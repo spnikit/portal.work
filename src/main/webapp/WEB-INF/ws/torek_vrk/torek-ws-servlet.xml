@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<description>WS rjd</description>
+
+
+	<bean id="payloadMapping"
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="mappings">
+			<props>
+				<prop key="{http://iit.ru/repair/torek}T_SEND_Request">SendEndpoint</prop> 
+				<prop key="{http://iit.ru/repair/torek}T_CHNG_Request">TCHNGEndpoint</prop>
+				<prop key="{http://iit.ru/repair/torek}T_PACK_Request">TPACKEndpoint</prop>
+					</props>
+		</property>				
+		<property name="interceptors">
+			<list>
+				<ref local="validatingInterceptor" />
+				<ref bean="loggingInterceptor" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/ws/xsd/torek_vrk/torek.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+	
+	<bean id="SendEndpoint" class="sheff.rjd.services.repair.T_SEND_Endpoint">
+		<constructor-arg ref="marshaller"/>
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="wst" ref="wst_standart" />
+		<property name="facade" ref="_Facade" />
+		<property name="transTemplate" ref="TransTemplate" />
+		<property name="signvrkservice" ref="signvrkservice" /> 	
+		</bean>
+		
+		<bean id="TCHNGEndpoint" class="sheff.rjd.services.repair.T_CHNG_Endpoint">
+		<constructor-arg ref="marshaller"/>
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="facade" ref="_Facade" />
+		</bean>
+		
+		<bean id="TPACKEndpoint" class="sheff.rjd.services.repair.T_PACK_Endpoint">
+		<constructor-arg ref="marshaller"/>
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="facade" ref="_Facade" />
+		</bean>
+		
+<bean id="schemaCollection" class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
+	<property name="inline" value="true"></property>
+	<property name="xsds" value="/WEB-INF/ws/xsd/torek_vrk/torek.xsd"/>
+	</bean> 
+	<bean id="torek" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schemaCollection" ref="schemaCollection"></property> 
+		<property name="portTypeName" value="torek"/>
+		<property name="locationUri" value="http://localhost:9080/IIT/repair/torek/services"/>
+	</bean>
+
+
+	
+	
+
+</beans>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.ibm:db2jcc_license_cisuz:0.0.1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/ibm/db2jcc_license_cisuz/0.0.1/db2jcc_license_cisuz-0.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/ibm/db2jcc_license_cisuz/0.0.1/db2jcc_license_cisuz-0.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/ibm/db2jcc_license_cisuz/0.0.1/db2jcc_license_cisuz-0.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://warecs.ru/IIT/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://warecs.ru/IIT/" targetNamespace="http://warecs.ru/IIT/"> 
+<wsdl:types> 
+<schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://warecs.ru/IIT/"> 
+<element name="SignRequest"> 
+<complexType> 
+<sequence>
+<element name="DOCID" type="long" />
+<element minOccurs="0" name="FINISHED" type="int" />
+<element minOccurs="0" name="FIO" type="string" />
+<element name="FORMNAME" type="string" />
+<element minOccurs="0" name="PACKAGEID" type="string" />
+<element minOccurs="0" name="POST" type="string" />
+<element minOccurs="0" name="POSTANDNAME" type="string" />
+<element minOccurs="0" name="POSTREJECT" type="string" />
+<element minOccurs="0" name="REASON" type="string" />
+<element name="SIGNDATE" type="string" />
+<element minOccurs="0" name="SIGNNUM" type="int" />
+<element name="SIGNTIME" type="string" />
+<element minOccurs="0" name="EXTTEXT" type="string" />
+</sequence> 
+</complexType> 
+</element> 
+<element name="SignResponse"> 
+<complexType> 
+<sequence>
+<element name="code" type="int" />
+<element name="description" type="string" />
+<element name="docid" type="long" />
+</sequence> 
+</complexType> 
+</element> 
+</schema> 
+</wsdl:types> 
+<wsdl:message name="SignRequest">
+<wsdl:part element="tns:SignRequest" name="SignRequest" />
+</wsdl:message> 
+<wsdl:message name="SignResponse">
+<wsdl:part element="tns:SignResponse" name="SignResponse" />
+</wsdl:message> 
+<wsdl:portType name="IIT"> 
+<wsdl:operation name="Sign">
+<wsdl:input message="tns:SignRequest" name="SignRequest" />
+<wsdl:output message="tns:SignResponse" name="SignResponse" />
+</wsdl:operation> 
+</wsdl:portType> 
+<wsdl:binding name="IITSoap11" type="tns:IIT">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" /> 
+<wsdl:operation name="Sign">
+<soap:operation soapAction="http://warecs.ru/IIT/Sign" /> 
+<wsdl:input name="SignRequest">
+<soap:body use="literal" />
+</wsdl:input> 
+<wsdl:output name="SignResponse">
+<soap:body use="literal" />
+</wsdl:output> 
+</wsdl:operation> 
+</wsdl:binding> 
+<wsdl:service name="SignIITService"> 
+<wsdl:port binding="tns:IITSoap11" name="IITSoap11">
+<soap:address location="http://warecs.ru/IIT.asmx" />
+</wsdl:port> 
+</wsdl:service> 
+</wsdl:definitions>

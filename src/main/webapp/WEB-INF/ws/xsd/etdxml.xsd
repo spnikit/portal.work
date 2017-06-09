@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://etd.gvc.rzd:8888/WAS/ETD/recievenotice"
+	xmlns:tns="http://etd.gvc.rzd:8888/WAS/ETD/recievenotice">
+
+	<element name="RecieveNoticeRequest">
+		<complexType>
+			<sequence>
+				<choice>
+					<element name="xml" type="string">
+						<annotation>
+							<documentation>устарел, оставлен для совместимости</documentation>
+						</annotation>
+					</element>
+					<element name="xmlbytes" type="hexBinary" />
+				</choice>
+				<element maxOccurs="1" minOccurs="1" name="etdid" type="long" />
+				<element maxOccurs="1" minOccurs="1" name="confirmid" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="xtype" type="string" />
+				<element maxOccurs="1" minOccurs="0" name="sign" type="hexBinary"/>
+				<element maxOccurs="1" minOccurs="0" name="portalDocId" type="long"/>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="RecieveNoticeResponse">
+		<complexType>
+			<sequence>
+				<element maxOccurs="1" minOccurs="1" name="etdid" type="long" />
+				<element maxOccurs="1" minOccurs="1" name="code" type="int" />
+				<element maxOccurs="1" minOccurs="1" name="description"
+					type="string" />
+			</sequence>
+		</complexType>
+	</element>
+
+
+
+
+
+</schema>

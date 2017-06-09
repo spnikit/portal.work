@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.iit.ru/IIT/vu36"
+	xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.iit.ru/IIT/vu36">
+	<element name="VU36docRequest" type="tns:VU36Type"></element>
+	<element name="VU36docResponse" type="tns:ReportType"></element>
+	<complexType name="VU36Type">
+		<sequence>
+			<element name="administration" maxOccurs="1" minOccurs="1"
+				type="int">
+			</element>
+			<element name="station_id" type="tns:int6" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="repair_kod" type="tns:myint" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="repair_date" type="tns:rjddate" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="repair_time" type="tns:rjdtime" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="P_29" type="tns:int2" minOccurs="0" maxOccurs="1" />
+			<element name="repair_pred_kod" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="int">
+						<maxInclusive value="9999"></maxInclusive>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="vagon" type="tns:vagonType" maxOccurs="unbounded"
+				minOccurs="1">
+			</element>
+			
+		</sequence>
+	</complexType>
+	<complexType name="ReportType">
+		<sequence>
+			<element name="code" type="int" maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="description" type="string" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="docid" type="long" maxOccurs="1" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+	<simpleType name="rjddate">
+		<restriction base="string">
+			<pattern value="\d{2}\.\d{2}\.\d{4}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="rjdtime">
+		<restriction base="string">
+			<pattern value="\d{2}:\d{2}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="int8">
+		<restriction base="int">
+			<pattern value="\d{0,8}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="int4">
+		<restriction base="string">
+			<pattern value="\d{2,4}" />
+		</restriction>
+	</simpleType>
+	<simpleType name="int6">
+		<restriction base="string">
+			<pattern value="\d{1,6}" />
+		</restriction>
+	</simpleType>
+	<simpleType name="int4_2">
+		<restriction base="string">
+			<pattern value="\d{4}" />
+		</restriction>
+	</simpleType>
+	<simpleType name="int2">
+		<restriction base="int">
+			<pattern value="\d{2}" />
+		</restriction>
+	</simpleType>
+	<simpleType name="myint">
+		<restriction base="string">
+			<pattern value="\d{1,}" />
+		</restriction>
+	</simpleType>
+	<complexType name="vagonType">
+		<sequence>
+			<element name="vagon_id" type="tns:myint" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="vagon_id_old" type="tns:int8" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="sobstv_kod" type="tns:myint" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="repair_begin_date" type="tns:rjddate"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="repair_begin_time" type="tns:rjdtime"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="modernization1" type="tns:int4" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="modernization2" type="tns:int4_2" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="modernization3" type="tns:int4_2" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="modernization4" type="tns:int4_2" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="modernization5" type="tns:int4_2" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="modernization6" type="tns:int4_2" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="modernization7" type="tns:int4_2" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="modernization8" type="tns:int4_2" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="modernization9" type="tns:int4_2" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="modernization10" type="tns:int4_2" maxOccurs="1"
+				minOccurs="0"></element>
+				<element name="mess4624" type="string" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+</schema>

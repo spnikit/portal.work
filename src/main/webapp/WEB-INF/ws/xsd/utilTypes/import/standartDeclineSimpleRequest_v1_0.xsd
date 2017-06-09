@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://iit.ru/xsd/utilTypes/import/standartDeclineSimpleRequest_v1_0"
+	xmlns:resp="http://iit.ru/xsd/utilTypes/import/standartDeclineSimpleRequest_v1_0">
+	<element name="simpleServiceRequest" type="resp:SimpleServiceRequest" />
+	<complexType name="SimpleServiceRequest">
+		<sequence>
+			<element name="docId" type="long" maxOccurs="1" minOccurs="1" />
+			<element name="declineReason" type="string" maxOccurs="1" minOccurs="1" />
+		</sequence>
+	</complexType>
+</schema>

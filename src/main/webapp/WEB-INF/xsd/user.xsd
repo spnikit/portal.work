@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://edo.iteco.ru/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	version="1.0" targetNamespace="http://edo.iteco.ru/">
+	<xs:element name="Exception" type="tns:Exception" />
+	<xs:element name="addExtendedState" nillable="true"
+		type="tns:addExtendedStateRequest" />
+	<xs:element name="addExtendedStateResponse" nillable="true"
+		type="tns:addExtendedStateResponse" />
+	<xs:element name="changeDocumentState" nillable="true"
+		type="tns:changeDocumentStatusRequest" />
+	<xs:element name="changeDocumentStateResponse" nillable="true"
+		type="tns:changeDocumentStatusResponse" />
+	<xs:element name="checkAuth" nillable="true" type="tns:checkAuthRequest" />
+	<xs:element name="checkAuthResponse" nillable="true"
+		type="tns:checkAuthResponse" />
+	<xs:element name="confirmNotice" nillable="true"
+		type="tns:signNoticeRequest" />
+	<xs:element name="confirmNoticeResponse" nillable="true"
+		type="tns:signNoticeResponse" />
+	<xs:element name="getDocument" nillable="true"
+		type="tns:getDocumentRequest" />
+	<xs:element name="getDocumentResponse" nillable="true"
+		type="tns:getDocumentResponse" />
+	<xs:element name="getFavorites" nillable="true"
+		type="tns:getFavoritesRequest" />
+	<xs:element name="getFavoritesResponse" nillable="true"
+		type="tns:getFavoritesResponse" />
+	<xs:element name="receiveNewDocs" nillable="true"
+		type="tns:receiveNewDocsRequest" />
+	<xs:element name="receiveNewDocsResponse" nillable="true"
+		type="tns:receiveNewDocsResponse" />
+	<xs:element name="receiveNewUsers" nillable="true"
+		type="tns:receiveNewUsersRequest" />
+	<xs:element name="receiveNewUsersResponse" nillable="true"
+		type="tns:receiveNewUsersResponse" />
+	<xs:element name="saveUser" nillable="true" type="tns:saveUserRequest" />
+	<xs:element name="saveUserResponse" nillable="true"
+		type="tns:saveUserResponse" />
+	<xs:element name="sendDocument" nillable="true"
+		type="tns:sendDocumentRequest" />
+	<xs:element name="sendDocumentResponse" nillable="true"
+		type="tns:sendDocumentResponse" />
+	<xs:element name="sendNotice" nillable="true"
+		type="tns:sendNoticeRequest" />
+	<xs:element name="sendNoticeResponse" nillable="true"
+		type="tns:sendNoticeResponse" />
+	<xs:element name="setFavorites" nillable="true"
+		type="tns:setFavoritesRequest" />
+	<xs:element name="setFavoritesResponse" nillable="true"
+		type="tns:setFavoritesResponse" />
+	<xs:element name="setPassword" nillable="true"
+		type="tns:setPasswordRequest" />
+	<xs:element name="setPasswordResponse" nillable="true"
+		type="tns:setPasswordResponse" />
+	<xs:complexType name="receiveNewDocsRequest">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractRequest">
+				<xs:sequence>
+					<xs:element name="lastDocumentVersion" type="xs:long"
+						minOccurs="0" />
+					<xs:element name="lastUpdateDate" type="xs:dateTime"
+						minOccurs="0" />
+					<xs:element name="onlyMyNotice" type="xs:boolean" />
+					<xs:element name="onlyNewNoticesAndEvents" type="xs:boolean" />
+					<xs:element name="onlyNotConfirmedNotice" type="xs:boolean" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="abstractRequest" abstract="true">
+		<xs:sequence>
+			<xs:element name="login" type="xs:string" minOccurs="0" />
+			<xs:element name="password" type="xs:unsignedShort"
+				nillable="true" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="receiveNewDocsResponse">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractResponse">
+				<xs:sequence>
+					<xs:element name="documents" type="tns:documentInfo"
+						nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="abstractResponse" abstract="true">
+		<xs:sequence>
+			<xs:element name="responseDate" type="xs:dateTime"
+				minOccurs="0" />
+			<xs:element name="userInfo" type="tns:userInfo" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="documentInfo">
+		<xs:sequence>
+			<xs:element name="deliveryType" type="tns:deliveryTypeEnum"
+				minOccurs="0" />
+			<xs:element name="emailOnError" type="xs:boolean"
+				minOccurs="0" />
+			<xs:element name="emailOnReceive" type="xs:boolean"
+				minOccurs="0" />
+			<xs:element name="extendedStates" type="tns:docStateInfo"
+				nillable="true" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="filename" type="xs:string" minOccurs="0" />
+			<xs:element name="flk" type="xs:boolean" minOccurs="0" />
+			<xs:element name="groupId" type="xs:long" minOccurs="0" />
+			<xs:element name="history" type="tns:historyEventInfo"
+				nillable="true" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="id" type="xs:long" minOccurs="0" />
+			<xs:element name="inArchive" type="xs:boolean" minOccurs="0" />
+			<xs:element name="lastUpdateDate" type="xs:dateTime"
+				minOccurs="0" />
+			<xs:element name="notices" type="tns:noticeInfo" nillable="true"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="number" type="xs:string" minOccurs="0" />
+			<xs:element name="receive" type="xs:dateTime" minOccurs="0" />
+			<xs:element name="receiver" type="tns:userInfo" minOccurs="0" />
+			<xs:element name="receiverComment" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="send" type="xs:dateTime" minOccurs="0" />
+			<xs:element name="sender" type="tns:userInfo" minOccurs="0" />
+			<xs:element name="senderComment" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="signatures" type="tns:signatureInfo"
+				nillable="true" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="state" type="tns:documentStateEnum"
+				minOccurs="0" />
+			<xs:element name="type" type="tns:documentTypesEnum"
+				minOccurs="0" />
+			<xs:element name="version" type="xs:long" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="docStateInfo">
+		<xs:sequence>
+			<xs:element name="code" type="tns:extendedStateEnum"
+				minOccurs="0" />
+			<xs:element name="date" type="xs:dateTime" minOccurs="0" />
+			<xs:element name="serverId" type="xs:long" minOccurs="0" />
+			<xs:element name="userInfo" type="tns:userInfo" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="userInfo">
+		<xs:sequence>
+			<xs:element name="certificate" type="xs:base64Binary"
+				minOccurs="0" />
+			<xs:element name="companyInfo" type="tns:companyInfo"
+				minOccurs="0" />
+			<xs:element name="dogovorEndDate" type="xs:dateTime"
+				minOccurs="0" />
+			<xs:element name="dogovorStartDate" type="xs:dateTime"
+				minOccurs="0" />
+			<xs:element name="edoActivationDate" type="xs:dateTime"
+				minOccurs="0" />
+			<xs:element name="edoUser" type="xs:boolean" minOccurs="0" />
+			<xs:element name="email" type="xs:string" minOccurs="0" />
+			<xs:element name="f" type="xs:string" minOccurs="0" />
+			<xs:element name="gniCode" type="xs:string" minOccurs="0" />
+			<xs:element name="gniSendDate" type="xs:dateTime"
+				minOccurs="0" />
+			<xs:element name="i" type="xs:string" minOccurs="0" />
+			<xs:element name="id" type="xs:long" minOccurs="0" />
+			<xs:element name="lastUpdateDate" type="xs:dateTime"
+				minOccurs="0" />
+			<xs:element name="login" type="xs:string" minOccurs="0" />
+			<xs:element name="loginDate" type="xs:dateTime" minOccurs="0" />
+			<xs:element name="o" type="xs:string" minOccurs="0" />
+			<xs:element name="phone" type="xs:string" minOccurs="0" />
+			<xs:element name="post" type="xs:string" minOccurs="0" />
+			<xs:element name="role" type="tns:userRoleEnum" minOccurs="0" />
+			<xs:element name="site" type="xs:string" minOccurs="0" />
+			<xs:element name="state" type="tns:userStateEnum"
+				minOccurs="0" />
+			<xs:element name="stateChangeDate" type="xs:dateTime"
+				minOccurs="0" />
+			<xs:element name="tariff" type="tns:tariffsEnum"
+				minOccurs="0" />
+			<xs:element name="version" type="xs:long" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="companyInfo">
+		<xs:sequence>
+			<xs:element name="block" type="xs:string" minOccurs="0" />
+			<xs:element name="city" type="xs:string" minOccurs="0" />
+			<xs:element name="district" type="xs:string" minOccurs="0" />
+			<xs:element name="flat" type="xs:string" minOccurs="0" />
+			<xs:element name="fullName" type="xs:string" minOccurs="0" />
+			<xs:element name="house" type="xs:string" minOccurs="0" />
+			<xs:element name="inn" type="xs:string" minOccurs="0" />
+			<xs:element name="kpp" type="xs:string" minOccurs="0" />
+			<xs:element name="ogrn" type="xs:string" minOccurs="0" />
+			<xs:element name="region" type="xs:string" minOccurs="0" />
+			<xs:element name="shortName" type="xs:string" minOccurs="0" />
+			<xs:element name="street" type="xs:string" minOccurs="0" />
+			<xs:element name="village" type="xs:string" minOccurs="0" />
+			<xs:element name="zip" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="historyEventInfo">
+		<xs:sequence>
+			<xs:element name="comment" type="xs:string" minOccurs="0" />
+			<xs:element name="date" type="xs:dateTime" minOccurs="0" />
+			<xs:element name="documentId" type="xs:long" minOccurs="0" />
+			<xs:element name="documentState" type="tns:documentStateEnum"
+				minOccurs="0" />
+			<xs:element name="historyEvent" type="tns:historyEventEnum"
+				minOccurs="0" />
+			<xs:element name="serverId" type="xs:long" minOccurs="0" />
+			<xs:element name="userLogin" type="xs:string" minOccurs="0" />
+			<xs:element name="version" type="xs:long" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="noticeInfo">
+		<xs:sequence>
+			<xs:element name="body" type="xs:base64Binary" minOccurs="0" />
+			<xs:element name="confirmed" type="xs:boolean" />
+			<xs:element name="date" type="xs:dateTime" minOccurs="0" />
+			<xs:element name="filename" type="xs:string" minOccurs="0" />
+			<xs:element name="receiverLogin" type="xs:string"
+				minOccurs="0" />
+			<xs:element name="receiverSignature" type="xs:base64Binary"
+				minOccurs="0" />
+			<xs:element name="senderLogin" type="xs:string" minOccurs="0" />
+			<xs:element name="senderSignature" type="xs:base64Binary"
+				minOccurs="0" />
+			<xs:element name="serverId" type="xs:long" minOccurs="0" />
+			<xs:element name="type" type="tns:noticeTypesEnum"
+				minOccurs="0" />
+			<xs:element name="version" type="xs:long" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="signatureInfo">
+		<xs:sequence>
+			<xs:element name="date" type="xs:dateTime" minOccurs="0" />
+			<xs:element name="serverId" type="xs:long" minOccurs="0" />
+			<xs:element name="signature" type="xs:base64Binary"
+				minOccurs="0" />
+			<xs:element name="userInfo" type="tns:userInfo" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Exception">
+		<xs:sequence>
+			<xs:element name="message" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="signNoticeRequest">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractRequest">
+				<xs:sequence>
+					<xs:element name="noticeServerId" type="xs:long"
+						minOccurs="0" />
+					<xs:element name="signature" type="xs:base64Binary"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="signNoticeResponse">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractResponse">
+				<xs:sequence>
+					<xs:element name="documentInfo" type="tns:documentInfo"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="saveUserRequest">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractRequest">
+				<xs:sequence>
+					<xs:element name="dataForSave" type="tns:userInfo"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="saveUserResponse">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractResponse">
+				<xs:sequence>
+					<xs:element name="savedData" type="tns:userInfo"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="receiveNewUsersRequest">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractRequest">
+				<xs:sequence>
+					<xs:element name="lastUpdateDate" type="xs:dateTime"
+						minOccurs="0" />
+					<xs:element name="lastUserVersion" type="xs:long"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="receiveNewUsersResponse">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractResponse">
+				<xs:sequence>
+					<xs:element name="users" type="tns:userInfo" nillable="true"
+						minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="sendDocumentRequest">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractRequest">
+				<xs:sequence>
+					<xs:element name="comment" type="xs:string" minOccurs="0" />
+					<xs:element name="creationDate" type="xs:dateTime"
+						minOccurs="0" />
+					<xs:element name="deliveryType" type="tns:deliveryTypeEnum"
+						minOccurs="0" />
+					<xs:element name="docTypeCode" type="tns:documentTypesEnum"
+						minOccurs="0" />
+					<xs:element name="document" type="xs:base64Binary"
+						minOccurs="0" />
+					<xs:element name="emailOnError" type="xs:boolean"
+						minOccurs="0" />
+					<xs:element name="emailOnReceive" type="xs:boolean"
+						minOccurs="0" />
+					<xs:element name="fileName" type="xs:string" minOccurs="0" />
+					<xs:element name="flk" type="xs:boolean" minOccurs="0" />
+					<xs:element name="number" type="xs:string" minOccurs="0" />
+					<xs:element name="receiverLogin" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="signature" type="xs:base64Binary"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="sendDocumentResponse">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractResponse">
+				<xs:sequence>
+					<xs:element name="documentInfo" type="tns:documentInfo"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="getDocumentRequest">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractRequest">
+				<xs:sequence>
+					<xs:element name="serverDocumentId" type="xs:long"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="getDocumentResponse">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractResponse">
+				<xs:sequence>
+					<xs:element name="data" type="xs:base64Binary"
+						minOccurs="0" />
+					<xs:element name="documentInfo" type="tns:documentInfo"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="addExtendedStateRequest">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractRequest">
+				<xs:sequence>
+					<xs:element name="documentState" type="tns:documentStateEnum"
+						minOccurs="0" />
+					<xs:element name="extendedState" type="tns:extendedStateEnum"
+						minOccurs="0" />
+					<xs:element name="receiverComment" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="senderComment" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="serverDocumentId" type="xs:long"
+						minOccurs="0" />
+					<xs:element name="signature" type="xs:base64Binary"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="addExtendedStateResponse">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractResponse">
+				<xs:sequence>
+					<xs:element name="documentInfo" type="tns:documentInfo"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="setFavoritesRequest">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractRequest">
+				<xs:sequence>
+					<xs:element name="favoritesAdd" type="xs:string"
+						nillable="true" minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="favoritesDel" type="xs:string"
+						nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="setFavoritesResponse">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractResponse">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="checkAuthRequest">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractRequest">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="checkAuthResponse">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractResponse">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="changeDocumentStatusRequest">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractRequest">
+				<xs:sequence>
+					<xs:element name="receiverComment" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="senderComment" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="serverDocumentId" type="xs:long"
+						minOccurs="0" />
+					<xs:element name="state" type="tns:documentStateEnum"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="changeDocumentStatusResponse">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractResponse">
+				<xs:sequence>
+					<xs:element name="documentInfo" type="tns:documentInfo"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="getFavoritesRequest">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractRequest">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="getFavoritesResponse">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractResponse">
+				<xs:sequence>
+					<xs:element name="logins" type="xs:string" nillable="true"
+						minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="sendNoticeRequest">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractRequest">
+				<xs:sequence>
+					<xs:element name="body" type="xs:base64Binary"
+						minOccurs="0" />
+					<xs:element name="documentServerId" type="xs:long"
+						minOccurs="0" />
+					<xs:element name="filename" type="xs:string" minOccurs="0" />
+					<xs:element name="receiverLogin" type="xs:string"
+						minOccurs="0" />
+					<xs:element name="signature" type="xs:base64Binary"
+						minOccurs="0" />
+					<xs:element name="types" type="tns:noticeTypesEnum"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="sendNoticeResponse">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractResponse">
+				<xs:sequence>
+					<xs:element name="documentInfo" type="tns:documentInfo"
+						minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="setPasswordRequest">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractRequest">
+				<xs:sequence>
+					<xs:element name="newPassword" type="xs:unsignedShort"
+						nillable="true" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="setPasswordResponse">
+		<xs:complexContent>
+			<xs:extension base="tns:abstractResponse">
+				<xs:sequence />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="deliveryTypeEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UNDEFINED" />
+			<xs:enumeration value="ACCEPT" />
+			<xs:enumeration value="NO_ACCEPT" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="extendedStateEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UNDEFINED" />
+			<xs:enumeration value="ACCEPTED" />
+			<xs:enumeration value="SIGNED" />
+			<xs:enumeration value="REJECTED" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="userRoleEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="USER" />
+			<xs:enumeration value="OPERATOR" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="userStateEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NEW" />
+			<xs:enumeration value="REGISTERED" />
+			<xs:enumeration value="WAIT_ACTIVATION" />
+			<xs:enumeration value="ACTIVE" />
+			<xs:enumeration value="BLOCKED" />
+			<xs:enumeration value="DELETED" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tariffsEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UNDEFINED" />
+			<xs:enumeration value="BASE" />
+			<xs:enumeration value="MAIN" />
+			<xs:enumeration value="MAIL" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="documentStateEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NEW" />
+			<xs:enumeration value="IN_PROGRESS" />
+			<xs:enumeration value="ERROR_AUTH" />
+			<xs:enumeration value="ERROR_SIGN" />
+			<xs:enumeration value="ERROR_UNEXISTED_RECEIVER" />
+			<xs:enumeration value="ERROR_FLK" />
+			<xs:enumeration value="ERROR_SYSTEM" />
+			<xs:enumeration value="SENT" />
+			<xs:enumeration value="RECEIVED" />
+			<xs:enumeration value="TICKET_COLLECTED" />
+			<xs:enumeration value="ACCEPTED" />
+			<xs:enumeration value="REJECTED" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="historyEventEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DOCUMENT_CREATED" />
+			<xs:enumeration value="DOCUMENT_SENT" />
+			<xs:enumeration value="DOCUMENT_STATE_CHANGED" />
+			<xs:enumeration value="DOCUMENT_SENT_TO_ARCHIVE" />
+			<xs:enumeration value="NOTICE_RECEIVED" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="noticeTypesEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UNDEFINED" />
+			<xs:enumeration value="PLAIN_MESSAGE" />
+			<xs:enumeration value="SENT_SUCCESS" />
+			<xs:enumeration value="SENT_ERROR" />
+			<xs:enumeration value="FLUSH_PASSWORD" />
+			<xs:enumeration value="VAT_DOC_1" />
+			<xs:enumeration value="VAT_DOC_2" />
+			<xs:enumeration value="VAT_DOC_3" />
+			<xs:enumeration value="VAT_DOC_4" />
+			<xs:enumeration value="VAT_DOC_5" />
+			<xs:enumeration value="VAT_DOC_6" />
+			<xs:enumeration value="VAT_DOC_7" />
+			<xs:enumeration value="VAT_DOC_8" />
+			<xs:enumeration value="VAT_DOC_9" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="documentTypesEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DOGOVOR" />
+			<xs:enumeration value="OFFER" />
+			<xs:enumeration value="VAT_INVOICE" />
+			<xs:enumeration value="VAT_INVOICE_CORR" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

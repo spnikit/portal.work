@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webappbnd:WebAppBinding xmi:version="2.0"
+	xmlns:xmi="http://www.omg.org/XMI" xmlns:webappbnd="webappbnd.xmi"
+	xmi:id="WebAppBinding_1246284037953" virtualHostName="default_host">
+	<webapp href="WEB-INF/web.xml#WebApp_ID" />
+	<resRefBindings xmi:id="ResourceRefBinding_1246360300328"
+		jndiName="jdbc/etd">
+		<bindingResourceRef href="WEB-INF/web.xml#ResourceRef_1219761862343" />
+	</resRefBindings>
+	<resRefBindings xmi:id="ResourceRefBinding_1248772244328"
+		jndiName="DB2D_ETD">
+		<bindingResourceRef href="WEB-INF/web.xml#ResourceRef_1248772244328" />
+	</resRefBindings>
+	<resRefBindings xmi:id="ResourceRefBinding_1259075347390"
+		jndiName="DB2P_CNSI">
+		<bindingResourceRef href="WEB-INF/web.xml#ResourceRef_1259075347390" />
+	</resRefBindings>
+	<resRefBindings xmi:id="ResourceRefBinding_1282921000171"
+		jndiName="jms/cf">
+		<bindingResourceRef href="WEB-INF/web.xml#ResourceRef_1276682928515" />
+	</resRefBindings>
+	<resRefBindings xmi:id="ResourceRefBinding_1282921000172"
+		jndiName="jms/aocput">
+		<bindingResourceRef href="WEB-INF/web.xml#ResourceRef_1276682928609" />
+	</resRefBindings>
+	<resRefBindings xmi:id="ResourceRefBinding_1282921000173"
+		jndiName="jms/aocget">
+		<bindingResourceRef href="WEB-INF/web.xml#ResourceRef_1276682928640" />
+	</resRefBindings>
+</webappbnd:WebAppBinding>

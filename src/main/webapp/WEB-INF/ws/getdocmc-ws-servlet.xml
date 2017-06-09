@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<description>WS rjd</description>
+	<!-- MAPPING -->
+
+	<bean id="payloadMapping"
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="mappings">
+			<props>
+				<prop key="{http://etd.gvc.rzd:8888/PortalRZD/getdoc}DocRequest">ServiceEndpoint</prop>
+
+			</props>
+		</property>
+		<property name="interceptors">
+			<list>
+				<ref local="validatingInterceptor" />
+				<ref local="loggingInterceptor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="marshaller" class="org.springframework.oxm.xmlbeans.XmlBeansMarshaller">
+	</bean>
+	<bean id="TransTemplate"
+		class="org.springframework.transaction.support.TransactionTemplate">
+		<constructor-arg ref="TransManager" />
+		<!-- property name="isolationLevelName" value="ISOLATION_SERIALIZABLE"/ -->
+		<property name="timeout" value="30" />
+	</bean>
+	<bean id="TransManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<!-- XML VALIDATION -->
+
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/xsd/ws/getdoc.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+	<bean id="loggingInterceptor"
+		class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor">
+		<description>This interceptor logs the message payload.</description>
+		<property name="logRequest" value="true" />
+		<property name="logResponse" value="true" />
+	</bean>
+	<!-- ENDPOINTS -->
+
+	<bean id="ServiceEndpoint" class="sheff.rjd.services.GetDocForMC">
+		<constructor-arg ref="marshaller" />
+		<property name="getDocDao" ref="GetDocDao" />
+		<property name="tt" ref="TransTemplate" />
+
+	</bean>
+
+	<!-- WSDL PUBLISHING -->
+
+	<bean id="schema" class="org.springframework.xml.xsd.SimpleXsdSchema">
+		<property name="xsd" value="/WEB-INF/ws/xsd/getdoc.xsd" />
+	</bean>
+
+	<bean id="getdoc"
+		class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<description>wsdl</description>
+		<property name="schema" ref="schema" />
+		<property name="portTypeName" value="getdoc" />
+		<!--<property name="locationUri" value="http://10.58.0.167:8080/STD/signps/services"/> -->
+		<property name="locationUri"
+			value="http://10.0.0.46:8087/WAS/ETD/wsetd/getdoc/services" />
+	</bean>
+
+</beans>

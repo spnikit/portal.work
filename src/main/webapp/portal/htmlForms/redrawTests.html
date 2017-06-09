@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="startTest.js"></script>
+<script type="text/javascript" src="applyBounds.js"></script>
+<script type="text/javascript" src="../utils.js"></script>
+<script type="text/javascript" src="../coreXFDL.js"></script>
+<script type="text/javascript" src="../coreHTML.js"></script>
+<script type="text/javascript" src="../jquery.easytooltip.js"></script>
+<script type="text/javascript" src="itemForPage/line.js"></script>
+<script type="text/javascript" src="itemForPage/button.js"></script>
+<script type="text/javascript" src="itemForPage/box.js"></script>
+<script type="text/javascript" src="itemForPage/check.js"></script>
+<script type="text/javascript" src="itemForPage/combobox.js"></script>
+<script type="text/javascript" src="itemForPage/field.js"></script>
+<script type="text/javascript" src="itemForPage/label.js"></script>
+<script type="text/javascript" src="itemForPage/pane.js"></script>
+<script type="text/javascript" src="itemForPage/popup.js"></script>
+<script type="text/javascript" src="itemForPage/spacer.js"></script>
+<script type="text/javascript" src="itemForPage/table.js"></script>
+<script type="text/javascript" src="itemForXForms/group.js"></script>
+<script type="text/javascript" src="itemForXForms/repeat.js"></script>
+
+
+
+<!-- <link rel="stylesheet" href="jquery.tooltip.css" /> -->
+
+<title>Test</title>
+</head>
+<style type="text/css">
+.tooltip {
+	color: #F00;
+	position: absolute;
+	z-index: 10000;
+	border: 1px solid black;
+	background-color: #ffffe1;
+	padding: 3px 3px 3px 3px;
+}
+
+.invalid_input {
+	background-color: #f88;
+}
+
+.mandatory {
+	background-color: #ffd;
+}
+
+#body_for {
+	position: absolute;
+	width: 100%;
+	height: 100px;
+	bottom: 0px;
+	left: 0px;
+	background-color: #ffffe1;
+	z-index: 0;
+}
+</style>
+
+<body>
+
+	<input type="button" value="automat" name="automat"
+		style="z-index: 10;" onClick="startTest()"></input>
+
+	<div id="body_for"></div>
+	<div class="tooltip"
+		style="display: none; left: 549px; top: 377px; z-index: 99999"></div>
+</body>
+
+
+
+</html>

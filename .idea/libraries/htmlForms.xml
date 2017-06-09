@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="htmlForms">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/htmlForms/applet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/htmlForms/utilsApplet.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

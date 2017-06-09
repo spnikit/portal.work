@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="applets">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/htmlForms/applets/applet_with_include_dll.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/htmlForms/applets/applet_with_external_dll.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/htmlForms/applets/applet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/htmlForms/applets/utilsApplet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/htmlForms/applets/applet_with_internal_dll.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

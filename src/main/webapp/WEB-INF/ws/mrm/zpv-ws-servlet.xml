@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	 http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+
+	 <bean id="payloadMapping"
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="defaultEndpoint" ref="putdocEndpoint" />
+		<property name="interceptors">
+			<list>
+				<ref local="validatingInterceptor" />
+
+			</list>
+		</property>
+	</bean> 
+    
+   <!-- <bean id="payloadMapping" class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="mappings">
+			<props>
+				<prop key="{http://iit.ru/ZPV}formCreateRequest">request</prop>
+			</props>
+		</property>					
+		<property name="interceptors">
+			<list>
+				<ref local="validatingInterceptor" />
+				<ref bean="loggingInterceptor" />
+			</list>
+		</property>
+	</bean>-->
+
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/ws/xsd/mrm/ZPVEndPoint.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+
+
+
+	<bean id="putdocEndpoint" class="sheff.rjd.services.mrm.ZPVEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+	<property name="facade" ref="_Facade" />
+	<property name="formname" value = "ЗПВ"/>
+	</bean>
+
+	<bean id="schemaCollection" class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
+	<property name="inline" value="true"></property>
+	<property name="xsds" value="/WEB-INF/ws/xsd/mrm/ZPVEndPoint.xsd"/>
+	</bean> 
+	<bean id="ZPV" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schemaCollection" ref="schemaCollection"></property> 
+		<property name="portTypeName" value="ZPV"/>
+		<property name="locationUri" value="http://localhost:48080/IIT/zpv/services"/>
+	</bean>
+
+
+</beans> 
+

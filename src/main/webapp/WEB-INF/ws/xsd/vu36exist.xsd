@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://etd.gvc.rzd:8888/WAS/ETD/vu36exist"
+	xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://etd.gvc.rzd:8888/WAS/ETD/vu36exist">
+
+	<element name="VU36existRequest" type="tns:VU36Type"></element>
+
+	<element name="VU36existResponce" type="tns:ReportType"></element>
+
+	<complexType name="VU36Type">
+		<sequence>
+			<element name="num_vag" maxOccurs="1" minOccurs="1" type="int">
+
+			</element>
+			<element name="vid_vag" type="int" maxOccurs="1" minOccurs="1">
+			</element>
+
+		</sequence>
+	</complexType>
+
+	<complexType name="ReportType">
+		<sequence>
+			<element name="size" type="int" maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="description" type="string" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="docid" type="long" minOccurs="0" maxOccurs="1"></element>
+			<element name="bldoc" type="string" minOccurs="0" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+
+</schema>

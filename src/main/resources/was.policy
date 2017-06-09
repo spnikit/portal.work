@@ -1,0 +1,131 @@
+grant codeBase "file:${application}" {
+
+permission javax.management.MBeanServerPermission "createMBeanServer";
+permission javax.management.MBeanServerPermission "findMBeanServer";
+permission javax.management.MBeanPermission "*","registerMBean";
+permission javax.management.MBeanTrustPermission "register";
+permission com.ibm.websphere.security.WebSphereRuntimePermission "AdminPermission";
+permission javax.management.MBeanPermission "*","getMBeanInfo";
+permission java.lang.RuntimePermission "shutdownHooks";
+
+permission java.lang.RuntimePermission "getClassLoader";
+permission java.lang.RuntimePermission "createClassLoader";
+permission java.lang.RuntimePermission "accessDeclaredMembers";
+permission java.lang.RuntimePermission "accessClassInPackage.sun.beans.editors";
+permission java.lang.RuntimePermission "stopThread";
+permission java.lang.RuntimePermission "modifyThread";
+permission java.lang.RuntimePermission "modifyThreadGroup";
+permission java.util.PropertyPermission "*", "read, write";
+permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
+
+permission java.security.SecurityPermission "putProviderProperty.BC";
+permission java.security.SecurityPermission "insertProvider.BC"; 
+permission java.security.SecurityPermission "insertProvider.JCP";
+permission java.lang.RuntimePermission "preferences";
+permission java.lang.RuntimePermission "accessClassInPackage.*";
+
+permission com.ibm.oti.shared.SharedClassPermission "*", "read,write";
+
+permission java.io.FilePermission "${was.install.root}${/}java${/}lib${/}*", "read";
+permission java.io.FilePermission "${was.install.root}/java/lib/*", "read";
+permission java.io.FilePermission "${was.install.root}${/}java64${/}lib${/}*", "read";
+permission java.io.FilePermission "${was.install.root}/java64/lib/*", "read";
+permission java.io.FilePermission "${app.installed.path}${/}-", "read, write";
+
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java/lib/wsdl.properties", "read";
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java/lib/jaxp.properties", "read";
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java/lib/xerces.properties", "read";
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java/lib/xalan.properties", "read";
+
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java/.systemPrefs/.system.lock", "read";
+
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java64/lib/wsdl.properties", "read";
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java64/lib/jaxp.properties", "read";
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java64/lib/xerces.properties", "read";
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java64/lib/xalan.properties", "read";
+
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java64/.systemPrefs/.system.lock", "read";
+
+permission java.io.FilePermission "/service/WAS/logs/wd/ETD${/}-", "read, write, delete";
+permission java.io.FilePermission "/service/WAS/ActiveMQ${/}-", "read, write, delete";
+permission java.io.FilePermission "/tmp${/}-", "read, write";
+permission java.io.FilePermission "/tmp${/}*", "read, write";
+permission java.io.FilePermission "/tmp", "read, write";
+permission java.io.FilePermission "${/}service${/}WAS${/}logs${/}wd${/}ETD${/}-", "read, write, delete";
+permission java.io.FilePermission "${/}service${/}WAS${/}logs${/}wd${/}ETD${/}*", "read, write, delete";
+permission java.io.FilePermission "${/}service${/}WAS${/}logs${/}wd${/}*", "read, write, delete";
+permission java.io.FilePermission "${/}service${/}WAS${/}ActiveMQ${/}-", "read, write, delete";
+permission java.io.FilePermission "${/}service${/}WAS${/}ActiveMQ${/}*", "read, write, delete";
+
+permission java.io.FilePermission "${app.installed.path}${/}wsedt3.war${/}WEB-INF${/}classes${/}log4j.xml", "read"; 
+
+permission java.net.SocketPermission "*", "connect,resolve";
+
+};
+
+grant codeBase "file:${jars}" {
+
+permission javax.management.MBeanServerPermission "createMBeanServer";
+permission javax.management.MBeanServerPermission "findMBeanServer";
+permission javax.management.MBeanPermission "*","registerMBean";
+permission javax.management.MBeanTrustPermission "register";
+permission com.ibm.websphere.security.WebSphereRuntimePermission "AdminPermission";
+permission javax.management.MBeanPermission "*","getMBeanInfo";
+permission java.lang.RuntimePermission "shutdownHooks";
+
+permission java.lang.RuntimePermission "getClassLoader";
+permission java.lang.RuntimePermission "accessDeclaredMembers";
+permission java.lang.RuntimePermission "accessClassInPackage.sun.beans.editors";
+permission java.lang.RuntimePermission "stopThread";
+permission java.lang.RuntimePermission "modifyThread";
+permission java.lang.RuntimePermission "modifyThreadGroup";
+permission java.util.PropertyPermission "*", "read, write";
+permission java.lang.RuntimePermission "createClassLoader";
+
+permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
+permission java.security.SecurityPermission "putProviderProperty.BC";
+permission java.security.SecurityPermission "insertProvider.BC"; 
+permission java.security.SecurityPermission "insertProvider.JCP";
+permission java.lang.RuntimePermission "preferences";
+permission java.lang.RuntimePermission "accessClassInPackage.*";
+
+permission com.ibm.oti.shared.SharedClassPermission "*", "read,write";
+
+permission java.io.FilePermission "${was.install.root}${/}java${/}lib${/}*", "read";
+permission java.io.FilePermission "${was.install.root}/java/lib/*", "read";
+permission java.io.FilePermission "${was.install.root}${/}java64${/}lib${/}*", "read";
+permission java.io.FilePermission "${was.install.root}/java64/lib/*", "read";
+permission java.io.FilePermission "${app.installed.path}${/}-", "read, write";
+
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java/lib/wsdl.properties", "read";
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java/lib/jaxp.properties", "read";
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java/lib/xerces.properties", "read";
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java/lib/xalan.properties", "read";
+
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java64/lib/wsdl.properties", "read";
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java64/lib/jaxp.properties", "read";
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java64/lib/xerces.properties", "read";
+permission java.io.FilePermission "/WebSphere/WAS/wd/wd3/AppServer/java64/lib/xalan.properties", "read";
+
+permission java.io.FilePermission "/service/WAS/logs/wd/ETD${/}-", "read, write, delete";
+permission java.io.FilePermission "/service/WAS/ActiveMQ${/}-", "read, write, delete";
+permission java.io.FilePermission "/tmp${/}-", "read, write";
+permission java.io.FilePermission "/tmp${/}*", "read, write";
+permission java.io.FilePermission "/tmp", "read, write";
+permission java.io.FilePermission "${/}service${/}WAS${/}logs${/}wd${/}ETD${/}-", "read, write, delete";
+permission java.io.FilePermission "${/}service${/}WAS${/}logs${/}wd${/}ETD${/}*", "read, write, delete";
+permission java.io.FilePermission "${/}service${/}WAS${/}logs${/}wd${/}*", "read, write, delete";
+permission java.io.FilePermission "${/}service${/}WAS${/}ActiveMQ${/}-", "read, write, delete";
+permission java.io.FilePermission "${/}service${/}WAS${/}ActiveMQ${/}*", "read, write, delete";
+
+
+
+permission java.io.FilePermission "${app.installed.path}${/}wsedt3.war${/}WEB-INF${/}classes${/}log4j.xml", "read"; 
+
+permission java.net.SocketPermission "*", "connect,resolve";
+
+};
+
+grant codeBase "file:${java.home}/lib/ext/*" {
+    permission java.security.AllPermission;
+};

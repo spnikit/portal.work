@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="http://iit.ru/KOR_SF_RTK/Kor_SF_RTK_Endpoint" 
+    xmlns:tns="http://iit.ru/KOR_SF_RTK/Kor_SF_RTK_Endpoint"
+    xmlns:resp="http://iit.ru/xsd/utilTypes/import/standartResponses_v1_0">
+	<!-- elementFormDefault="unqualified"> -->
+    
+    
+ 	<import
+		namespace="http://iit.ru/xsd/utilTypes/import/standartResponses_v1_0"
+		schemaLocation="../utilTypes/import/standartResponses_v1_0.xsd" />
+	
+	<element name="formCreateRequest" type="tns:FormCreateRequest"></element>
+    <element name="formCreateResponse" type="tns:FormCreateResponse"></element> 
+    
+    <complexType name="FormCreateResponse">
+		<sequence>
+			<element name="code" type="int" maxOccurs="1" minOccurs="1" />
+			<element name="description" type="string" maxOccurs="1" minOccurs="1" />
+			<element name="docid" type="long" maxOccurs="1" minOccurs="1" />
+		</sequence>
+	</complexType>  
+	
+	<complexType name="FormCreateRequest">
+		<sequence>
+			<element name="docId" type="long" minOccurs="0" maxOccurs="1" />
+			<element name="pred_kod" type="int" minOccurs="0" maxOccurs="1"/>
+			<element name="okpo_code" type="int" minOccurs="0" maxOccurs="1"/>
+			
+			<element name="SFCorrectionInfo" type="tns:HeaderInformation" minOccurs="1" maxOccurs="1" />
+			<element name="SFCorrectionInfoCorrect" type="tns:HeaderInformation" minOccurs="0" maxOccurs="1" />
+			<element name="SFInfo" type="tns:HeaderInformation" minOccurs="1" maxOccurs="1" />
+			<element name="SFInfoCorrect" type="tns:HeaderInformation" minOccurs="0" maxOccurs="1" />
+			
+			<element name="SellerInfo" type="tns:PersonInfo" minOccurs="1" maxOccurs="1" />
+			<element name="CustomerInfo" type="tns:PersonInfo" minOccurs="1" maxOccurs="1" />
+			
+			<element name="currency" type="tns:str3" />
+			<element name="currency_name" type="string" />
+			
+			<element name="Table" type="tns:Table" minOccurs="1" maxOccurs="unbounded" />
+			
+		
+			
+			<element name="AllIncWholePrice" type="tns:num17-2" minOccurs="0" maxOccurs="1" />
+			<element name="AllRedWholePrice" type="tns:num17-2" minOccurs="0" maxOccurs="1" />
+			<element name="AllIncTaxSum" type="tns:TaxSumValue" minOccurs="1" maxOccurs="1" />
+			<element name="AllRedTaxSum" type="tns:TaxSumValue" minOccurs="1" maxOccurs="1" />
+			<element name="AllIncWholePriceWithTax" type="tns:num17-2" minOccurs="1" maxOccurs="1" />
+			<element name="AllRedWholePriceWithTax" type="tns:num17-2" minOccurs="1" maxOccurs="1" />
+			
+			<element name="xml" minOccurs="0" maxOccurs="1" />
+			
+			<element name="id_pak" type="tns:str50" minOccurs="1" maxOccurs="1"/>
+			<element name="PFMCode" type="tns:str1to4" minOccurs="1" maxOccurs="1" />
+			<element name="NumTicket" type="tns:str1to15" minOccurs="1" maxOccurs="1"/>
+			
+			<element name="idAct_RTK" type="long" minOccurs="1" maxOccurs="1" />
+			<element name="idSF_RTK" type="long" minOccurs="1" maxOccurs="1" />
+			
+			
+		</sequence>
+	</complexType>
+	
+	<complexType name="HeaderInformation">
+		<sequence>
+			<element name="number" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="date" type="tns:date" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	<complexType name="PersonInfo">
+		<sequence>
+			<element name="name" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="address" type="tns:addr" minOccurs="1" maxOccurs="1" />
+			<element name="inn" type="tns:inn" minOccurs="1" maxOccurs="1" />
+			<element name="kpp" type="tns:kpp" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="Table">
+		<sequence>
+			<element name="name_supplied_goods" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="unitProduct" type="tns:unitProduct" minOccurs="0" maxOccurs="1" />
+			<element name="goods_volume" type="tns:goods_volume" minOccurs="0" maxOccurs="1"/>
+			<element name="price_product" type="tns:price_product" minOccurs="0" maxOccurs="1" />
+			<element name="infPolStr" type="string" minOccurs="0" maxOccurs="1"></element>
+			<element name="whole_price" type="tns:whole_price" minOccurs="0" maxOccurs="1" />
+			<element name="excise_sum" type="tns:excise_sum" minOccurs="1" maxOccurs="1"/>
+			<element name="tax_rate" type="tns:tax_rate" minOccurs="1" maxOccurs="1" />
+			<element name="tax_sum" type="tns:tax_sum" minOccurs="0" maxOccurs="1" />
+			<element name="whole_price_with_tax" type="tns:whole_price_with_tax" minOccurs="0" maxOccurs="1" />
+			<element name="SigService" type="tns:int0or1" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="unitProduct">
+		<sequence>
+			<element name="beforeChange" type="tns:code_and_name_national" minOccurs="0" maxOccurs="1" />
+			<element name="afterChange" type="tns:code_and_name_national" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	<complexType name="code_and_name_national">
+		<sequence>
+			<element name="code" type="tns:int3" />
+			<element name="name" type="string" />
+		</sequence>
+	</complexType>
+	<complexType name="goods_volume">
+		<sequence>
+			<element name="beforeChange" type="tns:num18-3" minOccurs="0" maxOccurs="1" />
+			<element name="afterChange" type="tns:num18-3" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	<complexType name="price_product">
+		<sequence>
+			<element name="beforeChange" type="tns:num17-2" minOccurs="0" maxOccurs="1"/>
+			<element name="afterChange" type="tns:num17-2" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="whole_price">
+		<sequence>
+			<element name="beforeChange" type="tns:num17-2" minOccurs="0" maxOccurs="1" />
+			<element name="afterChange" type="tns:num17-2" minOccurs="0" maxOccurs="1"/>
+			<element name="increase" type="tns:num17-2" minOccurs="0" maxOccurs="1" />
+			<element name="reduction" type="tns:num17-2" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	<complexType name="excise_sum">
+		<sequence>
+			<element name="beforeChange" type="tns:strint4to18orString" minOccurs="1" maxOccurs="1" />
+			<element name="afterChange" type="tns:strint4to18orString" minOccurs="1" maxOccurs="1"/>
+			
+				<choice>
+					<element name="increase" type="tns:num17-2" />
+					<element name="reduction" type="tns:num17-2" />
+				</choice>
+			
+		</sequence>
+	</complexType>
+	<complexType name="tax_rate">
+		<sequence>
+			<element name="beforeChange" type="tns:tax" minOccurs="1" maxOccurs="1"/>
+			<element name="afterChange" type="tns:tax" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	<complexType name="tax_sum">
+		<sequence>
+			<element name="beforeChange" type="tns:TaxSumValue" minOccurs="0" maxOccurs="1" />
+			<element name="afterChange" type="tns:TaxSumValue" minOccurs="0" maxOccurs="1"/>
+			
+					<choice>
+						<element name="increase" type="tns:num17-2" />
+						<element name="reduction" type="tns:num17-2" />
+					</choice>
+				
+		</sequence>
+	</complexType>
+	<complexType name="whole_price_with_tax">
+		<sequence>
+			<element name="beforeChange" type="tns:num17-2" minOccurs="1" maxOccurs="1" />
+			<element name="afterChange" type="tns:num17-2" minOccurs="1" maxOccurs="1"/>
+			<element name="increase" type="tns:num17-2" minOccurs="0" maxOccurs="1" />
+			<element name="reduction" type="tns:num17-2" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	
+	<simpleType name="date">
+		<restriction base="string">
+			<pattern
+				value="(([0][1-9])|([1-2][0-9])|([3][0-1]))[.](([0][1-9])|([1][0-2]))[.]\d{4}" />
+		</restriction>
+	</simpleType>
+	<simpleType name="str2">
+		<restriction base="string">
+			<maxLength value="2" />
+		</restriction>
+	</simpleType>
+	<simpleType name="str3">
+		<restriction base="string">
+			<maxLength value="3" />
+		</restriction>
+	</simpleType>
+	<simpleType name="int3">
+		<restriction base="string">
+			<pattern value="[0-9]{3}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="inn">
+		<restriction base="string">
+			<pattern value="[0-9]{10}|[0-9]{12}" />
+		</restriction>
+	</simpleType>
+	<simpleType name="kpp">
+		<restriction base="string">
+			<pattern value="[0-9]{9}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="num18-3">
+		<restriction base="string">
+			<pattern value="[0-9]{1,18}[\.][0-9]{1,3}|[0-9]{1,18}" />
+		</restriction>
+	</simpleType>
+	<simpleType name="num17-2">
+		<restriction base="string">
+			<pattern value="[0-9]{1,17}[\.][0-9]{1,2}|[0-9]{1,17}" />
+		</restriction>
+	</simpleType>
+	<simpleType name="tax">
+		<restriction base="string">
+			<pattern value="0|10|18|10/110|18/118|без НДС"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="str50">
+		<restriction base="string">
+			<maxLength value="50" />
+		</restriction>
+	</simpleType>
+	<simpleType name="strint4to18orString">
+		<restriction base="string">
+			<pattern value=".{4,18}|без акциза"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="string1to200">
+		<restriction base="string">
+			<minLength value="1"></minLength>
+			<maxLength value="200"></maxLength>
+		</restriction>
+	</simpleType>
+		<simpleType name="str1to4">
+		<restriction base="string">
+			<minLength value="1"></minLength>
+			<maxLength value="4"></maxLength>
+		</restriction>
+	</simpleType>
+		<simpleType name="str1to15">
+		<restriction base="string">
+			<minLength value="1"></minLength>
+			<maxLength value="15"></maxLength>
+		</restriction>
+	</simpleType>
+	  <simpleType name="int0or1">
+		<restriction base="int">
+			<pattern value="[0-1]{1}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="TaxSumValue">
+		<restriction base="string">
+			<pattern value="\d{1,15}\.\d{2}|без НДС|-"/>
+		</restriction>
+	</simpleType>
+	<complexType name="addr">
+		<sequence>
+			<choice>
+				<element name="aRf" type="tns:addrRf">
+					<annotation>
+						<documentation>Адрес местонахождения в Российской Федерации
+						</documentation>
+					</annotation>
+				</element>
+				<element name="aIn" type="tns:addrIn">
+					<annotation>
+						<documentation>Адрес местонахождения за пределами Российской
+							Федерации
+						</documentation>
+					</annotation>
+				</element>
+			</choice>
+		</sequence>
+	</complexType>
+	<complexType name="addrIn">
+		<sequence>
+			<element maxOccurs="1" minOccurs="1" name="kod" type="string" />
+			<element maxOccurs="1" minOccurs="1" name="text" type="string" />
+		</sequence>
+	</complexType>
+	<complexType name="addrRf">
+		<sequence>
+			<element maxOccurs="1" minOccurs="0" name="ind" type="string" />
+			<element maxOccurs="1" minOccurs="1" name="kod" type="tns:str2" />
+			<element maxOccurs="1" minOccurs="0" type="tns:str50" name="raion" />
+			<element maxOccurs="1" minOccurs="0" type="tns:str50" name="town" />
+			<element maxOccurs="1" minOccurs="0" type="tns:str50" name="punkt" />
+			<element maxOccurs="1" minOccurs="0" type="tns:str50" name="street" />
+			<element maxOccurs="1" minOccurs="0" type="tns:str50" name="house" />
+			<element maxOccurs="1" minOccurs="0" type="string" name="korp" />
+			<element maxOccurs="1" minOccurs="0" type="string" name="flat" />
+		</sequence>
+	</complexType>
+
+</schema>

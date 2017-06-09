@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="deletedocsTask" class="ru.aisa.rgd.etd.extend.DeleteDocsTask">
+		<property name="etdFacade" ref="etdFacade" />
+		<property name="signedDocsMap">
+			<map>
+
+			</map>
+		</property>
+		<property name="notSignedDocsMap">
+			<map>
+
+			</map>
+		</property>
+	</bean>
+
+
+	<bean id="scheduledTask3" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="delay" value="50400000" />
+		<property name="period" value="432000000" />
+		<property name="timerTask" ref="deletedocsTask" />
+	</bean>
+
+
+</beans>

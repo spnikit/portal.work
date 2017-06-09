@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://etd.gvc.rzd:8888/WAS/ETD/wrkname/"
+	xmlns:tns="http://etd.gvc.rzd:8888/WAS/ETD/wrkname/"
+	elementFormDefault="qualified">
+
+	<element name="WrknamedocRequest" type="tns:WrknameType"></element>
+
+	<element name="WrknamedocResponse" type="tns:RespType"></element>
+
+	<complexType name="RespType">
+		<sequence>
+			<element name="wrk" maxOccurs="unbounded" minOccurs="0">
+				<complexType>
+					<attribute name="Id" type="int"></attribute>
+					<attribute name="Name" type="string"></attribute>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="WrknameType">
+		<sequence>
+			<element name="wrkid" type="int" maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="formname" type="string" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="okpo" type="string" maxOccurs="1" minOccurs="1"
+				nillable="true">
+			</element>
+		</sequence>
+	</complexType>
+
+
+</schema>

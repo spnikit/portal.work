@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://rzd/util" xmlns:tns="http://rzd/util" >
+	<include schemaLocation="util-qualified.xsd"></include> 
+	
+	
+	
+<element name="serv_datetime_Request" type="string"></element>
+
+    <element name="serv_datetime_Response">
+    	<complexType>
+    		<sequence>
+    			<element name="datatime" type="string" maxOccurs="1" minOccurs="0"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+    
+   
+    <element name="BlDocByIdRequest" type="long"></element>
+<element name="BlDocByIdResponse" type="string"></element>
+    
+    	
+     <element name="inn_Response">
+    	<complexType>
+    		<sequence>
+    			
+    				<element name="inn" type="string" maxOccurs="1" minOccurs="0"></element>
+    				<element name="name" type="string" maxOccurs="1" minOccurs="0"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+     <element name="egrpo_Response">
+    	<complexType>
+    		<sequence>
+    		<element name="name" type="string" maxOccurs="1" minOccurs="0"></element>
+    			<element name="tel" type="string" maxOccurs="1" minOccurs="0"></element>
+    				<element name="fax" type="string" maxOccurs="1" minOccurs="0"></element>
+    				<element name="adr" type="string" maxOccurs="1" minOccurs="0"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+   
+   <element name="report_Response">
+    	<complexType>
+    		<sequence>
+    		<element name="P_3" type="string" maxOccurs="1" minOccurs="1" />
+    		<element name="table1" maxOccurs="1" minOccurs="1">
+    		<complexType>
+    			<sequence>
+    			
+    			<element name="dor" maxOccurs="unbounded" minOccurs="1">
+    			<complexType>
+    				<sequence>
+    					<element name = "dorname" minOccurs="0" maxOccurs="1" type = "string"/>
+    					<element name = "P_3_dor" maxOccurs="1" minOccurs="1" type="int"/>
+    					<element name = "recieved" minOccurs="1" maxOccurs="1" type = "int"/>
+    					<element name = "accepted" minOccurs="1" maxOccurs="1" type = "int"/>
+    					<element name = "declined" minOccurs="1" maxOccurs="1" type = "int"/>
+    					<element name = "signed" minOccurs="1" maxOccurs="1" type = "int"/>
+    					<element name = "summ" minOccurs="1" maxOccurs="1" type = "int"/>
+    					<element name = "sf" minOccurs="1" maxOccurs="1" type = "int"/>
+    					<element name = "flag" minOccurs="1" maxOccurs="1" type = "boolean"/>
+    					<element name = "preds" minOccurs="0" maxOccurs="1">
+    					
+    					<complexType>
+    					<sequence>
+    					
+    					<element name = "row" minOccurs="0" maxOccurs="unbounded">
+    						<complexType>
+    							<sequence>
+    							<element name = "number" minOccurs="1" maxOccurs="1" type = "int"/>
+    							<element name = "remname" minOccurs="0" maxOccurs="1" type = "string"/>
+    							<element name = "P_3_preds" maxOccurs="1" minOccurs="1" type="int"/>
+    							<element name = "recieved" minOccurs="1" maxOccurs="1" type = "int"/>
+    							<element name = "accepted" minOccurs="1" maxOccurs="1" type = "int"/>
+    							<element name = "declined" minOccurs="1" maxOccurs="1" type = "int"/>
+    							<element name = "signed" minOccurs="1" maxOccurs="1" type = "int"/>
+    							<element name = "summ" minOccurs="1" maxOccurs="1" type = "int"/>
+    							<element name = "sf" minOccurs="1" maxOccurs="1" type = "int"/>
+    							</sequence>
+    			   			</complexType>
+    		 			</element>
+    		 		</sequence>
+    		 		</complexType>
+    		 		</element>
+    		 		</sequence>
+    		    		
+    		</complexType>
+    		 	</element>	
+    		  	</sequence>
+    		    		
+    		</complexType>
+    		</element>
+    			
+    		</sequence>
+    	</complexType>
+    </element>
+    <element name="ppsinfo_Response">
+    	<complexType>
+    		<sequence>
+    				<element name="no" type="string" maxOccurs="1" minOccurs="1"></element>
+    				<element name="inn" type="string" maxOccurs="1" minOccurs="1"></element>
+    				<element name="kpp" type="string" maxOccurs="1" minOccurs="1"></element>
+    				<element name="okpo" type="string" maxOccurs="1" minOccurs="1"></element>
+    		</sequence>
+    	</complexType>
+    </element>
+    <element name="PrednStanFullInfoRequest">
+		<complexType>
+			<sequence>
+				<element name="ID" type="string" maxOccurs="1" minOccurs="0"></element>
+				<element name="Code" type="string" maxOccurs="1" minOccurs="0"></element>
+				<element name="Type" type="string" maxOccurs="1" minOccurs="0"></element>
+				<element name="DorId" type="string" maxOccurs="1" minOccurs="0"></element>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="PrednStanFullInfoResponse">
+		<complexType>
+			<sequence>
+				<element name="ID" type="string"></element>
+				<element name="Code" type="string"></element>
+				<element name="Type" type="string"></element>
+				<element name="VName" type="string"></element>
+				<element name="Name" type="string"></element>
+				<element name="OName" type="string"></element>
+				<element name="DorId" type="string"></element>
+				<element name="DorName" type="string"></element>
+			</sequence>
+		</complexType>
+	</element>
+    <!-- Сервис генерации XML для форм -->
+    <element name="xmlGenByDocIdRequest">
+        <complexType>
+            <sequence>
+                <element name="documentId" type="string"/>
+                <element name="params" type="string"/> <!-- Для СФ и КСФ тут будет ФИО -->
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="xmlGenByDocIdResponse">
+        <complexType>
+            <sequence>
+                <element name="xmlString" type="string"/>
+                <element name="message" type="string"/>
+                <element name="code" type="int"/> <!-- 0 - все хорошо, не 0 - плохо -->
+            </sequence>
+        </complexType>
+    </element>
+    
+    
+   <element name="NumberToWordRequest">
+        <complexType>
+            <sequence>
+                <element name="number" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="NumberToWordResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+</schema>

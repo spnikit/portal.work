@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- DATA LAYER -->
+
+
+
+	<!-- MAPPING -->
+	<bean id="payloadMapping"
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="defaultEndpoint" ref="ETDSignatureEndpoint" />
+		<property name="interceptors">
+			<list>
+				<ref local="validatingInterceptor" />
+
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- XML VALIDATION -->
+
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/ws/xsd/ETDSignature.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+
+	<!-- ENDPOINTS -->
+
+	<bean id="ETDSignatureEndpoint" class="ru.aisa.rgd.etd.ws.ETDSignatureEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="securityManager" ref="securitymanager" />
+		<property name="keyAlias" ref="Test1" />
+	</bean>
+
+	<!-- WSDL PUBLISHING -->
+	<bean id="ETDSignature"
+		class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schema">
+			<bean class="org.springframework.xml.xsd.SimpleXsdSchema">
+				<property name="xsd" value="/WEB-INF/ws/xsd/ETDSignature.xsd" />
+			</bean>
+		</property>
+		<property name="portTypeName" value="ETDSignature" />
+		<property name="locationUri"
+			value="http://localhost:8080/WAS/ETD/etdsignature/services" />
+	</bean>
+
+</beans>

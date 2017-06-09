@@ -1,0 +1,64 @@
+.comboboxMenu { /**/
+	/**/
+	/* основной стиль */
+	border: 1px solid #aaaaaa;
+	color: #222222;
+	list-style: none;
+	padding: 2px;
+	margin: 0;
+	background-color: #ffffff;
+}
+
+.comboboxItem {
+	background-color: #ffffff;
+}
+
+.comboboxItem:HOVER {
+	background-color: #f0f0f0;
+}
+
+.comboboxItem:FOCUS {
+	background-color: #f0f0f0;
+}
+
+/* для размера календаря */
+.ui-widget {
+	font-size: 10px;
+}
+
+/*кнопка выбора даты в datapicker*/
+.datepickerButton {
+	background-color: #ffffff; /* Цвет фона */
+	color: #ffffff; /* Цвет текста */
+	font-size: inherit;
+	border: 0.33px;
+	border-color: #f0f0f0;
+	border-style: inset;
+	font-size: inherit;
+	z-index: 8;
+}
+
+.ui-datepicker {
+	z-index: 15;
+}
+
+@MEDIA print {
+	div.defaulLabelItem {
+		text-align: left;
+		padding-left: 10px;
+		white-space: pre;
+	}
+	/*.noBorder {
+		border: 1 none !important;
+	}    */
+	.noPrint {
+		display: none;
+	}
+	.forcePrint {
+		visibility: visible;
+	}
+}
+
+.no-close .ui-dialog-titlebar-close {
+	display: none;
+}

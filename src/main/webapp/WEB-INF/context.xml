@@ -1,0 +1,967 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+ 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+      http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+<import resource="task.xml" />  
+
+	<bean id="DSrjd" class="net.ttddyy.dsproxy.support.ProxyDataSource">
+		<property name="dataSource" ref="DSrjdR" />
+		<property name="listener">
+			<bean class="net.ttddyy.dsproxy.listener.CommonsQueryLoggingListener">
+				<property name="logLevel" value="WARN" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="DSrjdR" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>jdbc/etd</value>
+		</property>
+		<property name="resourceRef" value="true" />
+	</bean>
+
+	<bean id="db2dateformat" class="java.text.SimpleDateFormat">
+		<constructor-arg type="java.lang.String" value="dd.MM.yyyy" />
+	</bean>
+	<bean id="oid" class="java.lang.String">
+		<constructor-arg value="'snt.gvc.oao.rzd'"></constructor-arg>
+	</bean>
+
+	<bean id="PrepTemplate"
+		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="SimpleTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="TransTemplate"
+		class="org.springframework.transaction.support.TransactionTemplate">
+		<constructor-arg ref="TransManager" />
+		<property name="timeout" value="200" />
+	</bean>
+	<bean id="TransManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	
+
+	<bean id="WebServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<property name="marshaller" ref="marshaller" />
+		<property name="unmarshaller" ref="marshaller" />
+		<property name="messageFactory" ref="messageFactory" />
+	</bean>
+
+
+	<bean id="marshaller" class="org.springframework.oxm.xmlbeans.XmlBeansMarshaller" />
+
+	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory">
+	</bean>
+
+
+
+	<bean id="loggingInterceptor"
+		class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor">
+		<description>This interceptor logs the message payload.</description>
+		<property name="logRequest" value="true" />
+		<property name="logResponse" value="true" />
+	</bean>
+
+	<bean id="wst_standart" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<property name="marshaller" ref="marshaller" />
+		<property name="unmarshaller" ref="marshaller" />
+		<property name="messageFactory" ref="messageFactory" />
+		<property name="messageSenders">
+			<list>
+				<ref bean="httpSender" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="wst_transoil" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<property name="marshaller" ref="marshaller" />
+		<property name="unmarshaller" ref="marshaller" />
+		<property name="messageFactory" ref="messageFactory" />
+		<property name="messageSenders">
+			<list>
+				<ref bean="httpSenderTransoil" />
+			</list>
+		</property>
+		<property name="interceptors">
+			<list>
+
+				<bean class="sheff.rjd.utils.TrahInterceptor" />
+
+			</list>
+		</property>
+	</bean>
+	<bean id="wst_vrk" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<property name="marshaller" ref="marshaller" />
+		<property name="unmarshaller" ref="marshaller" />
+		<property name="messageFactory" ref="messageFactory" />
+		<property name="messageSender">
+        <bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender">
+            <property name="credentials">
+                <bean class="org.apache.commons.httpclient.UsernamePasswordCredentials">
+                    <constructor-arg value="vrk1_warecs@1vrk.rzd"/>
+                    <constructor-arg value="WaReCS"/>
+                </bean>
+            </property>
+        </bean>
+    </property>
+	
+	</bean>
+	<bean id="HttpTimeOut" class="java.lang.Integer">
+		<constructor-arg value="5000"></constructor-arg>
+	</bean>
+
+	<bean id="TemplateDao" class="zpss.rjd.dao.TemplateDao">
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+
+
+	<bean id="httpSender"
+		class="org.springframework.ws.transport.http.CommonsHttpMessageSender">
+		<constructor-arg>
+			<ref bean="httpClient" />
+		</constructor-arg>
+	</bean>
+	<bean id="httpSenderTransoil"
+		class="org.springframework.ws.transport.http.CommonsHttpMessageSender">
+		<constructor-arg>
+			<ref bean="httpClientTransoil" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id="httpMgr"
+		class="org.apache.commons.httpclient.MultiThreadedHttpConnectionManager" />
+		
+	
+
+	<bean id="httpClient" class="com.aisa.HttpClient.AisaHttpClient">
+		<constructor-arg>
+			<ref bean="httpMgr" />
+		</constructor-arg>
+		<property name="params" ref="httpParams" />
+		<property name="httpRetryHandler" ref="httpRetryHandler" />
+		<property name="httptimeout" ref="HttpTimeOut" />
+	</bean>
+
+	<bean id="httpClientTransoil" class="com.aisa.HttpClient.AisaHttpClientTransoil">
+		<constructor-arg>
+			<ref bean="httpMgr" />
+		</constructor-arg>
+		<property name="params" ref="httpParams" />
+		<property name="httpRetryHandler" ref="httpRetryHandler" />
+		<property name="httptimeout" ref="HttpTimeOut" />
+	</bean>
+	
+	<bean id="httpRetryHandler" class="com.aisa.HttpClient.AisaRetryHandler">
+		<property name="countInt" value="1" />
+	</bean>
+	<bean id="httpParams" class="com.aisa.HttpClient.AisaHttpClientParams">
+		<property name="httptimeout" ref="HttpTimeOut" />
+		<property name="soTimeout" ref="HttpTimeOut" />
+
+	</bean>
+	<bean id="wst" class="sheff.rjd.utils.WSTnoUnmarsh">
+		<property name="marshaller" ref="marshaller" />
+		<property name="unmarshaller" ref="marshaller" />
+		<property name="messageFactory" ref="messageFactory" />
+		<property name="messageSenders">
+			<list>
+				<ref bean="httpSender" />
+			</list>
+		</property>
+	</bean>
+	<security:http authentication-manager-ref="admin"
+		pattern="/admin/**" auto-config="true">
+		<security:anonymous granted-authority="ROLE_ANONYMOUS" />
+		<security:intercept-url pattern='/admin/login.html'
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/admin/logo.png"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/admin/s.gif"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/admin/controllers/newsWS"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern='/admin/controllers/news'
+			access="ROLE_USER,ROLE_ADMIN,ROLE_READONLY,ROLE_POWER_USER,ROLE_ANONYMOUS" />
+		<security:intercept-url pattern='/admin/*'
+			access="ROLE_USER,ROLE_ADMIN,ROLE_READONLY,ROLE_POWER_USER" />
+		<security:intercept-url pattern="/admin/controllers/prednames"
+			access="ROLE_USER,ROLE_ADMIN,ROLE_READONLY,ROLE_POWER_USER" />
+		<security:intercept-url pattern="/admin/controllers/pred"
+			access="ROLE_USER,ROLE_ADMIN,ROLE_READONLY,ROLE_POWER_USER" />
+		<security:intercept-url pattern="/admin/controllers/prednew"
+			access="ROLE_USER,ROLE_ADMIN,ROLE_READONLY,ROLE_POWER_USER" />
+		<security:intercept-url pattern="/admin/controllers/headid"
+			access="ROLE_USER,ROLE_ADMIN,ROLE_READONLY,ROLE_POWER_USER" />
+			<security:intercept-url pattern="/admin/controllers/resultheadid"
+			access="ROLE_USER,ROLE_ADMIN,ROLE_READONLY,ROLE_POWER_USER" />
+		<security:intercept-url pattern="/admin/controllers/departments"
+			access="ROLE_USER,ROLE_ADMIN,ROLE_READONLY,ROLE_POWER_USER" />
+		<security:intercept-url pattern="/admin/controllers/wrknames"
+			access="ROLE_USER,ROLE_ADMIN,ROLE_READONLY,ROLE_POWER_USER" />
+		<security:intercept-url pattern="/admin/controllers/url"
+			access="ROLE_USER,ROLE_ADMIN,ROLE_READONLY,ROLE_POWER_USER" />
+		<security:intercept-url pattern="/admin/controllers/userrolestore"
+			access="ROLE_USER,ROLE_ADMIN,ROLE_POWER_USER" />
+		<security:intercept-url pattern="/admin/controllers/rolemanager"
+			access="ROLE_USER,ROLE_ADMIN,ROLE_POWER_USER" />
+		<security:intercept-url pattern="/admin/controllers/users"
+			access="ROLE_USER,ROLE_ADMIN,ROLE_READONLY,ROLE_POWER_USER" />
+		<security:intercept-url pattern="/admin/controllers/formtypes"
+			access="ROLE_USER,ROLE_ADMIN,ROLE_READONLY,ROLE_POWER_USER" />
+		<security:intercept-url pattern="/admin/controllers/package"
+			access="ROLE_ADMIN" />
+		<security:intercept-url pattern="/admin/controllers/cnsi"
+			access="ROLE_ADMIN" />
+		<security:intercept-url pattern="/admin/controllers/rights"
+			access="ROLE_ADMIN" />
+		<security:intercept-url pattern='/admin/controllers/*'
+			access="ROLE_ADMIN,ROLE_READONLY,ROLE_POWER_USER" />
+			<security:intercept-url pattern="/admin/controllers/headidsave"
+			access="ROLE_USER,ROLE_ADMIN,ROLE_READONLY,ROLE_POWER_USER" />
+		<security:form-login login-page='/admin/login.html'
+			default-target-url='/admin/index.html' always-use-default-target='true'
+			authentication-failure-url="/admin/login.html?failed=true"
+			login-processing-url="/admin/j_spring_security_check" />
+		<security:logout logout-success-url="/admin/login.html?logout=true"
+			logout-url="/admin/j_spring_security_logout" />
+	</security:http>
+
+	<security:authentication-manager id="admin">
+		<security:authentication-provider
+			user-service-ref="admin-service">
+			<security:password-encoder hash="md5" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<security:http authentication-manager-ref="service"
+		pattern="/**" auto-config="true">
+		<security:intercept-url pattern="/transstatusdoc/services*"	access="ROLE_Transoil" />
+		<security:intercept-url	pattern="/transstatusdoc/services/transstatusdoc.wsdl*" access="ROLE_Transoil" />
+		<security:intercept-url pattern="/TORG12/services*"	access="ROLE_Transoil, ROLE_CONTRAG" />
+		<security:intercept-url	pattern="/TORG12/services/TORG12.wsdl*" access="ROLE_Transoil, ROLE_CONTRAG" />
+		<security:intercept-url pattern="/ContrAgInvoice/services*"	access="ROLE_Transoil, ROLE_CONTRAG" />
+		<security:intercept-url	pattern="/ContrAgInvoice/services/ContrAgInvoice.wsdl*" access="ROLE_Transoil, ROLE_CONTRAG" />
+	 	<security:intercept-url pattern="/vu36/services*"	access="ROLE_VU36" />
+		<security:intercept-url	pattern="/vu36/services/vu36.wsdl*" access="ROLE_VU36" />
+		<security:http-basic />
+	</security:http>
+
+
+
+	<security:authentication-manager id="service">
+			<security:authentication-provider>
+				<security:jdbc-user-service data-source-ref="DSrjd" 
+				authorities-by-username-query="SELECT rtrim(username) as username,rtrim(authority) as authority FROM snt.contraguser WHERE username = ?"
+				users-by-username-query=  "SELECT rtrim(username) as username,rtrim(password) as password, active as active FROM snt.contraguser WHERE username=?"/>
+			</security:authentication-provider>
+		</security:authentication-manager>
+
+
+ 
+	<bean id="admin-service" class="ru.aisa.etdadmin.JdbcDao">
+		<property name="dataSource" ref="DSrjd" />
+		<property name="authoritiesByUsernameQuery"
+			value="SELECT rtrim(username) as username,rtrim(authority) as authority FROM snt.doruser WHERE username = ?" />
+		<property name="usersByUsernameQuery"
+			value="SELECT rtrim(username) as username,rtrim(password) as password,'true' as active FROM snt.doruser WHERE username=?" />
+	</bean>
+
+	<!--  <bean id="user-service" class="ru.aisa.etdadmin.JdbcDao">
+		<property name="dataSource" ref="DSrjd" />
+		<property name="authoritiesByUsernameQuery"
+			value="SELECT rtrim(username) as username,rtrim(authority) as authority FROM snt.contraguser WHERE username = ?" />
+		<property name="usersByUsernameQuery"
+			value="SELECT rtrim(username) as username,rtrim(password) as password,'true' as active FROM snt.contraguser WHERE username=?" />
+	</bean>-->
+
+	<!-- security:jdbc-user-service data-source-ref="DSrjd" id="jdbc-user-service" 
+		authorities-by-username-query="SELECT rtrim(username) as username,rtrim(authority) 
+		as authority FROM letd.doruser WHERE username = ?" users-by-username-query="SELECT 
+		rtrim(username) as username,rtrim(password) as password,'true' as active 
+		FROM letd.doruser WHERE username=?" / -->
+
+	<!-- DAO OBJECTS -->
+
+	<bean id="documentDao" class="ru.aisa.rgd.ws.dao.JdbcDocumentDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="reportDao" class="ru.aisa.rgd.ws.dao.JdbcReportDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="enterpriseDao" class="ru.aisa.rgd.ws.dao.JdbcEnterpriseDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="roadDao" class="ru.aisa.rgd.ws.dao.JdbcRoadDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="wayPartDao" class="ru.aisa.rgd.ws.dao.JdbcWayPartDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="templateDao" class="ru.aisa.rgd.ws.dao.JdbcTemplateDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="administrationDao" class="ru.aisa.rgd.ws.dao.JdbcAdministrationDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="territorialObjectDao" class="ru.aisa.rgd.ws.dao.JdbsTerritorialObjectDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="riverDao" class="ru.aisa.rgd.ws.dao.JdbcRiverDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="gruzDao" class="ru.aisa.rgd.ws.dao.JdbcGruzDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="personaDao" class="ru.aisa.rgd.ws.dao.JdbcPersonaDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+
+
+	<bean id="vagsobDao" class="ru.aisa.rgd.ws.dao.JdbcVagsobDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="activityKindDao" class="ru.aisa.rgd.ws.dao.JdbcActivityKindDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="dicObjectsDao" class="ru.aisa.rgd.ws.dao.JdbcDicObjectsDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="peregMsDao" class="ru.aisa.rgd.ws.dao.JdbcPeregMsDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="upDao" class="ru.aisa.rgd.ws.dao.JdbcUpDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+
+
+	<bean id="integrationDao" class="com.aisa.portal.invoice.integration.dao.IntegrationDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+
+	<bean id="etdsyncDao" class="ru.aisa.rgd.etd.dao.ETDSyncServiceDAO">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+
+	<bean id="urldao" class="ru.aisa.rgd.etd.dao.ETDUrlDAO">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="etdDocumentDao" class="ru.aisa.rgd.etd.dao.ETDDocumentDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="mrmDao" class="ru.aisa.rgd.ws.dao.JdbcMRMDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+
+	<bean id="roleDao" class="ru.aisa.rgd.ws.dao.JdbcRoleDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+
+	 <bean id="contragDao" class="ru.aisa.rgd.ws.dao.JdbcContragDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	
+		 <bean id="companyData" class="ru.aisa.rgd.ws.dao.JdbcCompanyData">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+
+	<bean id="EtdSyncFacade" class="ru.aisa.rgd.etd.dao.ETDSyncServiceFacade">
+		<property name="etdsyncDao" ref="etdsyncDao" />
+	</bean>
+
+	
+
+	<bean id="WrkMap" class="sheff.rjd.mappers.WrkflowMapper" />
+	<!-- DAO TRANSACTION MANAGMENT -->
+
+	<tx:advice id="txAdvice" transaction-manager="TransManager">
+		<tx:attributes>
+			<tx:method name="insertDocument" rollback-for="*" />
+
+			<tx:method name="get*" read-only="true" timeout="200" />
+			<tx:method name="*" timeout="200" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="txOperation"
+			expression="execution(* ru.aisa.rgd.ws.dao.JdbcServiceFacade.*(..))" />
+		<aop:pointcut id="txxOperation"
+			expression="execution(* ru.aisa.rgd.etd.dao.ETDFacade.*(..))" />
+
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txOperation" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txxOperation" />
+	</aop:config>
+
+	<bean id="iitip" class="java.lang.String">
+		<constructor-arg value="iit.ru"></constructor-arg>
+	</bean>
+
+	<bean id="gvcipSNMP" class="java.lang.String">
+		<constructor-arg value="10.200.7.2"></constructor-arg>
+	</bean>
+
+	<bean id="snmpip" class="java.lang.String">
+		<!-- constructor-arg value="udp:10.0.0.196/162"></constructor-arg -->
+		<constructor-arg value="udp:10.0.0.204/162"></constructor-arg>
+	</bean>
+
+	<bean id="snmpip2" class="java.lang.String">
+		<constructor-arg value="udp:10.0.0.226/162"></constructor-arg>
+	</bean>
+	<bean id="snmpOID" class="java.lang.String">
+		<constructor-arg value="'etd-test.gvc.rzd'" />
+	</bean>
+	<bean id="AppVer" class="java.lang.String">
+		<constructor-arg value="219.541.5"></constructor-arg>
+	</bean>
+
+	<bean id="iptaker" class="sheff.rjd.utils.IpTaker">
+		<property name="url" ref="iitip" />
+	</bean>
+
+	<bean id="logsdir" class="java.lang.String">
+		<constructor-arg value="/service/WAS/ActiveMQ/" />
+	</bean>
+
+	<bean id="performanceListener" class="sheff.rjd.utils.PerformanceListener" />
+
+	<bean id="AppCtxGetter" class="sheff.rjd.utils.AppCtxGetter" />
+
+	<bean id="starter" class="sheff.rjd.utils.StartChecker">
+		<constructor-arg ref="DSrjd"></constructor-arg>
+		<constructor-arg ref="AppVer"></constructor-arg>
+	</bean>
+
+
+
+	<!--  <import resource="handlers.xml" />-->	
+	<import resource="dispatcher.xml" />
+	<import resource="formControllers.xml" />
+	<!-- TTK -->
+
+	<bean id="_FacadeTTK"
+		class="com.aisa.portal.invoice.integration.facade.PortalSFServiceFacade">
+		<property name="dispatcher" ref="dispatcher" />
+		<property name="transactionTemplate" ref="TransTemplate" />
+		<property name="integrationDao" ref="integrationDao" />
+		<property name="personaDao" ref="personaDao" />
+		<property name="securitymanager" ref="securitymanager" />
+		<property name="noticeGenerator" ref="NoticeGenerator" />
+
+	</bean>
+
+
+
+
+	<bean id="PdotprParser" class="com.aisa.portal.invoice.notice.documentsParsers.Pdotpr">
+		<property name="documentName" value="Подтверждение" />
+		<property name="documentType" value="Pdotpr" />
+		<property name="oper" ref="OperatorObj" />
+	</bean>
+
+	<bean id="SfactParser" class="com.aisa.portal.invoice.notice.documentsParsers.Sfact">
+		<property name="documentName" value="Счет-фактура" />
+		<property name="documentType" value="Sfact" />
+		
+	</bean>
+
+	<bean id="KorSfactParser" class="com.aisa.portal.invoice.notice.documentsParsers.KorSfact">
+		<property name="documentName" value="Корректировочный счет-фактура" />
+		<property name="documentType" value="KorSfact" />
+		
+	</bean>
+
+	<bean id="PdpolParser" class="com.aisa.portal.invoice.notice.documentsParsers.Pdpol">
+		<property name="documentName" value="Подтверждение" />
+		<property name="documentType" value="Pdpol" />
+		<property name="oper" ref="OperatorObj" />
+	</bean>
+
+	<bean id="UvedParser" class="com.aisa.portal.invoice.notice.documentsParsers.Uved">
+		<property name="documentName" value="Уведомление об уточнении" />
+		<property name="documentType" value="BNUV" />
+		<property name="oper" ref="OperatorObj" />
+	</bean>
+
+	<bean id="NoticeGenerator" class="com.aisa.portal.invoice.notice.NoticeGenerator">
+		<property name="parsers">
+			<list>
+				<ref bean="PdotprParser" />
+				<ref bean="SfactParser" />
+				<ref bean="PdpolParser" />
+				<ref bean="KorSfactParser" />
+				<ref bean="UvedParser" />
+			</list>
+		</property>
+		<property name="processors">
+			<list>
+				<ref bean="BNCProcessor" />
+				<ref bean="BNICProcessor" />
+				<ref bean="BNIProcessor" />
+				<ref bean="BNICProcessor" />
+				<ref bean="SNCProcessor" />
+				<ref bean="BUNICProcessor" /> 
+				<ref bean="SNCUVProcessor" />
+			</list>
+		</property>
+	</bean>
+
+
+
+	<bean id="BNCProcessor"
+		class="com.aisa.portal.invoice.notice.documentsProcessors.BuyerNoticeConfirmationToTTKAbstract">
+		<property name="documentName" value="BNC" />
+		<property name="obj" ref="BNCObj" />
+	</bean>
+	<bean id="BNICProcessor"
+		class="com.aisa.portal.invoice.notice.documentsProcessors.BuyerNoticeInvoiceConfirmationToTTKAbstract">
+		<property name="documentName" value="BNIC" />
+		<property name="obj" ref="BNICObj" />
+	</bean>
+	<bean id="BNIProcessor"
+		class="com.aisa.portal.invoice.notice.documentsProcessors.BuyerNoticeInvoiceToTTKAbstract">
+		<property name="documentName" value="BNI" />
+		<property name="obj" ref="BNIObj" />
+	</bean>
+	<bean id="SNCProcessor"
+		class="com.aisa.portal.invoice.notice.documentsProcessors.SellerNoticeConfirmationToTTKAbstract">
+		<property name="documentName" value="SNC" />
+		<property name="obj" ref="SNCObj" />
+	</bean>
+	<bean id="BUNICProcessor"
+		class="com.aisa.portal.invoice.notice.documentsProcessors.BuyerUvedNoticeInvoiceConfirmationToTTKAbstract">
+		<property name="documentName" value="BNUV" />
+		<property name="obj" ref="BUNICObj" />
+	</bean>
+		<bean id="SNCUVProcessor"
+		class="com.aisa.portal.invoice.notice.documentsProcessors.SellerUvedConfirmationToTTKAbstract">
+		<property name="documentName" value="SNCUV" />
+		<property name="obj" ref="SNCUVObj" />
+	</bean>
+
+
+
+	
+
+	<bean id="BNCObj" class="com.aisa.portal.invoice.ttk.BuyerNoticeConfirmationToTTK">
+		<property name="wst" ref="wst_standart" />
+		<property name="url" ref="urlOper" />
+		<property name="integrationDao" ref="integrationDao" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="sendtonoticeetd" ref="transserviceetd" />
+	</bean>
+
+	<bean id="BNICObj" class="com.aisa.portal.invoice.ttk.BuyerNoticeInvoiceConfirmationToTTK">
+		<property name="wst" ref="wst_standart" />
+		<property name="url" ref="urlOper" />
+		<property name="integrationDao" ref="integrationDao" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="sendtonoticeetd" ref="transserviceetd" />
+	</bean>
+
+	<bean id="BNIObj" class="com.aisa.portal.invoice.ttk.BuyerNoticeInvoiceToTTK">
+		<property name="wst" ref="wst_standart" />
+		<property name="url" ref="urlOper" />
+		<property name="integrationDao" ref="integrationDao" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="sendtonoticeetd" ref="transserviceetd" />
+	</bean>
+
+	<bean id="SNCObj" class="com.aisa.portal.invoice.ttk.SellerNoticeConfirmationToTTK">
+		<property name="wst" ref="wst_standart" />
+		<property name="url" ref="urlOper" />
+		<property name="integrationDao" ref="integrationDao" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="sendtonoticeetd" ref="transserviceetd" />
+	</bean>
+	
+	<bean id="BUNICObj" class="com.aisa.portal.invoice.ttk.BuyerUvedNoticeInvoiceConfirmationToTTK">
+		<property name="wst" ref="wst_standart" />
+		<property name="url" ref="urlOper" />
+		<property name="integrationDao" ref="integrationDao" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="sendtonoticeetd" ref="transserviceetd" />
+	</bean> 
+	
+	<bean id="SNCUVObj" class="com.aisa.portal.invoice.ttk.SellerUvedConfirmationToTTK">
+		<property name="wst" ref="wst_standart" />
+		<property name="url" ref="urlOper" />
+		<property name="integrationDao" ref="integrationDao" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="sendtonoticeetd" ref="transserviceetd" />
+	</bean> 
+
+	<bean id="SSIObj" class="com.aisa.portal.invoice.ttk.SellerSignedInvoceToTTK">
+		<property name="wst" ref="wst_standart" />
+		<property name="url" ref="urlOper" />
+		<property name="integrationDao" ref="integrationDao" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="sendtonoticeetd" ref="transserviceetd" />
+	</bean>
+	
+ 	<bean id="OperatorObj" class="com.aisa.portal.invoice.operator.obj.OperatorObject">
+		<property name="NameUrLic" value="ООО &quot;ИИТ&quot;"/>
+		<property name="id" value="2JH"/>
+		<property name="idEDO" value="2JH000"/>
+		<property name="kpp" value="770901001"/>
+		<property name="inn" value="7708713259"/>
+		<property name="innurlic" value="7708713259"/>
+		<property name="name" value="Александр"/>
+		<property name="surname" value="Грингауз"/>
+		<property name="patronymic" value="Михайлович"/>
+		<property name="position" value="Генеральный директор"/>
+		 </bean>
+
+
+	<bean id="urlOper" class="java.lang.String">
+	<!-- <constructor-arg value="http://10.0.0.45:48180/portalSF/Operator/"></constructor-arg>  -->
+	<!-- <constructor-arg value="http://10.48.0.10:8080/portalSF/Operator/"></constructor-arg> -->
+	<!-- <constructor-arg value="http://10.48.0.10:38080/portalSF.test/Operator/"></constructor-arg> -->
+	<constructor-arg value="http://10.0.0.45:48180/portalSF/Operator/"></constructor-arg>
+	</bean>
+
+
+
+	<!-- TTK -->
+
+
+
+	<bean id="_Facade" class="ru.aisa.rgd.ws.dao.JdbcServiceFacade">
+		<property name="dispatcher" ref="dispatcher" />
+		<property name="transactionTemplate" ref="TransTemplate" />
+		<property name="documentDao" ref="documentDao" />
+		<property name="reportDao" ref="reportDao" />
+		<property name="enterpriseDao" ref="enterpriseDao" />
+		<property name="templateDao" ref="templateDao" />
+		<property name="roadDao" ref="roadDao" />
+		<property name="personaDao" ref="personaDao" />
+		<property name="wayPartDao" ref="wayPartDao" />
+		<property name="administrationDao" ref="administrationDao" />
+		<property name="territorialObjectDao" ref="territorialObjectDao" />
+		<property name="riverDao" ref="riverDao" />
+		<property name="gruzDao" ref="gruzDao" />
+		<property name="vagsobDao" ref="vagsobDao" />
+		<property name="activityKindDao" ref="activityKindDao" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="dicObjectsDao" ref="dicObjectsDao" />
+		<property name="peregMsDao" ref="peregMsDao" />
+		<property name="upDao" ref="upDao" />
+		<property name="MRMDao" ref="mrmDao" />
+		<property name="roleDao" ref="roleDao" />
+		<property name="ContragDao" ref="contragDao" />
+		<property name="CompanyData" ref="companyData" />
+	</bean>
+
+	<bean id="admin_utils" class="ru.aisa.etdadmin.Utils">
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+
+
+	<!-- Security -->
+
+
+
+	<bean id="securitymanager" class="com.aisa.portal.invoice.integration.security.Manager">
+		<constructor-arg value="classpath:prefs.xml" />
+		<constructor-arg value="AQViCj4CCf8=" />
+		<constructor-arg value="q+gyFXn7WJRzE5BhDpltK2YiOl6AORs2obPpMSjUNYI=" />
+		<constructor-arg ref="hDImageStoreDir" />
+		<constructor-arg ref="trustStore" />
+		<constructor-arg ref="trustStorePassword" />
+		<constructor-arg>
+			<list>
+				<value>1234567890</value>
+				<value>1234567890</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg>
+			<list>
+				<value>Test1</value>
+				<value>Test2</value>
+			</list>
+		</constructor-arg>
+
+
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ocsp" ref="ocsp" />
+		<property name="algorithm" ref="algorithm" />
+		<property name="jcp" ref="jcp" />
+	</bean>
+
+	<bean id="hDImageStoreDir" class="java.lang.String">
+		<constructor-arg value="/cprocsp"></constructor-arg>
+	</bean>
+	<bean id="trustStorePassword" class="java.lang.String">
+		<constructor-arg value="password"></constructor-arg>
+	</bean>
+
+
+	<bean id="keyStorePassword" class="java.lang.String">
+		<constructor-arg value="1234567890"></constructor-arg>
+	</bean>
+	<bean id="keyAlias" class="java.lang.String">
+		<constructor-arg value="Test1"></constructor-arg>
+	</bean>
+
+
+
+	<bean id="trustStore" class="java.lang.String">
+		<constructor-arg value="/full.store"></constructor-arg>
+	</bean>
+
+
+	<bean id="algorithm" class="java.lang.String">
+		<constructor-arg value="GOST3411withGOST3410DHEL" />
+	</bean>
+	<bean id="sig" class="java.security.Signature" factory-method="getInstance">
+		<constructor-arg ref="algorithm" />
+		<constructor-arg ref="jcp" />
+	</bean>
+	<bean id="jcp" class="ru.CryptoPro.JCP.JCP">
+	</bean>
+
+	 <!-- <bean id="ocsp" class="sheff.rjd.utils.OCSPutils">
+		<constructor-arg>
+			<list>
+			<value>CArzd.cer</value>
+			<value>CArzd2.cer</value>
+			<value>CArzd3.cer</value>
+			</list>
+		</constructor-arg>
+
+		<constructor-arg>
+			<list>
+				<value>http://ocsp.rzd.ru/ocsp/ocsp.srf</value>
+				</list>
+		</constructor-arg>
+
+		<constructor-arg>
+			<list>
+				<value>5000</value>
+			</list>
+		</constructor-arg>
+		<property name="hashCarzd" value="118292249" />
+		<property name="truevalue" value="0" />
+		<property name="enabled" value="yes" />
+	</bean> -->
+
+
+<bean id="ocsp" class="sheff.rjd.utils.OCSPutils">
+		<constructor-arg>
+			<list>
+				<value>CArzd.cer</value>
+				<value>CArzd2.cer</value>
+				<value>CArzd3.cer</value>
+				<value>auc.cer</value>
+			</list>
+		</constructor-arg>
+
+		<!--<constructor-arg> <list> <value>http://10.250.2.148/ocsp/ocsp.srf</value> 
+			<value>http://10.250.2.158/ocsp/ocsp.srf</value> <value>http://10.23.234.82/ocsp/ocsp.srf</value> 
+			<value>http://10.58.199.66/ocsp/ocsp.srf</value> <value>http://10.24.223.12/ocsp/ocsp.srf</value> 
+			<value>http://10.248.33.15/ocsp/ocsp.srf</value> <value>http://10.248.33.16/ocsp/ocsp.srf</value> 
+			</list> </constructor-arg> -->
+		<constructor-arg>
+			<list>
+				<!-- <value>http://ocsp.pkitrans.ru/ocspca1_niias/ocsp.srf</value> -->
+				<value>http://ca.rzd.ru/ocsp/ocsp.srf</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg>
+			<list>
+				<value>5000</value>
+			</list>
+		</constructor-arg>
+		<property name="hashCarzd" value="118292249" />
+		<property name="truevalue" value="0" />
+		<property name="enabled" value="yes" />
+	</bean>
+	<bean id="tsp" class="sheff.rjd.utils.TSPutils">
+		<property name="url">
+			<!--<list> <value>http://10.250.2.148/tsp/tsp.srf</value> <value>http://10.250.2.158/tsp/tsp.srf</value> 
+				<value>http://10.23.234.82/tsp/tsp.srf</value> <value>http://10.58.199.66/tsp/tsp.srf</value> 
+				<value>http://10.24.223.12/tsp/tsp.srf</value> <value>http://10.248.33.13/tsp/tsp.srf</value> 
+				<value>http://10.248.33.14/tsp/tsp.srf</value> </list> -->
+			<list>
+				<!-- <value>http://tsp.pkitrans.ru/tspca1_niias/tsp.srf</value> -->
+			<value>http://ca.rzd.ru/tsp/tsp.srf</value>
+			</list>
+		</property>
+		<property name="timeout">
+			<list>
+				<value>5000</value>
+			</list>
+		</property>
+		<property name="enabled" value="yes" />
+	</bean>
+
+	<bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="50" />
+		<property name="maxPoolSize" value="100" />
+		<property name="queueCapacity" value="250" />
+	</bean>
+	
+	<bean id="taskExecutorTransoil"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="12" />
+		<property name="maxPoolSize" value="50" />
+		<property name="queueCapacity" value="1000" />
+	</bean>
+
+	<bean id="droplist" class="sheff.rjd.ws.OCO.AfterSign.DropList">
+		<property name="npjt" ref="PrepTemplate" />
+
+	</bean>
+
+
+	<bean id="sendobject" class="sheff.rjd.services.transoil.SendObject">
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="trans" ref="transservice" />
+	</bean> 
+		
+	<bean id="transservice" class="sheff.rjd.services.transoil.TransService">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="wst" ref="WebServiceTemplate" />
+		<property name="wstoil" ref ="wst_transoil"/>
+		<property name="dateformat" ref="dateformat" />
+		<property name="timeformat" ref="timeformat" />
+		<property name="datetimeformat" ref="datetimeformat" />
+		<property name="send" value= "true" />
+		<property name="sendmrm" value="true" />
+		<property name="url" value="http://10.0.0.198:7804/sap/bc/soap/rfc" />
+		<property name="urlmrm" value="http://10.0.0.198:7804/sap/bc/soap/rfc"/>
+		<property name="urlsf" value="http://10.0.0.198:7804/toil_bp_dev_sav/ws/SFService.1cws"/>
+		
+		<!-- prom -->
+		<!-- 
+		<property name="url" value="http://10.48.0.7:7800/sap/bc/soap/rfc" />
+		<property name="urlmrm" value="http://10.48.0.7:7800/sap/bc/soap/rfcmrm"/>
+		<property name="urlsf" value="http://10.48.0.7:7800/toil_bp_dev_sav/ws/SFService.1cws"/>
+		 -->
+		 <!-- test -->
+		<!-- 
+		<property name="url" value="http://10.48.0.7:7800/sap/bc/soap/rfc_t" />
+		<property name="urlmrm" value="http://10.48.0.7:7800/sap/bc/soap/rfc/t/zwsk"/>
+		<property name="urlsf" value="http://10.48.0.7:7800/sap/bc/soap/rfc_t"/>
+		 -->
+		
+		<!-- local -->
+		<!--
+		<property name="url" value="http://10.0.0.198:7804/sap/bc/soap/rfc" />
+		<property name="urlmrm" value="http://10.0.0.198:7804/sap/bc/soap/rfc"/>
+		<property name="urlsf" value="http://10.0.0.198:7804/toil_bp_dev_sav/ws/SFService.1cws"/>
+		 -->
+	</bean>
+	
+	
+		<bean id="transserviceetd" class="sheff.rjd.services.etd.TransService">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="wst" ref="WebServiceTemplate" />
+		<property name="send" value= "true" />
+		<property name="etdurldao" ref="urldao" />
+		<property name="portalSFFacade" ref="_FacadeTTK" />
+		<!-- prom -->
+		<!-- 
+		<property name="url" value="http://10.48.0.7:7800/sap/bc/soap/rfc" />
+		<property name="urlmrm" value="http://10.48.0.7:7800/sap/bc/soap/rfcmrm"/>
+		<property name="urlsf" value="http://10.48.0.7:7800/toil_bp_dev_sav/ws/SFService.1cws"/>
+		 -->
+		 <!-- test -->
+		<!-- 
+		<property name="url" value="http://10.48.0.7:7800/sap/bc/soap/rfc_t" />
+		<property name="urlmrm" value="http://10.48.0.7:7800/sap/bc/soap/rfc/t/zwsk"/>
+		<property name="urlsf" value="http://10.48.0.7:7800/sap/bc/soap/rfc_t"/>
+		 -->
+		
+		<!-- local -->
+		<!--
+		<property name="url" value="http://10.0.0.198:7804/sap/bc/soap/rfc" />
+		<property name="urlmrm" value="http://10.0.0.198:7804/sap/bc/soap/rfc"/>
+		<property name="urlsf" value="http://10.0.0.198:7804/toil_bp_dev_sav/ws/SFService.1cws"/>
+		 -->
+	</bean>
+	
+
+	<bean id="signservice" class="sheff.rjd.services.syncutils.SendToRTKService">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="wst" ref="WebServiceTemplate" />
+		<property name="dateformat" ref="dateformat" />
+		<property name="timeformat" ref="timeformat" />
+		<property name="datetimeformat" ref="datetimeformat" />
+		<property name="send" value="false" />
+		<property name="url" value="http://www.podhod.info:80/RZDEDO/SignRtkService" />
+		<property name="urlClient" value="http://10.0.0.53:28080/GVC/portal/" />
+		<property name="urlMO" value="http://10.0.0.53:28080/GVC/portal/" />
+	
+	</bean>
+
+	<bean id="signvrkservice" class="sheff.rjd.services.syncutils.SendToVRKService">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="wst_vrk" ref="wst_vrk" />
+		<property name="dateformat" ref="dateformat" />
+		<property name="timeformat" ref="timeformat" />
+		<property name="datetimeformat" ref="datetimeformat" />
+		<property name="send" value="false" />
+		<property name="sendvrk" value="false" />
+		<!-- http://10.0.0.33:8088/mockIITSoap11 -->
+		<!-- http://warecs.ru/IIT.asmx -->
+		<property name="url" value="http://warecs.ru/IIT.asmx" />
+		<property name="urlrepair" value="http://warecs.ru/IITTOPEC.asmx"></property>
+	</bean>
+
+
+	<bean id="timeformat" class="java.text.SimpleDateFormat">
+		<constructor-arg type="java.lang.String" value="HH:mm:ss" />
+	</bean>
+	<bean id="dateformat" class="java.text.SimpleDateFormat">
+		<constructor-arg type="java.lang.String" value="dd.MM.yyyy" />
+	</bean>
+	<bean id="datetimeformat" class="java.text.SimpleDateFormat">
+		<constructor-arg type="java.lang.String" value="dd.MM.yyyy HH:mm:ss" />
+	</bean>
+
+	<bean id="sendtoetd" class="sheff.rjd.ws.OCO.AfterSign.SendToEtd">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="wst" ref="WebServiceTemplate" />
+		<property name="etdurldao" ref="urldao" />
+		<property name="ds" ref="DSrjd" />
+		<property name="formControllers" ref = "formControllers" />  
+	</bean>
+	 <bean id="Email" class="ru.aisa.mail.EmailHelper" init-method="init">
+		<property name="smtpHost" value="mail.iit.ru" />
+		<property name="smtpUser" value="request@iit.ru" />
+		<property name="smtpPass" value="rfhnfdsq" />
+		<property name="fromPersonall" value="Портал"></property>
+		<property name="adresses">
+		<list>
+		<value>portal@iit.ru</value>
+		</list>
+		</property>
+		</bean>
+		
+	<bean id="VUGen" class="sheff.rgd.ws.Controllers.PPS.VUGen">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="facade" ref="_Facade" />
+	    <property name="transT" ref="TransTemplate" />
+	</bean>
+	
+	<bean id="FictUserChecker" class="sheff.rjd.ws.OCO.AfterSign.FictUserChecker">
+		<property name="personaDao" ref="personaDao" />
+	</bean>
+</beans>

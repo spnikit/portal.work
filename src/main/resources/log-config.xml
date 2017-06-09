@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration>
+
+	<appender name="errorfile" class="org.apache.log4j.CompositeRollingAppender">
+		<param name="encoding" value="UTF-8" />
+		<param name="File"
+			value="/home/vovako/service/WAS/logs/portal/PORT-ERROR-Log4j.log" />
+		<param name="maxFileSize" value="50MB" />
+		<param name="Append" value="true" />
+		<param name="immediateFlush" value="false" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p [%c] - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="ERROR" />
+			<param name="LevelMax" value="ERROR" />
+		</filter>
+	</appender>
+
+
+	<appender name="warnfile" class="org.apache.log4j.CompositeRollingAppender">
+		<param name="encoding" value="UTF-8" />
+		<param name="File"
+			value="/home/vovako/service/WAS/logs/portal/PORT-WARN-Log4j.log" />
+		<param name="maxFileSize" value="50MB" />
+		<param name="Append" value="true" />
+		<param name="immediateFlush" value="false" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p [%c] - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="WARN" />  <!-- was FINE -->
+			<param name="LevelMax" value="WARN" />
+		</filter>
+
+	</appender>
+
+
+	<appender name="file" class="org.apache.log4j.CompositeRollingAppender">
+		<param name="encoding" value="UTF-8" />
+		<param name="File"
+			value="/home/vovako/service/WAS/logs/portal/PORT-DEBUG-Log4j.log" />
+		<param name="maxFileSize" value="50MB" />
+		<param name="Append" value="true" />
+		<param name="immediateFlush" value="false" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p [%c] - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="DEBUG" />
+			<param name="LevelMax" value="DEBUG" />
+		</filter>
+
+	</appender>
+
+	<appender name="rzdfile" class="org.apache.log4j.CompositeRollingAppender">
+		<param name="encoding" value="UTF-8" />
+		<param name="File"
+			value="/home/vovako/service/WAS/logs/portal/PORT-SUPPORT-Log4j.log" />
+		<param name="maxFileSize" value="50MB" />
+		<param name="immediateFlush" value="false" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d  - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="RZD_TRACE#ru.aisa.rjd.log4j.level.RzdLevel" />
+			<param name="LevelMax" value="RZD_TRACE#ru.aisa.rjd.log4j.level.RzdLevel" />
+		</filter>
+	</appender>
+	<appender name="notiffile" class="org.apache.log4j.CompositeRollingAppender">
+		<param name="encoding" value="UTF-8" />
+		<param name="File"
+			value="/home/vovako/service/WAS/logs/portal/PORT-NOTIF-Log4j.log" />
+		<param name="maxFileSize" value="50MB" />
+		<param name="immediateFlush" value="false" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p [%c] - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="NOTIF#ru.aisa.rjd.log4j.level.NotifLevel" />
+			<param name="LevelMax" value="NOTIF#ru.aisa.rjd.log4j.level.NotifLevel" />
+		</filter>
+	</appender>
+
+	<appender name="tracertfile" class="org.apache.log4j.CompositeRollingAppender">
+		<param name="encoding" value="UTF-8" />
+		<param name="File"
+			value="/home/vovako/service/WAS/logs/portal/PORT-TRACE-Log4j.log" />
+		<param name="MaxFileSize" value="50MB" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p [%c] - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="TRACE" />
+			<param name="LevelMax" value="TRACE" />
+		</filter>
+
+	</appender>
+
+     <logger name="org.springframework.core">
+		<level value="ERROR" />
+	</logger> 
+	
+	 <logger name="org.springframework.beans">
+		<level value="ERROR" />
+	</logger>  
+	
+	<logger name="org.springframework.jdbc">
+		<level value="ERROR" />
+	</logger>
+	
+	<logger name="org.springframework.web.context.support">
+		<level value="ERROR" />
+	</logger> 
+	
+	<logger name="org.springframework.jndi">
+		<level value="ERROR" />
+	</logger> 
+	
+	<logger name="org.springframework.ws.wsdl">
+		<level value="ERROR" /> 
+	</logger> 
+	
+	<logger name="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor">
+		<level value="ERROR" />
+	</logger> 
+	
+	<logger name="sheff.rjd.utils.SecurityInterceptor">
+		<level value="ERROR" />
+	</logger>
+	
+	<logger name="sheff">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="org.springframework.ws">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="org.springframework.xml">
+		<level value="DEBUG" />
+	</logger> 
+	
+
+
+	<logger name="org.springframework.transaction">
+		<level value="ERROR" />
+	</logger>
+	
+	<logger name="ru.aisa.rgd.etd.ws.vu">
+		<level value="TRACE" />
+	</logger>
+	<logger name="sheff.rjd.dispatcher">
+		<level value="NOTIF#ru.aisa.rjd.log4j.level.NotifLevel" />
+	</logger>
+	<logger name="ru.aisa.rgd.ws.client.ETDStandartSignification">
+		<level value="NOTIF#ru.aisa.rjd.log4j.level.NotifLevel" />
+	</logger> 
+	<logger name="org.springframework.ws.client">
+		<level value="TRACE" />
+	</logger>
+
+
+	<root>
+		<priority value="DEBUG"></priority>
+		<appender-ref ref="errorfile" />
+		<appender-ref ref="warnfile" />
+		<appender-ref ref="file" />
+		<appender-ref ref="rzdfile" />
+		<appender-ref ref="notiffile" />
+		<appender-ref ref="tracertfile" />
+	</root>
+</log4j:configuration>

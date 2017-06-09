@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+  <bean id="formControllers" class="sheff.rgd.ws.Abstract.DoAction">
+		<property name="docArray">
+			<list>
+		     	<ref local="SFController" /> 
+		     	<ref local="CorrSFController" /> 
+				
+				        <!-- TOR -->
+				<ref local="TORG12Controller" />
+				<ref local="CardDocController" />
+				<ref local="ActTMCController" />
+				<ref local="ActBrokenController" />
+				<ref local="AktReplaceController" />
+				<ref local="FPU26Controller" />
+				<ref local="MX1Controller" />
+				<ref local="MX3Controller" />
+				<ref local="PackageController" />
+				<ref local="RDVController" />
+				<ref local="VU22Controller" />
+				<ref local="VU23Controller" />
+				<ref local="VU36Controller" />
+				<ref local="VU41Controller" />
+				<ref local="SpravkaController" />
+				<ref local="RSHController" />
+				<ref local="RSVController" />
+				<ref local="ASOUPController" />
+				<ref local="PretensionController" />
+			        	<!-- Perevoz -->
+				<ref local="ReestrController" />
+				<ref local="LetterController" />
+				<ref local="EnumController" />
+				<ref local="ActController" />
+			           	<!-- PPS -->
+			    <ref local="ZPPSController" />
+			    <ref local="MOController" />
+			    <ref local="FPU26PPSController" />
+			    <ref local="CorrFPU26PPSController" />
+			    <ref local="CardPPSController" />
+			    <ref local="ReestrPPSController" />
+			    <ref local="VU19Controller" />
+			    <ref local="VU20Controller" />
+			    <ref local="VU20aController" />
+			            <!-- RTK -->
+			    <ref local="ActRTKController" />
+				<ref local="PackRTKController" />
+				<ref local="SFRTKController" />	   
+				 <ref local="KorActRTKController"/>   
+				 <ref local="KorSFRTKController"/>  
+        				<!-- ASR -->  
+				<!--<ref local="FPU26ASRController" />
+				<ref local="RashifrController" />
+				<ref local="SchetController" />	-->
+				<ref local="RashifrCSSController" />	
+			    <ref local="FPU26CSSController" />
+				<ref local="SchetCSSController" />	
+				<ref local="PackageCSSController" />	
+				<ref local="SFCSSController" /> 
+				        <!-- MRM -->
+				<ref local="GU23Controller" />
+				<ref local="GU2VController" />           
+				<ref local="GU38aController" />    
+				<ref local="GU38bController" />    
+				<ref local="GU45Controller" />    
+				<ref local="PVController" />    
+			    <ref local="SDGController" /> 
+			    <ref local="ZUVController" />
+				<ref local="ZPVController" />
+				<ref local="SPPVController" />
+				<ref local="GU2BController" />
+				<ref local="RNLController" />
+				<ref local="RNL2Controller" />
+				<ref local="RNL3Controller" />
+						<!-- RZDS -->  
+				<ref local="ActRZDSController" />
+				<ref local="CardRZDSController" />
+				<ref local="SFSController" />	
+				<ref local="SFGController" />	
+				<ref local="TORG12RZDSController" />	
+						<!-- Luzh -->
+				<ref local="DU46_LuzhController" />
+						<!-- Repair -->
+				<ref local="Pack_InrepairController" />
+				<ref local = "RepairabilityController" />
+				<ref local = "CompletionOfRepairController" />
+				</list>
+		</property>
+	</bean>
+
+
+
+
+    <bean id="SFController" class="sheff.rgd.ws.Controllers.Invoice.SFController">
+		<property name="parentform" value="Счет-фактура" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ssiobj" ref="SSIObj" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="fakesignature" ref="fakesignature" /> 
+		<property name="mail" ref="Email" /> 
+		 <!-- <property name="handlers">
+            <map>
+                <entry value-ref="sfXmlHandler">
+                    <key>
+                        <xsi:constant
+                        static-field="sheff.rjd.ws.handlers.FormHandler.XML_GENERATOR" />
+                    </key>
+                </entry>
+            </map>
+         </property> -->
+	</bean>  
+
+<bean id="CorrSFController" class="sheff.rgd.ws.Controllers.Invoice.CorrSFController">
+		<property name="parentform" value="Корректировочный счет-фактура" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ssiobj" ref="SSIObj" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<!-- <property name="handlers">
+            <map>
+                <entry value-ref="csfXmlHandler">
+                    <key>
+                        <xsi:constant
+                        static-field="sheff.rjd.ws.handlers.FormHandler.XML_GENERATOR" />
+                    </key>
+                </entry>
+            </map>
+        </property> -->
+	</bean>  
+    
+	
+	<!-- TOR -->
+	
+	<bean id="TORG12Controller" class="sheff.rgd.ws.Controllers.TOR.TORG12Controller">
+		<property name="parentform" value="ТОРГ-12" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="fakesignature" ref="fakesignature" /> 
+		<property name="oper" ref="OperatorObj" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="facade" ref="_Facade" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="checker" ref="FictUserChecker" />
+	</bean> 
+	
+	<bean id="CardDocController" class="sheff.rgd.ws.Controllers.TOR.CardDocController">
+		<property name="parentform" value="Карточка документ" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="fakesignature" ref="fakesignature" /> 
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	</bean> 
+	
+	<bean id="ActTMCController" class="sheff.rgd.ws.Controllers.TOR.ActTMCController">
+	     <property name="parentform" value="Акт приема передачи ТМЦ" />
+		 <property name="npjt" ref="PrepTemplate" />
+		 <property name="sendtoetd" ref="sendtoetd" />
+		 <property name="sendtotransoil" ref="transservice" />
+		 <property name="facade" ref="_Facade" />
+		 <property name="etdsyncfacade" ref="EtdSyncFacade" />
+		 <property name="oper" ref="OperatorObj" />
+	</bean> 
+	
+	<bean id="ActBrokenController" class="sheff.rgd.ws.Controllers.TOR.ActBrokenController">
+	    <property name="parentform" value="Акт браковки" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean> 
+	
+	<bean id="AktReplaceController" class="sheff.rgd.ws.Controllers.TOR.AktReplaceController">
+	    <property name="parentform" value="Акт ЗУД" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="npjt" ref="PrepTemplate" />
+	</bean> 
+	
+	<bean id="FPU26Controller" class="sheff.rgd.ws.Controllers.TOR.FPU26Controller">
+        <property name="parentform" value="ФПУ-26" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="facade" ref="_Facade" />
+		
+	</bean> 
+
+    <bean id="MX1Controller" class="sheff.rgd.ws.Controllers.TOR.MX1Controller">
+    	<property name="parentform" value="МХ-1" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	</bean> 
+	
+	<bean id="MX3Controller" class="sheff.rgd.ws.Controllers.TOR.MX3Controller">
+    	<property name="parentform" value="МХ-3" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	</bean> 
+	
+	<bean id="PackageController" class="sheff.rgd.ws.Controllers.TOR.PackageController">
+    	<property name="parentform" value="Пакет документов" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="taskExecutor" ref="taskExecutor" />
+	</bean> 
+	
+	<bean id="RDVController" class="sheff.rgd.ws.Controllers.TOR.RDVController">
+    	<property name="parentform" value="РДВ" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	</bean> 
+	
+	<bean id="VU22Controller" class="sheff.rgd.ws.Controllers.TOR.VU22Controller">
+		<property name="parentform" value="ВУ-22" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+	</bean> 
+	
+	<bean id="VU23Controller" class="sheff.rgd.ws.Controllers.TOR.VU23Controller">
+		<property name="parentform" value="ВУ-23_О" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="syncsignatures" value="1" />
+	</bean> 
+	
+	<bean id="VU36Controller" class="sheff.rgd.ws.Controllers.TOR.VU36Controller">
+		<property name="parentform" value="ВУ-36М_О" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="fakesignature" ref="fakesignature" /> 
+		<property name="signvrkservice" ref="signvrkservice" /> 
+	</bean> 
+	
+	<bean id="VU41Controller" class="sheff.rgd.ws.Controllers.TOR.VU41Controller">
+		<property name="parentform" value="ВУ-41 ЭТД" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+	</bean> 
+	
+	<bean id="SpravkaController" class="sheff.rgd.ws.Controllers.TOR.SpravkaController">
+		<property name="parentform" value="Справка 2612" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+	</bean> 
+	<bean id="RSHController" class="sheff.rgd.ws.Controllers.TOR.RSHController">
+		<property name="parentform" value="Расчет стоимости услуг по хранению" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+	</bean> 
+	<bean id="RSVController" class="sheff.rgd.ws.Controllers.TOR.RSVController">
+		<property name="parentform" value="Расчет стоимости услуг по погрузке/выгрузке" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+	</bean> 
+	<bean id="ASOUPController" class="sheff.rgd.ws.Controllers.TOR.ASOUPController">
+		<property name="parentform" value="Сообщения АСОУП" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="signvrkservice" ref="signvrkservice" /> 
+	</bean> 
+	
+	<bean id="PretensionController" class="sheff.rgd.ws.Controllers.TOR.PretensionController">
+		<property name="parentform" value="Претензия" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean> 
+	
+	<bean id="ReestrController" class="sheff.rgd.ws.Controllers.Perevoz.ReestrController">
+		<property name="parentform" value="Реестр счетов-фактур" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean> 
+	
+	<bean id="LetterController" class="sheff.rgd.ws.Controllers.Perevoz.LetterController">
+		<property name="parentform" value="Сопроводительное письмо" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean> 
+	
+	<bean id="EnumController" class="sheff.rgd.ws.Controllers.Perevoz.EnumController">
+		<property name="parentform" value="Перечень первичных документов" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean> 
+	
+	<bean id="ActController" class="sheff.rgd.ws.Controllers.Perevoz.ActController">
+		<property name="parentform" value="Акт оказанных услуг" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	</bean> 
+	
+	
+	<!-- PPS -->
+	
+	<bean id="ZPPSController" class="sheff.rgd.ws.Controllers.PPS.ZPPSController">
+		<property name="parentform" value="Заявка ППС" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="facade" ref="_Facade"></property>
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="fakesignature" ref="fakesignature" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean> 
+	
+	<bean id="MOController" class="sheff.rgd.ws.Controllers.PPS.MOController">
+		<property name="parentform" value="Мотивированный отказ ППС" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	</bean>
+	
+	
+	<bean id="FPU26PPSController" class="sheff.rgd.ws.Controllers.PPS.FPU26PPSController">
+		<property name="parentform" value="ФПУ-26 ППС" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="formControllers" ref = "formControllers" />  
+		<property name="facade" ref="_Facade"></property>
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="droplist" ref="droplist" />
+	</bean>
+	
+	<bean id="CorrFPU26PPSController" class="sheff.rgd.ws.Controllers.PPS.CorrFPU26PPSController">
+		<property name="parentform" value="Кор ФПУ-26 ППС" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="formControllers" ref = "formControllers" />  
+		<property name="facade" ref="_Facade"></property>
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean>
+	
+	<bean id="CardPPSController" class="sheff.rgd.ws.Controllers.PPS.CardPPSController">
+		<property name="parentform" value="Карточка документ ППС" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="facade" ref="_Facade"></property>
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="fakesignature" ref="fakesignature" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean> 
+<bean id="ReestrPPSController" class="sheff.rgd.ws.Controllers.PPS.ReestrPPSController">
+		<property name="parentform" value="Реестр ЦС" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="facade" ref="_Facade"></property>
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="fakesignature" ref="fakesignature" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean> 
+
+<bean id="VU19Controller" class="sheff.rgd.ws.Controllers.PPS.VU19Controller">
+		<property name="parentform" value="ВУ-19" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="facade" ref="_Facade"></property>
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="fakesignature" ref="fakesignature" />
+		
+	</bean> 
+	<bean id="VU20Controller" class="sheff.rgd.ws.Controllers.PPS.VU20Controller">
+		<property name="parentform" value="ВУ-20" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="facade" ref="_Facade"></property>
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="fakesignature" ref="fakesignature" />
+		
+	</bean> 
+	<bean id="VU20aController" class="sheff.rgd.ws.Controllers.PPS.VU20aController">
+		<property name="parentform" value="ВУ-20а" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="facade" ref="_Facade"></property>
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="fakesignature" ref="fakesignature" />
+		<property name="vugenerator" ref="VUGen" />
+	</bean> 
+	
+	<!-- RTK -->
+	<bean id="ActRTKController" class="sheff.rgd.ws.Controllers.RTK.ActRTKController">
+		<property name="parentform" value="Акт РТК" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="fakesignature" ref="fakesignature" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendsign" ref="signservice" />
+		<property name="facade" ref="_Facade" />
+	</bean> 
+	
+	<bean id="PackRTKController" class="sheff.rgd.ws.Controllers.RTK.PackRTKController">
+		<property name="parentform" value="Пакет документов РТК" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="fakesignature" ref="fakesignature" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendsign" ref="signservice" />
+		<property name="facade" ref="_Facade" />
+	</bean> 
+	
+	<bean id="SFRTKController" class="sheff.rgd.ws.Controllers.RTK.SFRTKController">
+		<property name="parentform" value="Счет-фактура РТК" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendsign" ref="signservice" />
+		<property name="ssiobj" ref="SSIObj" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="fakesignature" ref="fakesignature" />
+	</bean> 
+	
+	<bean id="KorSFRTKController" class="sheff.rgd.ws.Controllers.RTK.KorSFRTKController">
+		<property name="parentform" value="Корректировочный счет-фактура РТК" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendsign" ref="signservice" />
+		<property name="ssiobj" ref="SSIObj" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="fakesignature" ref="fakesignature" />
+	</bean> 
+	<bean id="KorActRTKController" class="sheff.rgd.ws.Controllers.RTK.KorActRTKController">
+		<property name="parentform" value="Корректировочный Акт РТК" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="fakesignature" ref="fakesignature" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendsign" ref="signservice" />
+	</bean>
+	<!-- ASR -->
+	
+	<!-- <bean id="FPU26ASRController" class="sheff.rgd.ws.Controllers.ASR.FPU26ASRController">
+		<property name="parentform" value="ФПУ-26 АСР" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="droplist" ref="droplist" />
+		<property name="formControllers" ref = "formControllers" />  
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	</bean> 
+	
+	<bean id="RashifrController" class="sheff.rgd.ws.Controllers.ASR.RashifrController">
+		<property name="parentform" value="Расшифровка" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="droplist" ref="droplist" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	</bean> 
+	
+	<bean id="SchetController" class="sheff.rgd.ws.Controllers.ASR.SchetController">
+		<property name="parentform" value="Счет" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="droplist" ref="droplist" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	</bean> -->
+	
+	<bean id="RashifrCSSController" class="sheff.rgd.ws.Controllers.ASR.RashifrCSSController">
+		<property name="parentform" value="Расшифровка" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+	</bean>  
+	
+	<bean id="SchetCSSController" class="sheff.rgd.ws.Controllers.ASR.SchetCSSController">
+		<property name="parentform" value="Счет" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="droplist" ref="droplist" />
+	</bean> 
+	
+	<bean id="FPU26CSSController" class="sheff.rgd.ws.Controllers.ASR.FPU26CSSController">
+		<property name="parentform" value="ФПУ-26 АСР" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="facade" ref="_Facade" />
+	</bean> 
+	
+	<bean id="PackageCSSController" class="sheff.rgd.ws.Controllers.ASR.PackageCSSController">
+		<property name="parentform" value="Пакет документов ЦСС" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="taskExecutor" ref="taskExecutor" />
+		<property name="formControllers" ref = "formControllers" /> 
+	</bean> 
+	
+    <bean id="SFCSSController" class="sheff.rgd.ws.Controllers.ASR.SFCSSController">
+		<property name="parentform" value="Счет-фактура ЦСС" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ssiobj" ref="SSIObj" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="fakesignature" ref="fakesignature" /> 
+		<property name="mail" ref="Email" /> 
+	</bean>  
+	
+	
+	<!-- MRM -->
+	
+	<bean id="GU23Controller" class="sheff.rgd.ws.Controllers.MRM.GU23Controller">
+		<property name="parentform" value="ГУ-23" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	    <property name="fakesignature" ref="fakesignature" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="signservice" ref="signservice"/>
+		<property name="sendtotransoil" ref="transservice" />
+	</bean> 
+	
+	<bean id="GU2VController" class="sheff.rgd.ws.Controllers.MRM.GU2VController">
+		<property name="parentform" value="ГУ-2в" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="npjt" ref="PrepTemplate" />
+		 <property name="fakesignature" ref="fakesignature" />
+		 <property name="sendtotransoil" ref="transservice" />
+	</bean> 
+	
+	<bean id="GU38aController" class="sheff.rgd.ws.Controllers.MRM.GU38aController">
+		<property name="parentform" value="ГУ-38а" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	    <property name="npjt" ref="PrepTemplate" />
+		<property name="signservice" ref="signservice"/>
+		</bean> 
+	<bean id="GU38bController" class="sheff.rgd.ws.Controllers.MRM.GU38bController">
+		<property name="parentform" value="ГУ-38б" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	   	<property name="npjt" ref="PrepTemplate" />
+		<property name="signservice" ref="signservice"/>
+	</bean> 
+	
+	<bean id="GU45Controller" class="sheff.rgd.ws.Controllers.MRM.GU45Controller">
+		<property name="parentform" value="ГУ-45" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	    <property name="fakesignature" ref="fakesignature" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="signservice" ref="signservice"/>
+		<property name="sendtotransoil" ref="transservice" />
+	</bean> 
+	
+	<bean id="ZUVController" class="sheff.rgd.ws.Controllers.MRM.ZUVController">
+		<property name="parentform" value="ЗУВ" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		 <property name="fakesignature" ref="fakesignature" /> 
+		 <property name="signservice" ref="signservice"/>
+		<property name="ds" ref="DSrjd" />
+	</bean> 
+	
+	<bean id="ZPVController" class="sheff.rgd.ws.Controllers.MRM.ZPVController">
+		<property name="parentform" value="ЗПВ" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		 <property name="fakesignature" ref="fakesignature" /> 
+		 <property name="signservice" ref="signservice"/>
+		<property name="ds" ref="DSrjd" />
+	</bean> 
+	
+	<bean id="SPPVController" class="sheff.rgd.ws.Controllers.MRM.SPPVController">
+		<property name="parentform" value="СППВ" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	    <property name="fakesignature" ref="fakesignature" /> 
+	     <property name="signservice" ref="signservice"/>
+	</bean> 
+	
+	<bean id="GU2BController" class="sheff.rgd.ws.Controllers.MRM.GU2BController">
+		<property name="parentform" value="ГУ-2б" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="ds" ref="DSrjd" />
+		<property name="sendtotransoil" ref="transservice" />
+	</bean> 
+	
+	<bean id="PVController" class="sheff.rgd.ws.Controllers.MRM.PVController">
+		<property name="parentform" value="Перечень вагонов" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	</bean> 
+	
+	<bean id="SDGController" class="sheff.rgd.ws.Controllers.MRM.SDGController">
+		<property name="parentform" value="СДГ" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	    <property name="fakesignature" ref="fakesignature" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="signservice" ref="signservice"/>
+	</bean> 
+	<bean id="RNLController" class="sheff.rgd.ws.Controllers.MRM.RNLController">
+		<property name="parentform" value="РНЛ" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="ds" ref="DSrjd" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	</bean> 
+	<bean id="RNL2Controller" class="sheff.rgd.ws.Controllers.MRM.RNL2Controller">
+		<property name="parentform" value="Перечень вагонов РНЛ 2" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="ds" ref="DSrjd" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		 <property name="fakesignature" ref="fakesignature" />
+	</bean> 
+	<bean id="RNL3Controller" class="sheff.rgd.ws.Controllers.MRM.RNL3Controller">
+		<property name="parentform" value="Перечень вагонов РНЛ 3" />
+		<property name="parentformrnl2" value="Перечень вагонов РНЛ 2" />
+		<property name="user_role1" value="Представитель владельца п/п (клиента)" />
+		<property name="user_role2" value="Представитель собственника подвижного состава" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean> 
+	
+	<!-- RZDS -->
+	<bean id="ActRZDSController" class="sheff.rgd.ws.Controllers.RZDS.ActController">
+		<property name="parentform" value="Акт РЖДС" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="droplist" ref="droplist" />
+		<property name="formControllers" ref = "formControllers" />  
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	</bean> 
+	<bean id="CardRZDSController" class="sheff.rgd.ws.Controllers.RZDS.CardController">
+		<property name="parentform" value="Карточка документ РЖДС" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean> 
+	<bean id="SFSController" class="sheff.rgd.ws.Controllers.RZDS.SFSController">
+		<property name="parentform" value="Счет-фактура РЖДС на услугу" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean> 
+	<bean id="SFGController" class="sheff.rgd.ws.Controllers.RZDS.SFGController">
+		<property name="parentform" value="Счет-фактура РЖДС на товар" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean> 
+	<bean id="TORG12RZDSController" class="sheff.rgd.ws.Controllers.RZDS.TORG12Controller">
+		<property name="parentform" value="ТОРГ-12 РЖДС" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="droplist" ref="droplist" />
+		<property name="formControllers" ref = "formControllers" />  
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	</bean> 
+	
+<!-- Luzh -->
+	<bean id="DU46_LuzhController" class="sheff.rgd.ws.Controllers.DU46.DU46_LuzhController">
+		<property name="parentform" value="ДУ-46 Лужская" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	    <property name="npjt" ref="PrepTemplate" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		</bean> 
+		<!-- Repair -->
+	<bean id="Pack_InrepairController" class="sheff.rgd.ws.Controllers.Repair.Pack_InrepairController">
+		<property name="parentform" value="Комплект на пересылку в ремонт" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	    <property name="npjt" ref="PrepTemplate" />
+	    <property name="signvrkservice" ref="signvrkservice" /> 
+	</bean> 
+	<bean id="RepairabilityController" class="sheff.rgd.ws.Controllers.Repair.DocRepairabilityController">
+		<property name="parentform" value="Комплект ремонтопригодности" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	    <property name="npjt" ref="PrepTemplate" />
+	    <property name="signvrkservice" ref="signvrkservice" /> 
+	</bean> 	
+	<bean id="CompletionOfRepairController" class="sheff.rgd.ws.Controllers.Repair.CompletionOfRepairController">
+		<property name="parentform" value="Комплект завершение ремонта" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	    <property name="npjt" ref="PrepTemplate" />
+	    <property name="signvrkservice" ref="signvrkservice" /> 
+	</bean>
+	
+<bean id="fakesignature" class="sheff.rjd.ws.OCO.AfterEdit.FakeSignature">
+	<property name="npjt" ref="PrepTemplate" />
+	<property name="ds" ref= "DSrjd"/>
+	</bean> 
+	
+	<!--<import resource="afterSave.xml" /> 
+
+	<bean id="createList" class="sheff.rjd.ws.OCO.AfterSign.TOR.CreateList">
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>-->
+</beans>

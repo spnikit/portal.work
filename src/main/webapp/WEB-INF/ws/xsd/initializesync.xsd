@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://etd.gvc.rzd:8888/WAS/ETD/Initsync/"
+	xmlns:tns="http://etd.gvc.rzd:8888/WAS/ETD/Initsync/">
+
+	<element name="InitsyncRequest">
+		<complexType>
+			<sequence>
+				<element maxOccurs="1" minOccurs="1" name="dosync" type="int" />
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="InitsyncResponse">
+		<complexType>
+			<sequence>
+				<element maxOccurs="1" minOccurs="1" name="okporow" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="count" type="int" />
+			</sequence>
+		</complexType>
+	</element>
+
+</schema>

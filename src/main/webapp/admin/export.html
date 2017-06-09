@@ -1,0 +1,27 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<title>Экспорт :)</title>
+<script type="text/javascript" src="webtoolkit.base64.js"></script>
+</head>
+<body>
+	<form action="controllers/forms" method="POST" id="forms"
+		onsubmit="document.getElementById('inpformhidden').value = Base64.encode(document.getElementById('inpform').value)">
+		<label>форму</label> <input type="text" id="inpform"> <input
+			type="hidden" name="formname" id="inpformhidden"> <input
+			type="hidden" name="act" value="export"> <input type="submit">
+	</form>
+	<form action="controllers/users" method="POST" id="users"
+		onsubmit="document.getElementById('inpuserhidden').value = Base64.encode(document.getElementById('inpuser').value)">
+		<label>сертификат</label> <input type="text" id="inpuser"> <input
+			type="hidden" name="certid" id="inpuserhidden"> <input
+			type="hidden" name="act" value="export"> <input type="submit">
+	</form>
+	<form action="controllers/package" method="POST" id="package"
+		onsubmit="document.getElementById('inppackagehidden').value = Base64.encode(document.getElementById('inppackage').value)">
+		<label>пакет</label> <input type="text" id="inppackage"> <input
+			type="hidden" name="formname" id="inppackagehidden"> <input
+			type="hidden" name="act" value="export"> <input type="submit">
+	</form>
+</body>
+</html>

@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DATA LAYER -->
+	
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+	<display-name>
+		RJD service
+	</display-name>
+	<description>RJD service</description>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/context.xml
+		</param-value>
+	</context-param>
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/transstatusdoc/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/TORG12/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/ContrAgInvoice/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/vu36/*</url-pattern>
+	</filter-mapping>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+
+
+
+	<!-- Defines the Spring-WS MessageDispatcherServlet -->
+	<servlet>
+		<servlet-name>log4j-init</servlet-name>
+		<servlet-class>ru.aisa.j2ee.logging.LogInitServlet</servlet-class>
+		<init-param>
+			<param-name>log4j-init-file</param-name>
+			<param-value>log-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>log4j-init-xml</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>log4j-test</servlet-name>
+		<servlet-class>ru.aisa.j2ee.logging.LogTestServlet</servlet-class>
+	</servlet>
+
+
+	<!-- NOTICE -->
+	<servlet>
+		<servlet-name>ws/Invoice/SetNotice-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<servlet-name>ws/Invoice/GetNotice-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<servlet-name>ws/Invoice/Uved-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<!-- NOTICE -->
+
+
+
+
+	<!-- ETD -->
+	<servlet>
+		<servlet-name>ws/etdsignature-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+
+
+	<!-- ETD -->
+
+	
+	<!-- TTK -->
+
+
+
+	<servlet>
+		<servlet-name>ws/TTK/Test-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet>
+		<servlet-name>ws/TTK/BuyerConfirmation-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<servlet-name>ws/TTK/BuyerInvoice-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ws/TTK/SellerConfirmation-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<servlet-name>ws/TTK/SellerNoticeInvoice-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<!-- TTK -->
+
+	<servlet>
+		<servlet-name>spring-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<servlet-name>springsave-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+
+
+	<servlet>
+		<servlet-name>dumb</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+
+	
+
+
+ <servlet>
+		<servlet-name>ws/SyncronizeXfdlDoc</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+ <servlet-mapping>
+		<servlet-name>ws/SyncronizeXfdlDoc</servlet-name>
+		<url-pattern>/SyncronizeXfdlDoc/*</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>ws/util2</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>ws/util-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<servlet-name>xsd/docdata-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+
+
+	<servlet>
+		<servlet-name>ws/contraginvoice-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<servlet-name>ws/companydata-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<!-- End -->
+	<servlet>
+		<servlet-name>ws/etdxml-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+
+
+	<servlet>
+		<servlet-name>ws/SF-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet>
+		<servlet-name>ws/TORG12-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<servlet-name>ws/transstatusdoc-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet>
+		<servlet-name>ws/etdgetnotice-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<servlet-name>online</servlet-name>
+		<servlet-class>sheff.rjd.utils.OnlineDoc</servlet-class>
+		<init-param>
+			<param-name>updateurl</param-name>
+			<param-value>http://www</param-value>
+			<description></description>
+		</init-param>
+		<init-param>
+			<param-name>version</param-name>
+			<param-value>1.0.0</param-value>
+			<description></description>
+		</init-param>
+	</servlet>
+	<servlet>
+		<servlet-name>admin/Roles</servlet-name>
+		<servlet-class> ru.aisa.etdadmin.Roles</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>admin/Excel</servlet-name>
+		<servlet-class>ru.aisa.etdadmin.controllers.excel.Export2Excel</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>admin/dumb</servlet-name>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>servlets</servlet-name>
+		<display-name>servlets</display-name>
+		<description></description>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+
+	<!-- Notice -->
+
+
+	<servlet-mapping>
+		<servlet-name>ws/Invoice/GetNotice-ws</servlet-name>
+		<url-pattern>/GetNotice/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ws/Invoice/SetNotice-ws</servlet-name>
+		<url-pattern>/SetNotice/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ws/Invoice/Uved-ws</servlet-name>
+		<url-pattern>/Uved/*</url-pattern>
+	</servlet-mapping>
+	<!-- Notice -->
+
+	<!-- ETD -->
+
+	<servlet-mapping>
+		<servlet-name>ws/etdsignature-ws</servlet-name>
+		<url-pattern>/etdsignature/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- ETD -->
+
+
+
+
+	<!-- TTK-D -->
+
+
+
+	<!-- <servlet-mapping> <servlet-name>ws/TTK-D/BuyerConfirmation-ws</servlet-name> 
+		<url-pattern>/BuyerConfirmation-D/*</url-pattern> </servlet-mapping> <servlet-mapping> 
+		<servlet-name>ws/TTK-D/BuyerInvoice-ws</servlet-name> <url-pattern>/BuyerInvoice-D/*</url-pattern> 
+		</servlet-mapping> <servlet-mapping> <servlet-name>ws/TTK-D/SellerConfirmation-ws</servlet-name> 
+		<url-pattern>/SellerConfirmation-D/*</url-pattern> </servlet-mapping> <servlet-mapping> 
+		<servlet-name>ws/TTK-D/SellerNoticeInvoice-ws</servlet-name> <url-pattern>/SellerNoticeInvoice-D/*</url-pattern> 
+		</servlet-mapping> -->
+
+	<!-- TTK -D -->
+
+
+	<!-- TTK -->
+
+	<servlet-mapping>
+		<servlet-name>ws/TTK/Test-ws</servlet-name>
+		<url-pattern>/Test/*</url-pattern>
+	</servlet-mapping>
+
+
+
+	<servlet-mapping>
+		<servlet-name>ws/TTK/BuyerConfirmation-ws</servlet-name>
+		<url-pattern>/BuyerConfirmation/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ws/TTK/BuyerInvoice-ws</servlet-name>
+		<url-pattern>/BuyerInvoice/*</url-pattern>
+	</servlet-mapping>
+
+		
+	<servlet-mapping>
+		<servlet-name>ws/TTK/SellerConfirmation-ws</servlet-name>
+		<url-pattern>/SellerConfirmation/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ws/TTK/SellerNoticeInvoice-ws</servlet-name>
+		<url-pattern>/SellerNoticeInvoice/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- TTK -->
+
+	<!-- <<< SERVICES' DISPATCHERS -->
+
+	<servlet-mapping>
+		<servlet-name>dumb</servlet-name>
+		<url-pattern>/portal/forms/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>online</servlet-name>
+		<url-pattern>/portal/online/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>spring-ws</servlet-name>
+		<url-pattern>/portal/ws/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>springsave-ws</servlet-name>
+		<url-pattern>/portal/wsss/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ws/util-ws</servlet-name>
+		<url-pattern>/portal/util/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>xsd/docdata-ws</servlet-name>
+		<url-pattern>/portal/docdata/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>admin/dumb</servlet-name>
+		<url-pattern>/admin/controllers/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>admin/Roles</servlet-name>
+		<url-pattern>/admin/Roles</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>admin/Excel</servlet-name>
+		<url-pattern>/admin/Excel</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>servlets</servlet-name>
+		<url-pattern>/servlets/*</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- <servlet-mapping> <servlet-name>ws/wrkname-ws</servlet-name> <url-pattern>/wrkname/*</url-pattern> 
+		</servlet-mapping> <servlet-mapping> <servlet-name>ws/checkvu36-ws</servlet-name> 
+		<url-pattern>/checkvu36/*</url-pattern> </servlet-mapping> <servlet-mapping> 
+		<servlet-name>ws/income-ws</servlet-name> <url-pattern>/income/*</url-pattern> 
+		</servlet-mapping> <servlet-mapping> <servlet-name>ws/getlistnew-ws</servlet-name> 
+		<url-pattern>/getlistnew/*</url-pattern> </servlet-mapping> <servlet-mapping> 
+		<servlet-name>ws/getdocmc-ws</servlet-name> <url-pattern>/getdoc/*</url-pattern> 
+		</servlet-mapping> <servlet-mapping> <servlet-name>ws/etdegrposync-ws</servlet-name> 
+		<url-pattern>/etdegrposync/*</url-pattern> </servlet-mapping> -->
+	<servlet-mapping>
+		<servlet-name>ws/util2</servlet-name>
+		<url-pattern>/portal/util2/*</url-pattern>
+	</servlet-mapping>
+
+
+	
+	<!-- <<< Services' mapping -->
+
+	<servlet-mapping>
+		<servlet-name>ws/contraginvoice-ws</servlet-name>
+		<url-pattern>/ContrAgInvoice/*</url-pattern>
+	</servlet-mapping>
+<!-- My -->
+	<servlet-mapping>
+		<servlet-name>ws/companydata-ws</servlet-name>
+		<url-pattern>/CompanyData/*</url-pattern>
+	</servlet-mapping>
+<!-- End -->
+
+	<servlet-mapping>
+		<servlet-name>ws/etdxml-ws</servlet-name>
+		<url-pattern>/EtdXml/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ws/etdgetnotice-ws</servlet-name>
+		<url-pattern>/EtdGetNotice/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ws/SF-ws</servlet-name>
+		<url-pattern>/SF/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ws/transstatusdoc-ws</servlet-name>
+		<url-pattern>/transstatusdoc/*</url-pattern>
+	</servlet-mapping>
+
+
+
+	<servlet-mapping>
+		<servlet-name>ws/TORG12-ws</servlet-name>
+		<url-pattern>/TORG12/*</url-pattern>
+	</servlet-mapping>
+
+
+
+
+
+<servlet>
+		<servlet-name>ws/rtk/actRtk-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+<servlet-mapping>
+		<servlet-name>ws/rtk/actRtk-ws</servlet-name>
+		<url-pattern>/act/rtk/*</url-pattern>
+	</servlet-mapping>
+
+<servlet>
+		<servlet-name>ws/rtk/SFRtk-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+<servlet-mapping>
+		<servlet-name>ws/rtk/SFRtk-ws</servlet-name>
+		<url-pattern>/sfRtk/*</url-pattern>
+	</servlet-mapping>
+
+
+<servlet>
+		<servlet-name>ws/rtk/SignRtk-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+<servlet-mapping>
+		<servlet-name>ws/rtk/SignRtk-ws</servlet-name>
+		<url-pattern>/SignRtk/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ws/rtk/cardDocRTK-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/rtk/cardDocRTK-ws</servlet-name>
+		<url-pattern>/cardDocRTK/*</url-pattern>
+</servlet-mapping>	
+
+<servlet>
+		<servlet-name>ws/rtk/AddCardDoc-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/rtk/AddCardDoc-ws</servlet-name>
+		<url-pattern>/AddCardDoc/*</url-pattern>
+</servlet-mapping>	
+
+<servlet>
+		<servlet-name>ws/rtk/DeleteCardDoc-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/rtk/DeleteCardDoc-ws</servlet-name>
+		<url-pattern>/DeleteCardDocRTK/*</url-pattern>
+</servlet-mapping>	
+
+<servlet>
+		<servlet-name>ws/mrm/zpv-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/mrm/zpv-ws</servlet-name>
+		<url-pattern>/zpv/*</url-pattern>
+</servlet-mapping>	
+
+<servlet>
+		<servlet-name>ws/mrm/zuv-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/mrm/zuv-ws</servlet-name>
+		<url-pattern>/zuv/*</url-pattern>
+</servlet-mapping>		
+<servlet>
+		<servlet-name>ws/mrm/gu2b-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/mrm/gu2b-ws</servlet-name>
+		<url-pattern>/gu2b/*</url-pattern>
+</servlet-mapping>	
+<servlet>
+		<servlet-name>ws/mrm/SPPV-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/mrm/SPPV-ws</servlet-name>
+		<url-pattern>/sppv/*</url-pattern>
+</servlet-mapping>	
+
+<servlet>
+		<servlet-name>ws/SFxmltotrans-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/SFxmltotrans-ws</servlet-name>
+		<url-pattern>/SFxmltotrans/*</url-pattern>
+</servlet-mapping>	
+<servlet>
+		<servlet-name>ws/rtk/KorActRTK-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/rtk/KorActRTK-ws</servlet-name>
+		<url-pattern>/kor_act_rtk/*</url-pattern>
+</servlet-mapping>	
+
+<servlet>
+		<servlet-name>ws/rtk/KorSFRTK-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/rtk/KorSFRTK-ws</servlet-name>
+		<url-pattern>/kor_sf_rtk/*</url-pattern>
+</servlet-mapping>	
+
+
+<servlet>
+		<servlet-name>ws/vu36-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/vu36-ws</servlet-name>
+		<url-pattern>/vu36/*</url-pattern>
+</servlet-mapping>	
+<servlet>
+		<servlet-name>ws/asoupmess-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/asoupmess-ws</servlet-name>
+		<url-pattern>/tor/asoupmess/*</url-pattern>
+</servlet-mapping>	
+<servlet>
+		<servlet-name>ws/rzds/act-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/rzds/act-ws</servlet-name>
+		<url-pattern>/rzds/act/*</url-pattern>
+</servlet-mapping>	
+
+<servlet>
+		<servlet-name>ws/rzds/cardDoc-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/rzds/cardDoc-ws</servlet-name>
+		<url-pattern>/rzds/cardDoc/*</url-pattern>
+</servlet-mapping>	
+
+<servlet>
+		<servlet-name>ws/rzds/SFG-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/rzds/SFG-ws</servlet-name>
+		<url-pattern>/rzds/SFG/*</url-pattern>
+</servlet-mapping>	
+
+<servlet>
+		<servlet-name>ws/rzds/SFS-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/rzds/SFS-ws</servlet-name>
+		<url-pattern>/rzds/SFS/*</url-pattern>
+</servlet-mapping>	
+
+<servlet>
+		<servlet-name>ws/rzds/TORG12-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/rzds/TORG12-ws</servlet-name>
+		<url-pattern>/rzds/TORG12/*</url-pattern>
+</servlet-mapping>	
+
+<servlet>
+		<servlet-name>ws/torek_vrk/receiveportal-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/torek_vrk/receiveportal-ws</servlet-name>
+		<url-pattern>/warecs/receive/*</url-pattern>
+</servlet-mapping>	
+<servlet>
+		<servlet-name>ws/torek_vrk/sendportal-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/torek_vrk/sendportal-ws</servlet-name>
+		<url-pattern>/warecs/send/*</url-pattern>
+</servlet-mapping>	
+
+<servlet>
+		<servlet-name>ws/torek_vrk/torek-ws</servlet-name>
+		<servlet-class>org.springframework.ws.transport.http.MessageDispatcherServlet</servlet-class>
+		<init-param>
+			<!-- Transform the location attributes in WSDLs -->
+			<param-name>transformWsdlLocations</param-name>
+			<param-value>true</param-value>
+		</init-param>
+</servlet>
+<servlet-mapping>
+		<servlet-name>ws/torek_vrk/torek-ws</servlet-name>
+		<url-pattern>/repair/torek/*</url-pattern>
+</servlet-mapping>	
+
+
+	<init-param id="InitParam">
+		<param-name>CachingType</param-name>
+		<param-value>No Caching</param-value>
+		<description>Sets the data caching type</description>
+	</init-param>
+	<welcome-file-list id="welcome1">
+		<!--  <welcome-file>main.html</welcome-file>-->
+		<welcome-file>indexscan.html</welcome-file>
+	</welcome-file-list>
+
+	<resource-ref id="ResourceRef_1219761862343">
+		<description>database</description>
+		<res-ref-name>jdbc/etd</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+	
+</web-app>
+

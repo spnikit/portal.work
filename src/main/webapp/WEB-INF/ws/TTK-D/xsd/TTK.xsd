@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/TTK"
+	xmlns:tns="http://www.example.org/TTK" elementFormDefault="qualified">
+	<element name="SInvoice">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="sCabinetId" type="tns:guid" />
+				<element minOccurs="0" name="bCabinetId" type="tns:guid" />
+				<element minOccurs="0" name="invoiceUserId" type="long" />
+				<element minOccurs="0" name="xml" nillable="true" type="base64Binary" />
+				<element minOccurs="0" name="sign" nillable="true" type="base64Binary" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="SInvoiceResponse">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="SInvoiceResult" type="tns:guid" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="SNoticeConfirmation">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="confirmationId" type="tns:guid" />
+				<element minOccurs="0" name="xml" nillable="true" type="base64Binary" />
+				<element minOccurs="0" name="sign" nillable="true" type="base64Binary" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="SNoticeConfirmationResponse">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="SNoticeConfirmationResult"
+					type="tns:guid" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="BNoticeInvoiceConfirmation">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="invoiceId" type="tns:guid" />
+				<element minOccurs="0" name="xml" nillable="true" type="base64Binary" />
+				<element minOccurs="0" name="sign" nillable="true" type="base64Binary" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="BNoticeInvoiceConfirmationResponse">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="BNoticeInvoiceConfirmationResult"
+					type="tns:guid" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="BNoticeInvoice">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="invoiceId" type="tns:guid" />
+				<element minOccurs="0" name="xml" nillable="true" type="base64Binary" />
+				<element minOccurs="0" name="sign" nillable="true" type="base64Binary" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="BNoticeInvoiceResponse">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="BNoticeInvoiceResult" type="tns:guid" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="BNoticeConfirmation">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="confirmationId" type="tns:guid" />
+				<element minOccurs="0" name="xml" nillable="true" type="base64Binary" />
+				<element minOccurs="0" name="sign" nillable="true" type="base64Binary" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="BNoticeConfirmationResponse">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="BNoticeConfirmationResult"
+					type="tns:guid" />
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="anyType" nillable="true" type="anyType" />
+	<element name="anyURI" nillable="true" type="anyURI" />
+	<element name="base64Binary" nillable="true" type="base64Binary" />
+	<element name="boolean" nillable="true" type="boolean" />
+	<element name="byte" nillable="true" type="byte" />
+	<element name="dateTime" nillable="true" type="dateTime" />
+	<element name="decimal" nillable="true" type="decimal" />
+	<element name="double" nillable="true" type="double" />
+	<element name="float" nillable="true" type="float" />
+	<element name="int" nillable="true" type="int" />
+	<element name="long" nillable="true" type="long" />
+	<element name="QName" nillable="true" type="QName" />
+	<element name="short" nillable="true" type="short" />
+	<element name="string" nillable="true" type="string" />
+	<element name="unsignedByte" nillable="true" type="unsignedByte" />
+	<element name="unsignedInt" nillable="true" type="unsignedInt" />
+	<element name="unsignedLong" nillable="true" type="unsignedLong" />
+	<element name="unsignedShort" nillable="true" type="unsignedShort" />
+	<element name="char" nillable="true" type="tns:char" />
+	<simpleType name="char">
+		<restriction base="int" />
+	</simpleType>
+	<element name="duration" nillable="true" type="tns:duration" />
+	<simpleType name="duration">
+		<restriction base="duration">
+			<pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+			<minInclusive value="-P10675199DT2H48M5.4775808S" />
+			<maxInclusive value="P10675199DT2H48M5.4775807S" />
+		</restriction>
+	</simpleType>
+	<element name="guid" nillable="true" type="tns:guid" />
+	<simpleType name="guid">
+		<restriction base="string">
+			<pattern
+				value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+		</restriction>
+	</simpleType>
+	<attribute name="FactoryType" type="QName" />
+	<attribute name="Id" type="ID" />
+	<attribute name="Ref" type="IDREF" />
+
+
+</schema>
+
+ 

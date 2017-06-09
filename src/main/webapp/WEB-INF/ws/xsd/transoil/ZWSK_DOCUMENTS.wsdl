@@ -1,0 +1,55 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:s0="urn:sap-com:document:sap:rfc:functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="urn:sap-com:document:sap:rfc:functions">
+<types>
+<xsd:schema targetNamespace="urn:sap-com:document:sap:rfc:functions">
+<xsd:element name="ZWSK_DOCUMENTS">
+<xsd:complexType>
+<xsd:all>
+<xsd:element name="BIN" minOccurs="0" type="xsd:string"/>
+<xsd:element name="ETDDOCID" minOccurs="0" type="xsd:string"/>
+<xsd:element name="FORMNAME" minOccurs="0" type="xsd:string"/>
+<xsd:element name="XML" minOccurs="0" type="xsd:string"/>
+</xsd:all>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="ZWSK_DOCUMENTS.Response">
+<xsd:complexType>
+<xsd:all>
+<xsd:element name="CODE" type="xsd:string"/>
+<xsd:element name="DESCRIPTION" type="xsd:string"/>
+<xsd:element name="DOCID" type="xsd:string"/>
+</xsd:all>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+</types>
+<message name="ZWSK_DOCUMENTSInput">
+<part name="parameters" element="s0:ZWSK_DOCUMENTS"/>
+</message>
+<message name="ZWSK_DOCUMENTSOutput">
+<part name="parameters" element="s0:ZWSK_DOCUMENTS.Response"/>
+</message>
+<portType name="ZWSK_DOCUMENTSPortType">
+<operation name="ZWSK_DOCUMENTS">
+<input message="s0:ZWSK_DOCUMENTSInput"/>
+<output message="s0:ZWSK_DOCUMENTSOutput"/>
+</operation>
+</portType>
+<binding name="ZWSK_DOCUMENTSBinding" type="s0:ZWSK_DOCUMENTSPortType">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="ZWSK_DOCUMENTS">
+<soap:operation soapAction="http://www.sap.com/ZWSK_DOCUMENTS"/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+</binding>
+<service name="ZWSK_DOCUMENTSService">
+<documentation>SAP Service ZWSK_DOCUMENTS via SOAP</documentation>
+<port name="ZWSK_DOCUMENTSPortType" binding="s0:ZWSK_DOCUMENTSBinding">
+<soap:address location="http://sapws.transoil.su:8033/sap/bc/soap/rfc"/>
+</port>
+</service>
+</definitions>

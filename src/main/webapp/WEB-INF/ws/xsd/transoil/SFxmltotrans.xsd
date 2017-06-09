@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://iit.ru/SFxmltotrans" xmlns:tns="http://iit.ru/SFxmltotrans" >
+
+<element name = "SFxmlRequest">
+<complexType>
+<sequence>
+<element name = "etdid" type="long" minOccurs="1" maxOccurs="1"/>
+<element name = "xmltable" minOccurs="1" maxOccurs="1">
+<complexType>
+<sequence>
+<element name="row" type="tns:XMLtype" minOccurs="1" maxOccurs="10"></element>
+</sequence>
+</complexType>
+</element>
+<element name="SF" type="tns:SFXMLtype" minOccurs="1" maxOccurs="1"/>
+<element name = "docdata" type="string" minOccurs="1" maxOccurs="1"/>
+</sequence>
+</complexType>
+</element>
+
+
+<element name="SFxmlResponse">
+<complexType>
+<sequence>
+<element name = "etdid" type="long" minOccurs="1" maxOccurs="1"/>
+<element name = "code" type="int" minOccurs="1" maxOccurs="1"/>
+<element name = "description" type="string" minOccurs="1" maxOccurs="1"/>
+</sequence>
+</complexType>
+</element>
+
+
+
+<complexType name="XMLtype">
+<sequence>
+<element name = "number" type="int" minOccurs="1" maxOccurs="1"/>
+<element name = "xml" type = "hexBinary" minOccurs="1" maxOccurs="1"/>
+<element name = "sign" type = "hexBinary" minOccurs="1" maxOccurs="1"/>
+</sequence>
+</complexType>
+
+<complexType name="SFXMLtype">
+<sequence>
+<element name = "sfxml" type = "hexBinary" minOccurs="1" maxOccurs="1"/>
+<element name = "sfsign" type = "hexBinary" minOccurs="1" maxOccurs="1"/>
+</sequence>
+</complexType>
+
+
+
+
+</schema>

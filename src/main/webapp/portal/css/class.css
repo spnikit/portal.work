@@ -1,0 +1,398 @@
+@CHARSET "UTF-8";
+
+a.black {
+	font-size: 12px;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none;
+}
+
+div {
+	font-family: tahoma;
+}
+
+.pbfog {
+	background-color: #ffffff;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	left: 0px;
+	top: 0px;
+	display: none;
+	z-index: 8;
+	opacity: 0.3;
+	filter: alpha(opacity = 30);
+}
+
+.progress_bar_item {
+	position: absolute;
+	width: 375px;
+	height: 79px;
+	display: none;
+	z-index: 9;
+}
+
+.progress_bar_pane {
+	position: absolute;
+	width: 375px;
+	height: 79px;
+	display: none;
+	z-index: 9;
+}
+
+.progress_bar_item .pbpath {
+	position: relative;
+	width: 310px;
+	height: 24px;
+	left: 32;
+	top: 34;
+}
+
+.progress_bar_item .pbline {
+	position: relative;
+	width: 200px;
+	height: 24px;
+	left: 32;
+	top: 34;
+}
+
+/*--------------------------   HEADER   -----------------------------*/
+.main_header {
+	/*background-color: yellow;*/
+	height: 150px;
+	display: none;
+}
+
+.main_header .logo {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 150px;
+	width: 200px;
+	text-align: center;
+	padding-top: 50;
+}
+
+.main_header .link {
+	float: right;
+	margin-right: 3%;
+	margin-top: 50px;
+}
+
+.main_header .link_palka {
+	float: right;
+	margin-right: 350px;
+	margin-top: 50px;
+}
+
+.main_header .link_log {
+	float: right;
+	margin-right: 3%;
+	margin-top: 50px;
+}
+
+.main_header .index {
+	float: right;
+	margin-right: 5%;
+	margin-left: 2%;
+	margin-top: 20px;
+}
+
+img {
+	border: 0;
+}
+
+/*--------------------------   CONTENT   -----------------------------*/
+.content_area {
+	height: 700px;
+}
+
+div.join {
+	display: none;
+	position: absolute;
+	width: 685px;
+	height: 205px;
+}
+
+div.front {
+	height: 337px;
+	display: none;
+	position: absolute;
+	margin: 0px;
+}
+
+div.front img {
+	float: left;
+	cursor: pointer;
+	width: 457px;
+	height: 337px;
+}
+
+div.front a img {
+	margin-left: 50px;
+}
+
+/*--------------------------   FOOTER   -----------------------------*/
+.main_footer {
+	height: 30px;
+}
+
+.main_footer div {
+	float: right;
+}
+
+/* ------------------------------- MAIN ----------------------------------*/
+body.body0 {
+	margin: 0px;
+	padding: 0px;
+	background: url(../pics/main.jpg) no-repeat bottom center fixed;
+}
+
+/* ------------------------------- ABOUT ----------------------------------*/
+body.body1 {
+	margin: 0px;
+	padding: 0px;
+	background: url(../pics/2.jpg) no-repeat bottom center fixed;
+}
+
+div.plashka_white {
+	position: absolute;
+	width: 100%;
+	height: 300px;
+	left: 0px;
+	top: 210px;
+	background: url('../pics/plashka_white.png') no-repeat top left;
+}
+
+div.plashka_blk {
+	position: absolute;
+	width: 100%;
+	height: 300px;
+	left: 0px;
+	top: 210px;
+	background: url('../pics/project_bgr.png') no-repeat top left;
+}
+
+div.project_title {
+	position: absolute;
+	width: 463px;
+	height: 38px;
+	top: 164px;
+	left: 140px;
+	background: url('../pics/project_title.png') no-repeat top center;
+}
+
+div.about_content {
+	position: absolute;
+	width: 100%;
+	top: 202px;
+	left: 0px;
+}
+
+div.about_content td {
+	font-size: 14px;
+}
+
+/* ------------------------------- NEWS ----------------------------------*/
+body.body2 {
+	margin: 0px;
+	padding: 0px;
+	background: url(../pics/2.jpg) no-repeat bottom center fixed;
+}
+
+/* ------------------------------- JOIN ----------------------------------*/
+body.body3 {
+	margin: 0px;
+	padding: 0px;
+	background: url(../pics/2.jpg) no-repeat bottom center fixed;
+}
+
+.pdiv {
+	font-family: Verdana;
+	font-size: 12px;
+}
+
+.pinput {
+	width: 300px;
+	background: none;
+	border: 0px;
+	border-bottom: 1px solid black;
+	text-align: center;
+	margin-left: 5px;
+}
+
+/*-------------------------- MANUALS ----------------------*/
+.body5 {
+	margin: 0px;
+	padding: 0px;
+	background: url(../pics/2.jpg) no-repeat bottom center fixed;
+}
+
+div.manuals_title {
+	position: absolute;
+	width: 463px;
+	height: 38px;
+	top: 140px;
+	left: 140px;
+	background: url('../pics/manuals_title.png') no-repeat top center;
+}
+
+/*---------------------------- SUPPORT ---------------------*/
+.body6 {
+	margin: 0px;
+	padding: 0px;
+	background: url(../pics/2.jpg) no-repeat bottom center fixed;
+}
+
+div.support_title {
+	position: absolute;
+	width: 463px;
+	height: 38px;
+	top: 140px;
+	left: 140px;
+	background: url('../pics/support_title.png') no-repeat top center;
+}
+
+/* ---------------------------------- WIZARD -------------------------------*/
+div.wizard {
+	position: absolute;
+	left: 1px;
+	top: 1px;
+	width: 900px;
+	height: 500px;
+	background: #dddddd;
+	border: 5px solid #1a2766;
+	padding: 10px;
+	display: none;
+	filter: alpha(opacity = 0);
+	opacity: 0;
+}
+
+.wizard_header {
+	/*background-color: #aa6644;*/
+	
+}
+
+.wizard_header .header_title {
+	font-family: Verdana;
+	font-size: 46px;
+	font-weight: bold;
+	color: #373ea8;
+	text-align: left;
+}
+
+.wizard_header .button_panel {
+	float: right;
+}
+
+.wizard_header .button_panel * {
+	display: inline;
+	margin-left: 5px;
+}
+
+.wizard_top {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 12px;
+	color: #bbbbbb;
+}
+
+.wizard_top_active {
+	color: #000000;
+}
+
+.wizard_top * {
+	float: left;
+}
+
+.wizard_top_last {
+	float: none;
+}
+
+.wizard_content {
+	overflow: auto;
+	/*background-color: red;*/
+	width: 850;
+	height: 350;
+	background: #dddddd;
+}
+
+.wizard_content_block {
+	width: 250px;
+	height: 150px;
+	/*cursor: pointer;*/
+	text-align: center;
+	/*	background-color: blue;*/
+	float: left;
+	margin: 2px;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.wizard_content_block img {
+	width: 80%;
+	height: 80%;
+	margin-top: 6%;
+	cursor: pointer;
+}
+
+#wizard_3 .wizard_content_block img {
+	border: 2px solid transparent;
+}
+
+#wizard_fill table {
+	margin-top: 20px;
+}
+
+#send_content_div {
+	margin-top: 10px;
+	margin-left: 250px;
+}
+
+#send_content_div  div {
+	margin-top: 10px;
+}
+
+#send_content_div input,.regDiv input {
+	background: none;
+	text-align: center;
+	border: none;
+	border-bottom: 1px solid black;
+	margin-left: 5px;
+	width: 400px;
+}
+
+#wizard_send div {
+	font-size: 12px;
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+#imgdiv {
+	margin-left: 20px;
+}
+
+.regDiv {
+	margin-top: 20px;
+}
+
+.regDiv input {margi
+	
+}
+
+/*-------------------- UTILS ----------------------- */
+.err_msg {
+	background-color: red;
+	border: 1px solid white;
+	font-size: 11px;
+	font-family: Tahoma;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: white;
+	width: 200px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+}

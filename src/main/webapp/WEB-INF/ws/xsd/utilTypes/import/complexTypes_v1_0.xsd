@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://iit.ru/xsd/utilTypes/import/complexTypes_v1_0"
+	xmlns:tns="http://iit.ru/xsd/utilTypes/import/complexTypes_v1_0">
+	<complexType name="DocumentInfo">
+		<sequence>
+			<element name="docId" type="long" />
+			<element name="predId" type="int" />
+			<element name="typeId" type="int" />
+			<element name="typeName" type="string" />
+			<element name="createTime" type="dateTime" />
+			<element name="dropTime" type="dateTime" nillable="true" />
+			<element name="dropTxt" type="string" nillable="true" />
+			<element name="dropId" type="int" nillable="true" />
+			<element name="signLvl" type="int" nillable="true" />
+			<element name="number" type="string" />
+			<element name="shCont" type="string" />
+			<element name="signatures" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="signatureInfo" minOccurs="0" maxOccurs="unbounded"
+	type="tns:SignatureInfo"></element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="docData" type="string"></element>
+			<element name="bldoc" type="string"></element>
+		</sequence>
+	</complexType>
+	<complexType name="SignatureInfo">
+		<sequence></sequence>
+	</complexType>
+</schema>

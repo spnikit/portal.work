@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema 
+	targetNamespace="http://iit.ru/RTK/AddCardDocRTK" 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:tns="http://iit.ru/RTK/AddCardDocRTK">
+	<element name="formCreateRequest" type="tns:FormCreateRequest"></element>
+	<element name="formCreateResponse" type="tns:FormCreateResponse"></element>
+	
+	<complexType name="FormCreateRequest">
+		<sequence>
+		 <element name="file" type="base64Binary" minOccurs="1" maxOccurs="1"/> 
+	   	 <element name="fileName" type="tns:filename" minOccurs="1" maxOccurs="1"/> 
+		 <element name="packageid" type="tns:string1to50" maxOccurs="1" minOccurs="1" />	
+	   </sequence>
+	</complexType>
+	
+	<complexType name="FormCreateResponse">
+		<sequence>
+			<element name="code" type="int" maxOccurs="1" minOccurs="1" />
+			<element name="description" type="string" maxOccurs="1" minOccurs="1" />
+			<element name="docid" type="long" maxOccurs="1" minOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<simpleType name="string1to50">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="50"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="string1to206">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="206"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="filename">
+		<restriction base="tns:string1to206">
+			<pattern value="[^&amp;&lt;&gt;&quot;&apos;|\\/:*?.]{1,196}\.[^&amp;&lt;&gt;&quot;&apos;|\\/:*?.]{1,10}"></pattern>
+		</restriction>
+	</simpleType>
+</schema>

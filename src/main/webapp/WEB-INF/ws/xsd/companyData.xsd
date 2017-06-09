@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://iit.ru/billing/companyData"
+	xmlns:tns="http://iit.ru/billing/companyData" elementFormDefault="qualified">
+
+	<element name="CompanyDataResponse" type="tns:ResponseCompanyData"></element>
+
+	<element name="CompanyDataRequest" type="tns:RequestCompanyData"></element>
+
+
+	<complexType name="RequestCompanyData">
+		<sequence>
+			<element name = "month" type = "int"></element>
+			<element name = "year" type = "int"></element>	
+		</sequence>
+	</complexType>
+
+
+	<complexType name = "ResponseCompanyData">
+	<sequence>
+	<element name = "contragent" type="tns:CompanyDataType" minOccurs="0" maxOccurs="unbounded"/>
+	</sequence>
+</complexType>
+
+	<complexType name="CompanyDataType">
+		<sequence>
+			<element name="innCompany" type="string"></element>
+			<element name="countUserCompany" type="int"></element>
+			<element name="numberDocPortal" type="tns:DocPortal" minOccurs="0" maxOccurs="1"></element>
+			<element name="numberSignedDocPortal" type="tns:DocPortal" minOccurs="0" maxOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="DocPortal">
+		<sequence>
+			<element name="doc" type="tns:DocType" minOccurs="0" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="DocType">
+		<sequence>
+			<element name="id" type="int"></element>
+			<element name="name" type="string"></element>
+		</sequence>
+	</complexType>
+
+</schema>

@@ -1,0 +1,7 @@
+<Update Version="1.50.16">
+	<First>
+		<Http File="applet.jar" To="c:\aisa\applet.jar" />
+		<Http File="applet-xsd.jar" To="c:\aisa\dependency\portal.xsd.applet-1.0.5.jar" />
+		<Http File="NoticeSheme-xsd.jar" To="c:\aisa\dependency\portal.xsd.notice-1.0.4.jar" />
+	</First>
+</Update>

@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Test</title>
+</head>
+
+<body>
+	<input type="text" id="text_for_valid"></input>
+	<input type="button" value="getRandomValue[0-99]" name="but"
+		onClick="al()"></input>
+	<input type="text" id="text_for_valid_2"></input>
+	<input type="button" value="getRandomValue[0-99]" name="but"
+		onClick="al_2()"></input>
+	<applet id="signApplet" mayscript codebase="applets"
+		code="ru.aisa.xfdltohtml.SignManagerApplet.class" archive="applet.jar"
+		width="1" height="1"></applet>
+</body>
+
+
+<script>
+	
+	function getWWJApplet()
+	{	var theApplet=null;
+//String jsFileName,String jsButtonName,String jsReaderName,String jsPinCode
+		  theApplet = document.getElementById('signApplet');
+		  alert(document.getElementById('signApplet').createSignerForFile('filename.xfdl','button5'));
+		  alert(document.getElementById('signApplet').getRandom());
+
+
+	}
+		function al(){
+			//alert("s");
+			getWWJApplet();
+			var sign=document.signApplet.getRandom();
+			document.getElementById('text_for_valid').value=document.signApplet.getRandom();
+		
+		};
+		
+		
+		function al_2(){
+			var sign=document.signApplet.getRandom();
+			document.getElementById('text_for_valid_2').value=document.signApplet.getRandom();
+		};
+	
+	</script>
+</html>

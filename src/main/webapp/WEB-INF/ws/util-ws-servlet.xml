@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<description>WS rjd</description>
+
+
+	<bean id="payloadMapping"
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="mappings">
+			<props>
+				<prop key="{http://rzd/util}serv_datetime_Request">getServ_Datetime</prop>
+				<prop key="{http://rzd/util}egrpo_Request">getEgrpo</prop>
+				<prop key="{http://rzd/util}inn_Request">getNameINN</prop>
+				<prop key="{http://rzd/util}BlDocByIdRequest">getBlDocById</prop>
+				<prop key="{http://rzd/util}report_Request">getReport</prop>
+				<prop key="{http://rzd/util}ppsinfo_Request">getPPSInfo</prop>
+				<prop key="{http://rzd/util}PrednStanFullInfoRequest">getPrednStanFullInfo</prop>
+				<prop key="{http://rzd/util}xmlGenByDocIdRequest">docXmlGeneratorEndpoint</prop>
+				<prop key="{http://rzd/util}NumberToWordRequest">NumberToWordConverterEndpoint</prop>
+			</props>
+		</property>
+		<property name="interceptors">
+			<list>
+				<!--<ref local="validatingInterceptor" /> -->
+				<ref bean="loggingInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+<bean id="uPDSfXmlHandler" class="sheff.rjd.ws.handlers.UPDSfXmlHandler" /> <!-- Генерация XML для СФ -->
+<bean id="csfXmlHandler" class="sheff.rjd.ws.handlers.CSFXmlHandler" /> <!-- Генерация XML для КСФ -->
+<bean id="fpu26XmlHandler" class="sheff.rjd.ws.handlers.FPU26XmlHandler"/>
+<bean id="actrtkXmlHandler" class="sheff.rjd.ws.handlers.ACTRTKXmlHandler" />
+<bean id="torg12XmlHandler" class="sheff.rjd.ws.handlers.TORG12XmlHandler" /> 
+<bean id="fpu26ActXmlHandler" class="sheff.rjd.ws.handlers.Fpu26ActXmlHandler">
+	<property name="npjt" ref="PrepTemplate" />
+</bean>
+
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/xsd/util.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+
+
+	<bean id="getServ_Datetime" class="sheff.rjd.gvcservice.GetServ_Datetime">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+
+	</bean>
+
+	<bean id="getEgrpo" class="sheff.rjd.gvcservice.GetEgrpo">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+
+	</bean>
+	<bean id="getNameINN" class="sheff.rjd.gvcservice.GetNameINN">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+
+	</bean>
+	<bean id="getBlDocById" class="sheff.rjd.gvcservice.GetBlDocById">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+
+	</bean>
+
+	<bean id="getReport" class="sheff.rjd.gvcservice.GetReport">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="facade" ref="_Facade" />
+		<property name="db2format" ref="db2format" />
+	</bean>
+
+	<bean id="getPPSInfo" class="sheff.rjd.gvcservice.PPSInfo">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="facade" ref="_Facade" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	<bean id="getPrednStanFullInfo" class="sheff.rjd.gvcservice.GetPrednStanFullInfo">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+	<!--Сервис на генерацию XML по данным формы. -->
+	<bean id="docXmlGeneratorEndpoint" class="sheff.rjd.gvcservice.DocXmlGeneratorEndpoint">
+<constructor-arg index="0" ref="marshaller" />
+<constructor-arg index="1" ref="uPDSfXmlHandler" />
+<constructor-arg index="2" ref="csfXmlHandler" />
+<constructor-arg index="3" ref="fpu26XmlHandler" />
+<constructor-arg index="4" ref="actrtkXmlHandler" />
+<constructor-arg index="5" ref="torg12XmlHandler" />
+<constructor-arg index="6" ref="fpu26ActXmlHandler" />
+<property name="facade" ref="_Facade" />
+</bean>
+	<bean id="NumberToWordConverterEndpoint" class="sheff.rjd.gvcservice.NumberToWordConverterEndpoint">
+		<constructor-arg ref="marshaller" />
+	</bean>
+		<!-- <bean id="util" class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
+	<property name="inline" value="true"></property>
+	<property name="xsds" value="/WEB-INF/xsd/util.xsd"/>
+	</bean>  -->
+		
+	
+	<bean id="util"
+		class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schemaCollection">
+			<bean class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
+				<property name="xsds" value="/WEB-INF/xsd/util.xsd" />
+				<property name="inline" value="true"></property>
+			</bean>
+			
+		</property>
+		<property name="portTypeName" value="util" />
+		<property name="locationUri"
+			value="http://localhost:8080/IIT/portal/util/services" />
+	</bean>
+
+	<bean id="db2format" class="java.text.SimpleDateFormat">
+		<constructor-arg type="java.lang.String" value="yyyy-MM-dd" />
+	</bean>
+
+</beans>

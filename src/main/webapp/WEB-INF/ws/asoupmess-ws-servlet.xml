@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<description>WS rjd</description>
+
+
+	<bean id="payloadMapping"
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="mappings">
+			<props>
+				<prop key="{http://www.iit.ru/IIT/tor/asoupmess}ASOUPmessRequest">ServiceEndpoint</prop>
+			</props>
+		</property>				
+		<property name="interceptors">
+			<list>
+				<ref local="validatingInterceptor" />
+				<ref bean="loggingInterceptor" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/ws/xsd/tor/asoupmess.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+
+	
+	<bean id="ServiceEndpoint" class="sheff.rjd.services.TOR.ASOUPEndpoint">
+		<constructor-arg ref="marshaller"/>
+		<property name="facade" ref="_Facade" />
+		<property name="templateName" value="Сообщения АСОУП" />
+		<property name="needUrl" value="0" />
+		<property name="sendtoetd" ref="sendtoetd"/>
+	</bean>
+ <bean id="asoupmess"
+		class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schema">
+			<bean class="org.springframework.xml.xsd.SimpleXsdSchema">
+				<property name="xsd" value="/WEB-INF/ws/xsd/tor/asoupmess.xsd" />
+			</bean>
+		</property>
+		<property name="portTypeName" value="asoupmess" />
+		<property name="locationUri" value="http://localhost:38080/IIT/tor/asoupmess/services" />
+	</bean>
+	
+</beans>

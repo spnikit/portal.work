@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.aisa:portal.xsd:1.1.21">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/aisa/portal.xsd/1.1.21/portal.xsd-1.1.21.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/aisa/portal.xsd/1.1.21/portal.xsd-1.1.21-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/aisa/portal.xsd/1.1.21/portal.xsd-1.1.21-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

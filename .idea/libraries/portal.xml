@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="portal">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/etdegrposync-xsd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/util-xsd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/initializesync-xsd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/user-xsd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/quickapplet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/NoticeSheme-xsd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/etdsave-xsd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/applet-xsd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/CruvVu23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/applet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/appletscan.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/etddoc-xsd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/TTK-xsd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/SetNoticeSheme-xsd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/etd-xsd.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

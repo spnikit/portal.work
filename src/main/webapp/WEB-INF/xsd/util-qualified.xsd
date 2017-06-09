@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://rzd/util" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://rzd/util" elementFormDefault="qualified">
+
+	<element name="egrpo_Request" type="tns:egrpo" />
+	<element name="inn_Request" type="tns:inn" />
+	<element name="report_Request" type="tns:repo" />
+	<element name="ppsinfo_Request" type="tns:ppsinfo" />
+	<complexType name="inn">
+		<sequence>
+			<element name="okpo" type="string" maxOccurs="1" minOccurs="0"></element>
+
+		</sequence>
+	</complexType>
+	<complexType name="egrpo">
+		<sequence>
+			<element name="inn" type="string" maxOccurs="1" minOccurs="1"></element>
+			<element name="kpp" type="string" maxOccurs="1" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="repo">
+		<sequence>
+			<element name="predid" type="int" maxOccurs="1" minOccurs="1"></element>
+			<element name="typeid" type="int" maxOccurs="1" minOccurs="1"></element>
+			<element name="dateot" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="dateto" type="string" maxOccurs="1" minOccurs="0"></element>
+
+		</sequence>
+	</complexType>
+	<complexType name="ppsinfo">
+    	<sequence>
+    		<element name="code" type="int" maxOccurs="1" minOccurs="1"></element>
+    		<element name="predid" type="int" maxOccurs="1" minOccurs="1"></element>
+    		<element name="formname" type="string" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+</schema>

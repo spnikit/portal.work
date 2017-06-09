@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	 http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<!-- DATA LAYER -->
+
+	<security:http authentication-manager-ref="service">
+		<security:intercept-url pattern="/ContrAgInvoice/*"
+			access="ROLE_USER" />
+		<security:http-basic />
+	</security:http>
+
+
+
+	<security:authentication-manager id="service">
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="admin" password="password"
+					authorities="ROLE_USER" />
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<!-- MAPPING -->
+	<bean id="payloadMapping"
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="mappings">
+			<props>
+				<prop key="{http://iit.ru/portal/Contraginvoice}AuthRequest">ServiceEndpoint1</prop>
+				<prop key="{http://iit.ru/portal/Contraginvoice}DocListRequest">ServiceEndpoint2</prop>
+				<prop key="{http://iit.ru/portal/Contraginvoice}DocDataRequest">ServiceEndpoint3</prop>
+				<prop key="{http://iit.ru/portal/Contraginvoice}DocDeclineRequest">ServiceEndpoint4</prop>
+				<prop key="{http://iit.ru/portal/Contraginvoice}ArchDocRequest">ServiceEndpoint5</prop>
+				<prop key="{http://iit.ru/portal/Contraginvoice}PackdocRequest">ServiceEndpoint6</prop>
+				<prop key="{http://iit.ru/portal/Contraginvoice}PackAcceptRequest">ServiceEndpoint7</prop>
+				<prop key="{http://iit.ru/portal/Contraginvoice}DockAcceptLinkRequest">ServiceEndpoint8</prop>
+				<prop key="{http://iit.ru/portal/Contraginvoice}PackOpenDateRequest">ServiceEndpoint9</prop>
+			</props>
+		</property>
+		<property name="interceptors">
+			<list>
+				<ref local="validatingInterceptor" />
+				<ref bean="loggingInterceptor" />
+				<!--  <ref bean="securityInterceptor" />-->
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- XML VALIDATION -->
+
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/ws/xsd/contraginvoice.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+
+	<bean id="securityInterceptor" class="sheff.rjd.utils.SecurityAuthInterceptor">
+		<property name="securityManager" ref="securitymanager" />
+	</bean>
+
+	<!-- ENDPOINTS -->
+
+	<bean id="ServiceEndpoint1" class="sheff.rjd.services.contraginvoice.AuthEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="securitymanager" ref="securitymanager" />
+
+	</bean>
+	<bean id="ServiceEndpoint2" class="sheff.rjd.services.contraginvoice.DocListEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="facade" ref="_Facade" />
+	</bean>
+	<bean id="ServiceEndpoint3" class="sheff.rjd.services.contraginvoice.DocDataEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="facade" ref="_Facade" />
+
+	</bean>
+	<bean id="ServiceEndpoint4" class="sheff.rjd.services.contraginvoice.DeclineDocEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+	<property name="facade" ref="_Facade" />
+	<property name="sendtoetd" ref="sendtoetd" />
+	<property name="sendtotransoil" ref="transservice" />
+	</bean>
+
+	<bean id="ServiceEndpoint5" class="sheff.rjd.services.contraginvoice.ArchDocEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+	<property name="facade" ref="_Facade" />
+	</bean>
+
+<bean id="ServiceEndpoint6" class="sheff.rjd.services.contraginvoice.PackdocEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+	<property name="facade" ref="_Facade" />
+	</bean>
+	<!--startPackAccept  -->
+	 <bean id="ServiceEndpoint7" class="sheff.rjd.services.contraginvoice.PackAcceptEndpoint">
+		<constructor-arg ref="marshaller" />
+	<property name="npjt" ref="PrepTemplate" />
+	<property name="facade" ref="_Facade" />
+	<property name="sendtoetd" ref="sendtoetd" />
+	<property name="formControllers" ref="formControllers" />
+	</bean>
+	<bean id="ServiceEndpoint8" class="sheff.rjd.services.contraginvoice.DockAcceptLinkEndpoind">
+		<constructor-arg ref="marshaller" />
+	<property name="npjt" ref="PrepTemplate" />
+	<property name="facade" ref="_Facade" />
+	<!-- <property name="sendtoetd" ref="sendtoetd" /> -->
+	<!-- <property name="formControllers" ref="formControllers" /> -->
+	</bean>
+
+	<bean id="ServiceEndpoint9" class="sheff.rjd.services.contraginvoice.PackOpenDateEndpoint">
+		<constructor-arg ref="marshaller" />
+	<property name="npjt" ref="PrepTemplate" />
+	<property name="facade" ref="_Facade" />
+	</bean>
+	
+	<!--endPackAccept  -->
+	
+	
+	<!-- WSDL PUBLISHING -->
+
+	<bean id="ContrAgInvoice"
+		class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schema">
+			<bean class="org.springframework.xml.xsd.SimpleXsdSchema">
+				<property name="xsd" value="/WEB-INF/ws/xsd/contraginvoice.xsd" />
+			</bean>
+		</property>
+		<property name="portTypeName" value="ContrAgInvoice" />
+		<property name="locationUri"
+			value="http://localhost:48080/IIT/ContrAgInvoice/services" />
+	</bean>
+<!-- <import resource="../afterSign.xml" />
+<import resource="../afterSave.xml" /> -->
+<import resource = "../formControllers.xml"/>
+</beans>

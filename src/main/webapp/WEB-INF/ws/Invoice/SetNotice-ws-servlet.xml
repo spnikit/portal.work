@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+
+
+	<!-- MAPPING -->
+	<bean id="payloadMapping"
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="mappings">
+			<props>
+				<prop key="{http://iit.ru/portal:8888/portal}SetNoticeRequest">SetNoticeEndpoint</prop>
+			</props>
+		</property>
+
+		<property name="interceptors">
+			<list>
+				<ref local="validatingInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- XML VALIDATION -->
+
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/ws/Invoice/xsd/SetNoticeSheme.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+
+	<!-- ENDPOINTS -->
+
+	<bean id="SetNoticeEndpoint"
+		class="com.aisa.portal.invoice.notice.endpoints.SetNoticeEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="facade" ref="_FacadeTTK" />
+	</bean>
+
+	<!-- WSDL PUBLISHING -->
+	<bean id="SetNotice"
+		class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schema">
+			<bean class="org.springframework.xml.xsd.SimpleXsdSchema">
+				<property name="xsd" value="/WEB-INF/ws/Invoice/xsd/SetNoticeSheme.xsd" />
+			</bean>
+		</property>
+		<property name="portTypeName" value="SetNotice" />
+		<property name="locationUri"
+			value="http://46.183.181.126:8080/WAS/ETD/SetNotice/services" />
+	</bean>
+
+
+</beans>

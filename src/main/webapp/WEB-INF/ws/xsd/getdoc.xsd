@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://etd.gvc.rzd:8888/PortalRZD/getdoc"
+	xmlns:tns="http://etd.gvc.rzd:8888/PortalRZD/getdoc">
+
+	<element name="DocRequest">
+		<complexType>
+			<sequence>
+				<element name="id" maxOccurs="1" minOccurs="1" type="int" />
+				<element name="certid" maxOccurs="1" minOccurs="1" type="string" />
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="DocResponse">
+		<complexType>
+			<sequence>
+				<element name="resp" type="string" maxOccurs="1" minOccurs="1"></element>
+				<element name="lockName" type="string" maxOccurs="1"
+					minOccurs="1"></element>
+				<element name="code" maxOccurs="1" minOccurs="1" type="int"></element>
+
+			</sequence>
+		</complexType>
+	</element>
+
+
+
+</schema>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://iit.ru/StanSynchronisation"
+	xmlns:tns="http://iit.ru/StanSynchronisation" elementFormDefault="qualified">
+
+	<element name="stanSynchronisationRequest" type="tns:StanSynchronisationRequest"></element>
+	<element name="stanSynchronisationResponse" type="tns:StanSynchronisationResponse"></element>
+
+	<complexType name="StanSynchronisationRequest">
+		<sequence>
+			<element name="packageNumber" type="int"></element>
+			<element name="packagesAmount" type="int"></element>
+			<element name="synchTs" type="dateTime"></element>
+			<element name="previousSynchTs" type="dateTime"></element>
+			<element name="stan" minOccurs="1" maxOccurs="100">
+				<complexType>
+					<sequence>
+						<element name="id" type="int"></element>
+						<element name="dorCode" type="int"></element>
+						<element name="predId" type="int"></element>
+						<element name="okatoId" type="int"></element>
+						<element name="stKod" type="int"></element>
+						<element name="vName" type="string"></element>
+						<element name="name" type="string"></element>
+						<element name="stanTypeId" type="int"></element>
+						<element name="mnem" type="string"></element>
+						<element name="isActiv" type="boolean"></element>
+						<element name="timestamp" type="dateTime"></element>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="StanSynchronisationResponse">
+		<sequence>
+			<element name="status">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="SUCCESS"></enumeration>
+						<enumeration value="FALTURE"></enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

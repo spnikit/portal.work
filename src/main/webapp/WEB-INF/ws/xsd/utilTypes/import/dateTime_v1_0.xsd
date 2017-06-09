@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://iit.ru/xsd/utilTypes/import/dateTime_v1_0">
+	<simpleType name="UDate">
+		<restriction base="string">
+			<pattern value="((0[1-9])|([12]\d)|(3[01]))\.((0[1-9])|(1[0-2]))\.\d{4}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="UDate_dd_MM">
+		<restriction base="string">
+			<pattern value="((0[1-9])|([12]\d)|(3[01]))\.((0[1-9])|(1[0-2]))"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="UDateOrEmpty">
+		<restriction base="string">
+			<pattern
+				value="(((0[1-9])|([12]\d)|(3[01]))\.((0[1-9])|(1[0-2]))\.\d{4})|()"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="ReverseDate">
+		<restriction base="string">
+			<pattern value="\d{4}\-((0[1-9])|(1[0-2]))\-((0[1-9])|([12]\d)|(3[01]))"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="ReverseDateOrEmpty">
+		<restriction base="string">
+			<pattern
+				value="(\d{4}\-((0[1-9])|(1[0-2]))\-((0[1-9])|([12]\d)|(3[01])))|()"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="UTime">
+		<restriction base="string">
+			<pattern value="(([01]\d)|(2[0-3])):([0-5]\d)"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="UDateTime">
+		<restriction base="string">
+			<pattern
+				value="((0[1-9])|([12]\d)|(3[01]))\.((0[1-9])|(1[0-2]))\.\d{4} (([01]\d)|(2[0-3])):([0-5]\d)"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="UTimeDate">
+		<restriction base="string">
+			<pattern
+				value="(([01]\d)|(2[0-3])):([0-5]\d) ((0[1-9])|([12]\d)|(3[01]))\.((0[1-9])|(1[0-2]))\.\d{4}"></pattern>
+		</restriction>
+	</simpleType>
+</schema>

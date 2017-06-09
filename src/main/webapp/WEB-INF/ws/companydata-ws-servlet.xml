@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	 http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<!-- DATA LAYER -->
+
+
+
+	<!-- MAPPING -->
+	<bean id="payloadMapping"
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="mappings">
+			<props>		
+				<prop key="{http://iit.ru/billing/companyData}CompanyDataRequest">CompanyDataServiceEndpoint</prop>
+			</props>
+		</property>
+		<property name="interceptors">
+			<list>
+				<ref local="validatingInterceptor" />
+				
+			</list>
+		</property>
+	</bean>
+
+	<!-- XML VALIDATION -->
+
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/ws/xsd/companyData.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+
+	<!-- ENDPOINTS -->
+
+	<bean id="CompanyDataServiceEndpoint" class="sheff.rjd.services.billing.CompanyDataEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+	<property name="facade" ref="_Facade" />
+	</bean>
+
+	<!-- WSDL PUBLISHING -->
+	<bean id="CompanyData"
+		class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schema">
+			<bean class="org.springframework.xml.xsd.SimpleXsdSchema">
+				<property name="xsd" value="/WEB-INF/ws/xsd/companyData.xsd" />
+			</bean>
+		</property>
+		<property name="portTypeName" value="CompanyData" />
+		<property name="locationUri"
+			value="http://localhost:48080/IIT/CompanyData/services" />
+	</bean>
+
+
+</beans>

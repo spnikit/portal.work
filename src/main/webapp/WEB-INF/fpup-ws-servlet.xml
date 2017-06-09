@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- DATA LAYER -->
+
+
+
+	<!-- MAPPING -->
+	<bean id="payloadMapping"
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="defaultEndpoint" ref="putdocEndpoint" />
+		<property name="interceptors">
+			<list>
+				<ref local="validatingInterceptor" />
+
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- XML VALIDATION -->
+
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/fpup.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+
+	<!-- ENDPOINTS -->
+
+	<bean id="putdocEndpoint" class="sheff.rjd.services.FPU26Endpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="templateDao" ref="TemplateDao" />
+		<property name="template" value="ФПУ-26" />
+		<property name="template2" value="РДВ" />
+		<property name="template3" value="Счет-фактура" />
+	</bean>
+
+	<!-- WSDL PUBLISHING -->
+
+	<bean id="fpup"
+		class="org.springframework.ws.wsdl.wsdl11.DynamicWsdl11Definition">
+		<description>wsdl</description>
+		<property name="builder">
+			<bean
+				class="org.springframework.ws.wsdl.wsdl11.builder.XsdBasedSoap11Wsdl4jDefinitionBuilder">
+				<property name="schema" value="/WEB-INF/fpup.xsd" />
+				<property name="portTypeName" value="fpup" />
+				<property name="locationUri"
+					value="http://10.0.0.57:38080/WAS/ETD/wsetd/fpup/services" />
+			</bean>
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="http://iit.ru/portal/TORG12/" 
+    xmlns:tns="http://iit.ru/portal/TORG12/">
+
+     <element name="Torg12Request">
+        <complexType>
+    		<sequence>
+
+<element name="GruzOtprInf" maxOccurs="1" minOccurs="1">
+<complexType>
+<sequence>    		
+	<element maxOccurs="1" minOccurs="1" name="GruzOtpr_name" type="tns:str300"/>
+	<element maxOccurs="1" minOccurs="1" name="GruzOtpr_address" type="tns:addr"/>
+	<element maxOccurs="1" minOccurs="0" name="GruzOtpr_tel" type="tns:str20"/>
+	<element maxOccurs="1" minOccurs="0" name="GruzOtpr_fax" type="tns:str20"/>
+	<element maxOccurs="1" minOccurs="0" name="GruzOtpr_bankname" type="tns:str100"/>
+	<element maxOccurs="1" minOccurs="0" name="GruzOtpr_schet" type="tns:str100"/>
+	<element maxOccurs="1" minOccurs="0" name="GruzOtpr_korschet" type="tns:str100"/>
+	<element maxOccurs="1" minOccurs="0" name="GruzOtpr_bik" type="tns:str9"/>
+	<element maxOccurs="1" minOccurs="0" name="GruzOtpr_inn" type="tns:strNum12"/>
+	<element maxOccurs="1" minOccurs="0" name="GruzOtpr_kpp" type="tns:str9"/>
+	<element maxOccurs="1" minOccurs="0" name="GruzOtpr_okpo" type="tns:str8"/>
+	<element maxOccurs="1" minOccurs="0" name="GruzOtpr_okdp" type="tns:str15"/>
+</sequence>
+</complexType>    
+</element>
+
+
+<element name="GruzPolInf" maxOccurs="1" minOccurs="1">
+<complexType>
+<sequence>    		
+	<element maxOccurs="1" minOccurs="1" name="GruzPol_name" type="tns:str300"/>
+	<element maxOccurs="1" minOccurs="1" name="GruzPol_address" type="tns:addr"/>
+	<element maxOccurs="1" minOccurs="0" name="GruzPol_tel" type="tns:str20"/>
+	<element maxOccurs="1" minOccurs="0" name="GruzPol_fax" type="tns:str20"/>
+	<element maxOccurs="1" minOccurs="0" name="GruzPol_okpo" type="tns:str8"/>
+</sequence>
+</complexType>    
+</element>
+
+
+<element name="PostInf" maxOccurs="1" minOccurs="1">
+<complexType>
+<sequence>    		
+	<element maxOccurs="1" minOccurs="1" name="Post_name" type="tns:str300"/>
+	<element maxOccurs="1" minOccurs="1" name="Post_address" type="tns:addr"/>
+	<element maxOccurs="1" minOccurs="0" name="Post_tel" type="tns:str50"/>
+	<element maxOccurs="1" minOccurs="0" name="Post_fax" type="tns:str50"/>
+	<element maxOccurs="1" minOccurs="1" name="Post_bankname" type="tns:str300"/>
+	<element maxOccurs="1" minOccurs="1" name="Post_schet" type="tns:str20"/>
+	<element maxOccurs="1" minOccurs="1" name="Post_korschet" type="tns:str100"/>
+	<element maxOccurs="1" minOccurs="1" name="Post_bik" type="tns:str9"/>
+	<element maxOccurs="1" minOccurs="1" name="Post_inn" type="tns:strNum12"/>
+	<element maxOccurs="1" minOccurs="1" name="Post_kpp" type="tns:str9"/>
+	<element maxOccurs="1" minOccurs="0" name="Post_okpo" type="tns:str10"/>
+</sequence>
+</complexType>    
+</element>
+
+
+<element name="BuyerInf" maxOccurs="1" minOccurs="1">
+<complexType>
+<sequence>    		
+	<element maxOccurs="1" minOccurs="1" name="Buyer_name" type="tns:str500"/>
+	<element maxOccurs="1" minOccurs="1" name="Buyer_address" type="tns:addr"/>
+	<element maxOccurs="1" minOccurs="1" name="Buyer_bankname" type="tns:str100"/>
+	<element maxOccurs="1" minOccurs="1" name="Buyer_schet" type="tns:str20"/>
+	<element maxOccurs="1" minOccurs="1" name="Buyer_korschet" type="tns:str100"/>
+	<element maxOccurs="1" minOccurs="1" name="Buyer_bik" type="tns:str9"/>
+	<element maxOccurs="1" minOccurs="1" name="Buyer_inn" type="tns:strNum12"/>
+	<element maxOccurs="1" minOccurs="1" name="Buyer_kpp" type="tns:str9"/>
+	<element maxOccurs="1" minOccurs="0" name="Buyer_okpo" type="tns:str10"/>
+</sequence>
+</complexType>    
+</element>
+
+<element maxOccurs="1" minOccurs="1" name="reason" type="tns:str100"/>
+<element maxOccurs="1" minOccurs="1" name="reasonnumber" type="tns:str35"/>
+<element maxOccurs="1" minOccurs="1" name="reasondate" type="tns:date"/>
+<element maxOccurs="1" minOccurs="1" name="docnumber" type="tns:str256"/>
+<element maxOccurs="1" minOccurs="1" name="docdate" type="tns:date"/>
+
+<element name="torg_tab" type="tns:table" minOccurs="1" maxOccurs="unbounded" />
+<element name="itogotab" type="tns:tableitog" minOccurs="1" maxOccurs="1" />
+<element name="vsegotab" type="tns:tableitogall" minOccurs="1" maxOccurs="1" />
+<element name="datesell" type="tns:date" minOccurs="1" maxOccurs="1" />
+<element name="numberwrite" type="tns:str1-255" minOccurs="1" maxOccurs="1" />
+<element name="vsegootpwrite" type="tns:str1-255" minOccurs="1" maxOccurs="1" />
+<element name="vsegootp" type="tns:str100" minOccurs="1" maxOccurs="1" />
+<element name="vsegootpkop" type="tns:str2" minOccurs="1" maxOccurs="1" />
+<!-- <element name="varantyinfo" type="tns:varantyinfo" minOccurs="0" maxOccurs="1" />
+<element name="datebuy" type="tns:date" minOccurs="1" maxOccurs="1" /> -->
+<element name="vagonnumber" type="tns:str1-12" minOccurs="1" maxOccurs="1" />
+<element name="kleim" type="tns:str1-4" minOccurs="1" maxOccurs="1" />
+<element name="tmcid" type="long" minOccurs="1" maxOccurs="1" />
+</sequence>
+</complexType>    
+</element>
+
+
+
+
+<simpleType name="str15">     
+		<restriction base="string">
+			<minLength value = "0"/>
+			<maxLength value="15"/>
+		</restriction>
+	</simpleType>
+
+	
+	<simpleType name="strNum">     
+		<restriction base="string">
+			<pattern value="[0-9]+"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="str150" >
+		<restriction base="string" >
+		<minLength value = "1"/>
+			<maxLength value="150"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="str256" >
+		<restriction base="string" >
+		<minLength value = "1"/>
+			<maxLength value="256"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str1-255" >
+		<restriction base="string" >
+		<minLength value = "1"/>
+			<maxLength value="255"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str1-12" >
+		<restriction base="string" >
+		<minLength value = "1"/>
+			<maxLength value="12"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str1-4" >
+		<restriction base="string" >
+		<minLength value = "1"/>
+			<maxLength value="4"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str10" >
+		<restriction base="string" >
+		<minLength value = "1"/>
+			<maxLength value="10"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="str35" >
+		<restriction base="string" >
+		<minLength value = "1"/>
+			<maxLength value="35"/>
+		</restriction>
+	</simpleType>
+	
+	
+	<simpleType name="str300" >
+		<restriction base="string" >
+		<minLength value = "1"/>
+			<maxLength value="300"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str500" >
+		<restriction base="string" >
+		<minLength value = "1"/>
+			<maxLength value="500"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str1-450" >
+		<restriction base="string" >
+		<minLength value = "1"/>
+			<maxLength value="450"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str100" >
+		<restriction base="string" >
+		<minLength value = "1"/>
+			<maxLength value="100"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="str50" >
+		<restriction base="string" >
+		<minLength value = "1"/>
+			<maxLength value="50"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str20" >
+		<restriction base="string" >
+			<minLength value = "1"/>
+			<maxLength value="20"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str2" >
+		<restriction base="string" >
+			<maxLength value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str3" >
+		<restriction base="string" >
+			<length value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str4" >
+		<restriction base="string" >
+			<maxLength value="4"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str6" >
+		<restriction base="string" >
+			<length value="6"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str9" >
+		<restriction base="string" >
+			<length value="9"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str8" >
+		<restriction base="string" >
+			<length value="8"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str12" >
+		<restriction base="string" >
+			<length value="12"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str1-5" >
+		<restriction base="string" >
+			<minLength value = "1"/>
+			<maxLength value="5"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="str1-2" >
+		<restriction base="string" >
+			<minLength value = "1"/>
+			<maxLength value="2"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="strNum12">     
+		<restriction base="string">
+			<pattern value="[0-9]+"/>
+			<minLength value = "1"/>
+			<maxLength value="12"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="date">     
+		<restriction base="string">
+			<pattern value="(([0][1-9])|([1-2][0-9])|([3][0-1]))[.](([0][1-9])|([1][0-2]))[.]\d{4}"/>
+		</restriction>
+	</simpleType>
+
+		
+	<simpleType name="num12-2">		
+		<restriction base='decimal'>
+    		<totalDigits value='12'/>
+    		<fractionDigits value='2'/>
+  		</restriction>		
+	</simpleType>
+	<simpleType name="num13-3">		
+		<restriction base='decimal'>
+    		<totalDigits value='13'/>
+    		<fractionDigits value='3'/>
+  		</restriction>		
+	</simpleType>
+<simpleType name="num13-2">		
+		<restriction base='decimal'>
+    		<totalDigits value='13'/>
+    		<fractionDigits value='2'/>
+  		</restriction>		
+	</simpleType>
+<complexType name="addr">
+<sequence>
+	<choice>
+			<element name="aRf" type="tns:addrRf">
+				<annotation>
+					<documentation>Адрес местонахождения в Российской Федерации</documentation>
+				</annotation>
+			</element>
+			<element name="aIn" type="tns:addrIn">
+				<annotation>
+					<documentation>Адрес местонахождения за пределами Российской Федерации</documentation>
+				</annotation>
+			</element>
+		</choice>
+				
+</sequence>
+</complexType> 
+
+
+
+<complexType name="addrIn">
+			<sequence>
+			
+			<element maxOccurs="1" minOccurs="1" name="kod" type="string"/>
+			<element maxOccurs="1" minOccurs="1" name="text" type="string"/>	
+			</sequence>
+		</complexType> 
+		<complexType name="addrRf">
+			<sequence>
+			
+			<element maxOccurs="1" minOccurs="0" name="ind" type="tns:str6"/>			
+		<element maxOccurs="1" minOccurs="0" name="kod" type = "tns:str2"/>
+			
+		<element maxOccurs="1" minOccurs="0" type = "tns:str50" name="raion" />
+		
+		<element maxOccurs="1" minOccurs="0" type = "tns:str50" name="town" />
+	
+		<element maxOccurs="1" minOccurs="0" type = "tns:str50" name="punkt" />
+			
+		<element maxOccurs="1" minOccurs="0" type = "tns:str50" name="street"/>
+			
+		<element maxOccurs="1" minOccurs="0" type = "tns:str20" name="house" />
+			
+		<element maxOccurs="1" minOccurs="0" type = "tns:str20" name="korp" />
+			
+		<element maxOccurs="1" minOccurs="0" type = "tns:str20" name="flat"/>
+			
+			</sequence>
+		</complexType> 
+		
+		<complexType name="fio">
+			<sequence>
+					
+		<element maxOccurs="1" minOccurs="1" name="fname" type = "string"/>
+			
+		<element maxOccurs="1" minOccurs="1" type = "string" name="name" />
+		
+		<element maxOccurs="1" minOccurs="0" type = "string" name="sname" />
+	
+			</sequence>
+		</complexType> 
+       
+    
+    
+    	<complexType name="table">
+		<sequence>
+			<element maxOccurs="1" minOccurs="1" name="number" type="tns:str1-5"/>
+           <element maxOccurs="1" minOccurs="1" name="goods" type="tns:str1-450"/>
+           <element maxOccurs="1" minOccurs="1" name="goodsname" type="tns:str150"/>
+           <element maxOccurs="1" minOccurs="1" name="goodschar" type="tns:str300"/>
+           <element maxOccurs="1" minOccurs="0" name="goodscode" type="tns:str12"/>
+           <element maxOccurs="1" minOccurs="1" name="eizmname" type="tns:str10"/>
+           <element maxOccurs="1" minOccurs="1" name="eizmcode" type="tns:str3"/>
+           <element maxOccurs="1" minOccurs="1" name="kolvo" type="tns:num12-2"/>
+           <element maxOccurs="1" minOccurs="1" name="edprice" type="tns:num12-2"/>
+           <element maxOccurs="1" minOccurs="1" name="nonends" type="tns:num12-2"/>
+           <element maxOccurs="1" minOccurs="1" name="nds" type="tns:str1-2"/>
+           <element maxOccurs="1" minOccurs="1" name="ndssumm" type="tns:num12-2"/>
+           <element maxOccurs="1" minOccurs="1" name="withnds" type="tns:num12-2"/>
+		</sequence>
+		
+	</complexType>
+    
+    <complexType name="tableitog">
+		<sequence>
+		<!--  <element maxOccurs="1" minOccurs="1" name="itogo_kolvo" type="tns:num12-2"/>
+         <element maxOccurs="1" minOccurs="1" name="itogo_mass" type="tns:num13-3"/> -->
+         <element maxOccurs="1" minOccurs="1" name="itogo_kolvomass" type="tns:num13-3"/>
+         <element maxOccurs="1" minOccurs="1" name="itogo_beznds" type="tns:num13-2"/>
+         <element maxOccurs="1" minOccurs="1" name="ndssumm" type="tns:num12-2"/>
+         <element maxOccurs="1" minOccurs="1" name="withnds" type="tns:num12-2"/>
+		</sequence>
+		
+	</complexType>
+    
+    <complexType name="tableitogall">
+		<sequence>
+		 <!-- <element maxOccurs="1" minOccurs="1" name="kolvoall" type="tns:num13-3"/>
+         <element maxOccurs="1" minOccurs="1" name="massall" type="tns:num13-3"/> -->
+         <element maxOccurs="1" minOccurs="1" name="kolvomassall" type="tns:num13-3"/>
+         <element maxOccurs="1" minOccurs="1" name="bezndsall" type="tns:num13-2"/>
+         <element maxOccurs="1" minOccurs="1" name="ndssummall" type="tns:num12-2"/>
+         <element maxOccurs="1" minOccurs="1" name="withndsall" type="tns:num12-2"/>
+		</sequence>
+		
+	</complexType>
+    
+     <complexType name="varantyinfo">
+		<sequence>
+		 <element maxOccurs="1" minOccurs="0" name="varanty_number" type="tns:str50"/>
+         <element maxOccurs="1" minOccurs="0" name="varanty_date" type="tns:date"/>
+         <element maxOccurs="1" minOccurs="0" name="givenby" type="tns:givenbyinfo"/>
+         <element maxOccurs="1" minOccurs="0" name="givento" type="tns:giventoinfo"/>
+		</sequence>
+	</complexType>
+    
+     <complexType name="givenbyinfo">
+		<sequence>
+		 <element maxOccurs="1" minOccurs="0" name="orgname" type="tns:str150"/>
+         <element maxOccurs="1" minOccurs="0" name="doljby" type="tns:str50"/>
+         <element maxOccurs="1" minOccurs="0" name="dopsvby" type="tns:str500"/>
+         <element maxOccurs="1" minOccurs="0" name="fioby" type="tns:fio"/>
+		</sequence>
+	</complexType>
+    
+      <complexType name="giventoinfo">
+		<sequence>
+		 <element maxOccurs="1" minOccurs="0" name="doljto" type="tns:str50"/>
+         <element maxOccurs="1" minOccurs="0" name="dopsvto" type="tns:str500"/>
+         <element maxOccurs="1" minOccurs="0" name="fioto" type="tns:fio"/>
+		</sequence>
+	</complexType>
+    
+     <element name="Torg12Response">
+    	<complexType>
+    		<sequence>
+    		<element maxOccurs="1" minOccurs="1" name="docid" type="long">
+    			</element>
+    			<element maxOccurs="1" minOccurs="1" name="code" type="int">
+    			</element>
+    			<element maxOccurs="1" minOccurs="1" name="description" type="string">
+    			</element>
+    			
+        		</sequence>
+    	</complexType>
+    </element>
+    
+</schema>

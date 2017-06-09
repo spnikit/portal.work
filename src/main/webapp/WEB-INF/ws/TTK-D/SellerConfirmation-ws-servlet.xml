@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+
+
+	<bean id="facade" class="ru.aisa.rgd.ws.dao.JdbcServiceFacade">
+		<property name="documentDao" ref="documentDao" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="templateDao" ref="templateDao" />
+	</bean>
+
+	<!-- MAPPING -->
+	<bean id="payloadMapping"
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="mappings">
+			<props>
+				<prop key="{http://iit.ru/portal:8888/portal}SConfirmationRequest">SellerConfirmationEndpoint</prop>
+			</props>
+		</property>
+		<property name="interceptors">
+			<list>
+				<ref local="validatingInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- XML VALIDATION -->
+
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/ws/TTK/xsd/SellerConfirmation.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+
+	<!-- ENDPOINTS -->
+
+	<bean id="SellerConfirmationEndpoint" class="dumb.SellerConfirmationEndpoint">
+		<constructor-arg ref="marshaller" />
+
+
+	</bean>
+
+	<!-- WSDL PUBLISHING -->
+
+	<bean id="SellerConfirmation"
+		class="org.springframework.ws.wsdl.wsdl11.DynamicWsdl11Definition">
+		<description>wsdl</description>
+		<property name="builder">
+			<bean
+				class="org.springframework.ws.wsdl.wsdl11.builder.XsdBasedSoap11Wsdl4jDefinitionBuilder">
+				<property name="schema"
+					value="/WEB-INF/ws/TTK-D/xsd/SellerConfirmation.xsd" />
+				<property name="portTypeName" value="SellerConfirmation" />
+				<property name="locationUri"
+					value="http://iit.ru/IIT/SellerConfirmation-D/services" />
+			</bean>
+		</property>
+	</bean>
+
+</beans>

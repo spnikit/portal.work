@@ -1,0 +1,89 @@
+<!DOCTYPE preferences SYSTEM "http://java.sun.com/dtd/preferences.dtd">
+<preferences EXTERNAL_XML_VERSION="1.0">
+	<root type="system">
+		<map />
+		<node name="ru">
+			<map />
+			<node name="CryptoPro">
+				<map>
+					<entry key="JCPCheckSum"
+						value="00000049H7WM7PCRK1RDNVDNBF5TCGPWV3R1B97AG1M8Z233NUU6QPPUCMN1W2HA0" />
+					<entry key="SSLCheckSum"
+						value="0000000A5M3289V0TVZEDGPD66L2CT3P15X5TNG80LG7X8DRQZ9W07RT2DG9B1TU1" />
+				</map>
+
+				<node name="Install">
+					<map>
+						<entry key="AbstractInstaller_class_Uninstall"
+							value="ru.CryptoPro.Install.SelfInstaller,ru.CryptoPro.JCP.Install.JCPInstaller,ru.CryptoPro.JCPRequest.RequestInstall,ru.CryptoPro.JCPxml.XMLInstall,ru.CryptoPro.Crypto.JCryptoPInstaller,ru.CryptoPro.reprov.Install,ru.CryptoPro.JCP.Install.JCPAsnInstaller" />
+
+
+						<entry key="InstallAccess" value="0" />
+					</map>
+				</node>
+				<node name="JCP">
+					<map />
+					<node name="ASN">
+						<map />
+						<node name="CertificateExtensions">
+							<map>
+								<entry key="CertificateExtensionsValues"
+									value="ru.CryptoPro.JCP.ASN.CertificateExtensions.Lite_CertificateExtensionsValues,ru.CryptoPro.JCP.ASN.CertificateExtensions.JCP_CertificateExtensionsValues" />
+							</map>
+						</node>
+						<node name="PKIX1Explicit88">
+							<map>
+								<entry key="PKIX1Explicit88Values"
+									value="ru.CryptoPro.JCP.ASN.PKIX1Explicit88.Lite_PKIX1Explicit88Values,ru.CryptoPro.JCP.ASN.PKIX1Explicit88.JCP_PKIX1Explicit88Values" />
+							</map>
+						</node>
+					</node>
+					<node name="ControlPane">
+						<map>
+							<entry key="MainControlPaneConfig_class_Pages"
+								value="ru.CryptoPro.JCP.ControlPane.PageLicense,ru.CryptoPro.JCP.ControlPane.PageAlg,ru.CryptoPro.JCP.ControlPane.PageHardware,ru.CryptoPro.JCP.ControlPane.PageOther,ru.CryptoPro.JCP.ControlPane.PageVerify,ru.CryptoPro.JCP.ControlPane.PageKeys,ru.CryptoPro.ssl.TLSLicensePage,ru.CryptoPro.ssl.ServerSettings" />
+
+						</map>
+					</node>
+					<node name="Key">
+						<map />
+					</node>
+					<node name="KeyStore">
+						<map>
+							<entry key="StoreConfig_class_Store"
+								value="ru.CryptoPro.JCP.KeyStore.HDImage.HDImageStore,ru.CryptoPro.JCP.KeyStore.HDImage.FloppyStore" />
+						</map>
+						<node name="HDImage">
+							<map />
+						</node>
+					</node>
+					<node name="params">
+						<map />
+					</node>
+					<node name="tools">
+						<map>
+							<entry key="License_class_license"
+								value="AAAAa9Ce0YLQutGA0YvRgtC+0LUg0LDQutGG0LjQvtC90LXRgNC90L7QtSDQvtCx0YnQtdGB0YLQstC+INCg0L7RgdGB0LjQudGB0LrQuNC1INCW0LXQu9C10LfQvdGL0LUg0JTQvtGA0L7Qs9C4AB1DRjEwMi04MTAwMC0wQUUwRS1XNjJRQy05RENLWg==" />
+							<entry key="SelfTester_jar_names"
+								value="ru.CryptoPro.JCP.Install.JCPInstaller;ru.CryptoPro.Crypto.JCryptoPInstaller" />
+							<!-- entry key="SelfTester_external_classNames" value="ru.CryptoPro.Crypto.JCryptoPInstaller"/ -->
+						</map>
+						<node name="CPVerify">
+							<map />
+						</node>
+					</node>
+				</node>
+			</node>
+			<node name="ssl">
+				<map>
+					<entry key="License" value="AAAAAAAdQ1QxMFItQTAwMzAtMDFXRlItQzZGNjEtUUEzMTc=" />
+					<entry key="ssl.KeyManagerFactory.algorithm" value="" />
+					<entry key="ssl.ServerSocketFactory.provider" value="" />
+					<entry key="ssl.SocketFactory.provider" value="" />
+					<entry key="ssl.TrustManagerFactory.algorithm" value="" />
+
+				</map>
+			</node>
+		</node>
+	</root>
+</preferences>

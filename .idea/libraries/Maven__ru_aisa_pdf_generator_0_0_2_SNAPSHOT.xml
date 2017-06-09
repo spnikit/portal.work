@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: ru.aisa:pdf-generator:0.0.2-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/ru/aisa/pdf-generator/0.0.2-SNAPSHOT/pdf-generator-0.0.2-20160817.133037-2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/ru/aisa/pdf-generator/0.0.2-SNAPSHOT/pdf-generator-0.0.2-20160817.133037-2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/ru/aisa/pdf-generator/0.0.2-SNAPSHOT/pdf-generator-0.0.2-20160817.133037-2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

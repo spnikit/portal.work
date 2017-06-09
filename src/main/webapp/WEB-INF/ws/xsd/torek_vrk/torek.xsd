@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://iit.ru/repair/torek" 
+xmlns:tns="http://iit.ru/repair/torek"
+ elementFormDefault="qualified">
+ <element name="T_CHNG_Request">
+		<complexType>
+			<sequence>
+				<element name="Timestamp" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="T_CHNG_Response">
+		<complexType>
+			<sequence>
+				<element name="IDDATA" type="tns:CHNG_TIDDATA" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="CHNG_TIDDATA">
+		<sequence>
+			<element name="code">
+				<simpleType>
+					<restriction base="string">
+						<length value="1"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="description">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="255"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="DOCID" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="0"/>
+						<maxLength value="20"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="OperDocID">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="Timestamp" type="string"/>
+		</sequence>
+	</complexType>
+	<element name="T_PACK_Request">
+		<complexType>
+			<sequence>
+				<element name="TorPackID" minOccurs="0">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="0"/>
+							<maxLength value="50"/>
+						</restriction>
+					</simpleType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="T_PACK_Response">
+		<complexType>
+			<sequence>
+				<element name="code">
+					<simpleType>
+						<restriction base="string">
+							<length value="1"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="description">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="1"/>
+							<maxLength value="255"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="TorPackID" minOccurs="0">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="0"/>
+							<maxLength value="11"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="PACKAGE" type="tns:PACK_TPROW" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="PACK_TEDSTAB">
+		<sequence>
+			<element name="SIGN_NUM" type="int"/>
+			<element name="SIGNER_ID" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="0"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="EDS" type="string"/>
+		</sequence>
+	</complexType>
+	<complexType name="PACK_TPROW">
+		<sequence>
+			<element name="DOCID">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="20"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="DOCSPEC">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="DOCTYPE">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="FILENAME" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="0"/>
+						<maxLength value="255"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="DOC_STATUS" type="int"/>
+			<element name="REJECT_REASON" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="0"/>
+						<maxLength value="350"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="CONTENT" type="string"/>
+			<element name="EDSTAB" type="tns:PACK_TEDSTAB" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<element name="T_SEND_Request">
+		<complexType>
+			<sequence>
+				<element name="PR_PACKAGE">
+					<simpleType>
+						<restriction base="string">
+							<length value="1"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="TorPackID">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="1"/>
+							<maxLength value="11"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="MainTorPackID" minOccurs="0">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="0"/>
+							<maxLength value="11"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="CorrPackID" minOccurs="0">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="0"/>
+							<maxLength value="11"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="SenderBoxID" minOccurs="0">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="0"/>
+							<maxLength value="50"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="SenderBranchID" minOccurs="0">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="0"/>
+							<maxLength value="50"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="SenderDepoID" minOccurs="0">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="0"/>
+							<maxLength value="50"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="RecieverBoxID" minOccurs="0">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="0"/>
+							<maxLength value="50"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="RecieverBranchID" minOccurs="0">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="0"/>
+							<maxLength value="50"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="RecieverDepoID" minOccurs="0">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="0"/>
+							<maxLength value="50"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="PACKAGE" type="tns:SEND_TPROW" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="SEND_TPROW">
+		<sequence>
+			<element name="DOCID">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="20"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="DOCSPEC">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="DOCTYPE">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="3"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="FILENAME" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="0"/>
+						<maxLength value="255"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="CONTENT" type="string"/>
+			<element name="EDSTAB" type="tns:SEND_TEDSTAB" maxOccurs="unbounded"/>
+			<element name="DOC_STATUS" type="int"/>
+		</sequence>
+	</complexType>
+	<complexType name="SEND_TEDSTAB">
+		<sequence>
+			<element name="SIGN_NUM" type="int"/>
+			<element name="SIGNER_ID" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="0"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="EDS" type="string"/>
+		</sequence>
+	</complexType>
+	<element name="T_SEND_Response">
+		<complexType>
+			<sequence>
+				<element name="code">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="1"/>
+							<maxLength value="4"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="description">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="1"/>
+							<maxLength value="255"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="IDDATA" type="tns:SEND_TIDDATA" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="SEND_TIDDATA">
+		<sequence>
+			<element name="DOCID">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="20"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="OperDocID">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- DATA LAYER -->
+
+
+
+	<!-- MAPPING -->
+	<bean id="payloadMapping"
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="mappings">
+		<props>
+		<prop key="{http://iit.ru/portal/etdgetnotice}EtdGetnoticeRequest">putdocEndpoint</prop>
+		<prop key="{http://etd.gvc.rzd:8888/WAS/ETD/recievenotice}RecieveNoticeResponse">responseEndpoint</prop>
+		</props>
+</property>
+		<property name="interceptors">
+			<list>
+				<ref local="validatingInterceptor" />
+
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- XML VALIDATION -->
+
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/ws/xsd/etdgetnotice.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+
+	<!-- ENDPOINTS -->
+
+	<bean id="putdocEndpoint"
+		class="com.aisa.portal.invoice.notice.endpoints.EtdGetNoticeEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="securitymanager" ref="securitymanager" />
+		<property name="facade" ref="_FacadeTTK" />
+		<property name="wst" ref="wst_standart" />
+		<property name="url" ref="urlOper" />
+		 <property name="sendtotransoil" ref="transservice" />
+	</bean>
+
+<bean id="responseEndpoint"
+		class="com.aisa.portal.invoice.notice.endpoints.EtdGetNoticeResponseEndpoint">
+		<constructor-arg ref="marshaller" />
+		</bean>
+
+	<!-- WSDL PUBLISHING -->
+
+	<bean id="EtdGetNotice"
+		class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schema">
+			<bean class="org.springframework.xml.xsd.SimpleXsdSchema">
+				<property name="xsd" value="/WEB-INF/ws/xsd/etdgetnotice.xsd" />
+			</bean>
+		</property>
+		<property name="portTypeName" value="ContrAgInvoice" />
+		<property name="locationUri"
+			value="http://localhost:38080/IIT/EtdGetNotice/services" />
+	</bean>
+
+
+
+</beans>

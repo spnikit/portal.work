@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+							
+	<bean id="payloadMapping" class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="mappings">
+			<props>
+				<prop key="{http://iit.ru/RZDS/SFG/}SFRequest">request</prop>
+			</props>
+		</property>					
+		<property name="interceptors">
+			<list>
+				<ref local="validatingInterceptor" />
+				<ref bean="loggingInterceptor" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="xsdSchemaCollection" ref="schemaCollection"></property>
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+	
+<bean id="request" class="sheff.rjd.services.rzds.SF_Goods_Endpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="securitymanager" ref="securitymanager" />
+		<property name="facade" ref="_Facade" />
+		<property name="oper" ref="OperatorObj" />
+		<property name="formname" value="Счет-фактура РЖДС на товар" />
+	</bean>
+		
+	<!-- WSDL PUBLISHING  -->
+
+	<bean id="schemaCollection" class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
+	<property name="inline" value="true"></property>
+	<property name="xsds" value="/WEB-INF/ws/xsd/rzds/SFgoods.xsd"/>
+	</bean> 
+	<bean id="sfgrzds" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schemaCollection" ref="schemaCollection"></property> 
+		<property name="portTypeName" value="sfgrzds"/>
+		<property name="locationUri" value="http://localhost:9080/IIT/rzds/SFG/services"/>
+	</bean>
+	
+</beans>

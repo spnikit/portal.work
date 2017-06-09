@@ -1,0 +1,1508 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:edtsave="http://www.aisa.ru/edtsave" targetNamespace="http://www.aisa.ru/edtsave"
+	elementFormDefault="qualified">
+
+
+
+	<xs:element name="getReportRequest">
+
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="wrkid" maxOccurs="1" minOccurs="1"
+					type="xs:int">
+				</xs:element>
+				<xs:element name="reqnum" maxOccurs="1" minOccurs="0"
+					type="xs:string">
+				</xs:element>
+				<xs:element name="date1" type="xs:date" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="prosrochka" type="xs:int" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="date2" type="xs:date" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1">
+				</xs:element>
+				<xs:element name="flt" type="xs:int" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+
+				<xs:element name="form" type="xs:string" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="status" type="xs:int" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="filters">
+					<xs:simpleType>
+						<xs:list itemType="xs:int"></xs:list>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="counterparts" minOccurs="1" maxOccurs="1"
+					type="xs:string"></xs:element>
+
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="PartialResponse">
+		<xs:annotation>
+			<xs:documentation>qwerty</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DocId" type="xs:int"></xs:element>
+				<xs:element name="BaseDoc" type="xs:int"></xs:element>
+				<xs:element name="response" type="xs:string"></xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+
+
+	<xs:element name="NextDocIdResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" maxOccurs="1" minOccurs="1" type="xs:int">
+				</xs:element>
+				<xs:element name="response" type="xs:string" maxOccurs="1"
+					minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+
+	<xs:element name="docsRequestN">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="fetchedrows" type="xs:int" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+
+				<xs:element name="data" maxOccurs="1" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="doc" minOccurs="0" maxOccurs="unbounded">
+
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="name" type="xs:string" maxOccurs="1"
+											minOccurs="1">
+										</xs:element>
+
+										<xs:element name="number" type="xs:string"
+											maxOccurs="1" minOccurs="1">
+										</xs:element>
+
+										<xs:element name="crdatetime" type="xs:string"
+											maxOccurs="1" minOccurs="1">
+										</xs:element>
+
+
+									</xs:sequence>
+									<xs:attribute name="id" type="xs:int" use="required">
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1">
+				</xs:element>
+
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+
+	<xs:element name="docsRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="fetchedrows" type="xs:int" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="filter" maxOccurs="1" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:int" maxOccurs="1"
+								minOccurs="0">
+							</xs:element>
+							<xs:element name="lastpers" type="xs:int" maxOccurs="1"
+								minOccurs="0">
+							</xs:element>
+							<xs:element name="predid" type="xs:int" maxOccurs="1"
+								minOccurs="0">
+							</xs:element>
+							<xs:element name="page" type="xs:int" maxOccurs="1"
+								minOccurs="0">
+							</xs:element>
+							<xs:element name="wrkid" type="xs:int" maxOccurs="1"
+								minOccurs="0">
+							</xs:element>
+							<xs:element name="datefrom" type="xs:date" maxOccurs="1"
+								minOccurs="0">
+							</xs:element>
+							<xs:element name="dateto" type="xs:date" maxOccurs="1"
+								minOccurs="0">
+							</xs:element>
+							<xs:element name="sorttype" type="xs:string"
+								maxOccurs="1" minOccurs="0">
+							</xs:element>
+							<xs:element name="sortfield" type="xs:string"
+								maxOccurs="1" minOccurs="0">
+							</xs:element>
+
+							<xs:element name="rqn" type="xs:string" maxOccurs="unbounded"
+								minOccurs="0"></xs:element>
+
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<xs:element name="data" maxOccurs="1" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="doc" minOccurs="0" maxOccurs="unbounded">
+
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="name" type="xs:string" maxOccurs="1"
+											minOccurs="1">
+										</xs:element>
+
+										<xs:element name="number" type="xs:string"
+											maxOccurs="1" minOccurs="1">
+										</xs:element>
+
+										<xs:element name="crdatetime" type="xs:string"
+											maxOccurs="1" minOccurs="1">
+										</xs:element>
+										<xs:element name="balance" type="xs:string"
+											maxOccurs="1" minOccurs="1">
+										</xs:element>
+
+										<xs:element name="lastsignpers" type="xs:string"
+											maxOccurs="1" minOccurs="1">
+										</xs:element>
+
+										<xs:element name="lastsigndate" type="xs:string"
+											maxOccurs="1" minOccurs="1">
+										</xs:element>
+										<xs:element name="executor" type="xs:string"
+											maxOccurs="1" minOccurs="0">
+										</xs:element>
+										<xs:element name="creator" type="xs:string"
+											maxOccurs="1" minOccurs="0">
+										</xs:element>
+										<xs:element name="cdel" type="xs:string" maxOccurs="1"
+											minOccurs="1">
+										</xs:element>
+
+										<xs:element name="no" type="xs:int" maxOccurs="1"
+											minOccurs="0">
+										</xs:element>
+
+
+										<xs:element name="datecreated" type="xs:string"
+											maxOccurs="1" minOccurs="0">
+										</xs:element>
+										<xs:element name="reqnum" type="xs:string"
+											maxOccurs="1" minOccurs="0">
+										</xs:element>
+
+										<xs:element name="reqdate" type="xs:string"
+											maxOccurs="1" minOccurs="0">
+										</xs:element>
+
+										<xs:element name="getdate" type="xs:string"
+											maxOccurs="1" minOccurs="0">
+										</xs:element>
+										<xs:element name="period" type="xs:int" maxOccurs="1"
+											minOccurs="0">
+										</xs:element>
+										<xs:element name="execdate" type="xs:string"
+											maxOccurs="1" minOccurs="0">
+										</xs:element>
+										<xs:element name="execfio" type="xs:string"
+											maxOccurs="1" minOccurs="0">
+										</xs:element>
+										<xs:element name="fnsnum" type="xs:string"
+											maxOccurs="1" minOccurs="0">
+										</xs:element>
+
+
+
+										<xs:element name="decldate" type="xs:string"
+											maxOccurs="1" minOccurs="0">
+										</xs:element>
+										<xs:element name="decliner" type="xs:string"
+											maxOccurs="1" minOccurs="0">
+										</xs:element>
+										<xs:element name="datefrom" type="xs:string"
+											maxOccurs="1" minOccurs="0">
+										</xs:element>
+										<xs:element name="send_obj" type="xs:string"
+											maxOccurs="1" minOccurs="0">
+										</xs:element>
+										<xs:element name="get_obj" type="xs:string"
+											maxOccurs="1" minOccurs="0">
+										</xs:element>
+
+
+										<xs:element name="pages" type="xs:int" maxOccurs="1"
+											minOccurs="0">
+										</xs:element>
+										<xs:element name="wagon_number" type="xs:string"
+											maxOccurs="1" minOccurs="1">
+										</xs:element>
+
+									</xs:sequence>
+									<!--<xs:attribute name="id" type="xs:int" use="required"> </xs:attribute> -->
+									<xs:attribute name="id" type="xs:long" use="required">
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1">
+				</xs:element>
+
+				<xs:element name="totaldocs" type="xs:int" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+
+				<xs:element name="scroll" type="xs:string" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="nextpageid" type="xs:long" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="previouspageid" type="xs:long"
+					maxOccurs="1" minOccurs="1">
+				</xs:element>
+				<xs:element name="exactids" type="xs:long" maxOccurs="unbounded"
+					minOccurs="0"></xs:element>
+
+
+
+
+				<xs:element name="srchflt" maxOccurs="1" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="num" type="xs:string" maxOccurs="1"
+								minOccurs="0"></xs:element>
+							<xs:element name="from" type="xs:string" maxOccurs="1"
+								minOccurs="0"></xs:element>
+							<xs:element name="fromto" type="xs:string" maxOccurs="1"
+								minOccurs="0"></xs:element>
+							<xs:element name="crdate" type="xs:string" maxOccurs="1"
+								minOccurs="0"></xs:element>
+							<xs:element name="crdateto" type="xs:string"
+								maxOccurs="1" minOccurs="0"></xs:element>
+							<xs:element name="org" type="xs:string" maxOccurs="1"
+								minOccurs="0"></xs:element>
+							<xs:element name="inn" type="xs:string" maxOccurs="1"
+								minOccurs="0"></xs:element>
+							<xs:element name="pred" type="xs:string" maxOccurs="1"
+								minOccurs="0"></xs:element>
+							<xs:element name="bal" type="xs:string" maxOccurs="1"
+								minOccurs="0"></xs:element>
+							<xs:element name="creator" type="xs:string" maxOccurs="1"
+								minOccurs="0"></xs:element>
+							<xs:element name="name" type="xs:string" maxOccurs="1"
+								minOccurs="0"></xs:element>
+							<xs:element name="num_vag" type="xs:string" maxOccurs="1"
+								minOccurs="0"></xs:element>
+
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+
+
+
+	<xs:element name="userinfo">
+		<!--<xs:annotation> <xs:documentation>qwerty</xs:documentation> </xs:annotation> -->
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="person" maxOccurs="1" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string" maxOccurs="1"
+								minOccurs="1">
+							</xs:element>
+							<xs:element name="depid" type="xs:int" maxOccurs="1"
+								minOccurs="1">
+							</xs:element>
+							<xs:element name="depname" type="xs:string" maxOccurs="1"
+								minOccurs="1">
+							</xs:element>
+							<xs:element name="wrkid" type="xs:int" maxOccurs="unbounded"
+								minOccurs="1">
+							</xs:element>
+							<xs:element name="wrkname" type="xs:string" maxOccurs="unbounded"
+								minOccurs="1">
+							</xs:element>
+							<xs:element name="predid" type="xs:int" maxOccurs="unbounded"
+								minOccurs="1">
+							</xs:element>
+							<xs:element name="predname" type="xs:string"
+								maxOccurs="unbounded" minOccurs="1">
+							</xs:element>
+							<xs:element name="dorname" type="xs:string" maxOccurs="unbounded"
+								minOccurs="1">
+							</xs:element>
+							<xs:element name="okpo" type="xs:string" maxOccurs="unbounded"
+								minOccurs="1">
+							</xs:element>
+							<xs:element name="kleimo" type="xs:string" maxOccurs="unbounded"
+								minOccurs="1">
+							</xs:element>
+							<xs:element name="fr" type="xs:int" maxOccurs="unbounded"
+								minOccurs="1"></xs:element>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:int"></xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!--<xs:element name="getTypes"> <xs:annotation> <xs:documentation>qwerty</xs:documentation> 
+		</xs:annotation> <xs:complexType> <xs:sequence> <xs:element name="type" maxOccurs="unbounded" 
+		minOccurs="0"> <xs:complexType> <xs:sequence> <xs:element name="name" type="xs:string" 
+		maxOccurs="1" minOccurs="1"> </xs:element> </xs:sequence> <xs:attribute name="id" 
+		type="xs:int"></xs:attribute> </xs:complexType> </xs:element> <xs:element 
+		name="template" type="xs:string" maxOccurs="1" minOccurs="1"> </xs:element> 
+		<xs:element name="template" type="xs:hexBinary" <xs:element name="auto" type="xs:int" 
+		maxOccurs="1" minOccurs="1"></xs:element> <xs:element name="bal" type="xs:string" 
+		maxOccurs="1" minOccurs="1"></xs:element> <xs:element name="wrkid" type="xs:int" 
+		maxOccurs="1" minOccurs="1"></xs:element> <xs:element name="response" type="xs:string" 
+		maxOccurs="1" minOccurs="1"></xs:element> <xs:element name="fr" type="xs:int" 
+		maxOccurs="1" minOccurs="1"></xs:element> </xs:sequence> </xs:complexType> 
+		</xs:element> -->
+	<xs:element name="getTypes">
+		<xs:annotation>
+			<xs:documentation>qwerty</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="type" maxOccurs="unbounded" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string" maxOccurs="1"
+								minOccurs="1">
+							</xs:element>
+
+							<xs:element name="template" type="xs:hexBinary"
+								maxOccurs="1" minOccurs="1">
+							</xs:element>
+
+
+
+
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:int"></xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="template" type="xs:string" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="wrkid" type="xs:int" maxOccurs="1"
+					minOccurs="1"></xs:element>
+
+				<xs:element name="auto" type="xs:int" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="bal" type="xs:string" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="response" type="xs:string" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="fr" type="xs:int" maxOccurs="1"
+					minOccurs="1"></xs:element>
+
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+
+
+
+
+
+	<xs:element name="saveRequest" type="edtsave:singledoc">
+
+
+	</xs:element><!-- <xs:element name="getTemplate"> <xs:annotation> <xs:documentation>qwerty</xs:documentation> 
+		</xs:annotation> <xs:complexType> <xs:sequence> <xs:element name="getTemplate" 
+		type="xs:string"></xs:element> <xs:element name="getWrkID" type="xs:int"></xs:element> 
+		<xs:element name="pareId" type="xs:int" maxOccurs="1" minOccurs="1"></xs:element> 
+		<xs:element name="bal" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element> 
+		<xs:element name="security" type="edtsave:signature" maxOccurs="1" minOccurs="1"></xs:element> 
+		<xs:element name="name" type="xs:string" maxOccurs="1" minOccurs="1"> </xs:element> 
+		<xs:element name="predid" type="xs:int" maxOccurs="1" minOccurs="1"></xs:element> 
+		</xs:sequence> </xs:complexType> </xs:element> -->
+	<xs:element name="getTemplate">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="name" type="xs:string" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="getTemplate" type="xs:string"></xs:element>
+				<xs:element name="predid" type="xs:int" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="getWrkID" type="xs:int"></xs:element>
+				<xs:element name="pareId" type="xs:int" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="bal" type="xs:string" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1"></xs:element>
+
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ImageDoc">
+		<xs:annotation>
+			<xs:documentation>qwerty</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ImageId" type="xs:int" maxOccurs="unbounded"
+					minOccurs="1"></xs:element>
+				<xs:element name="DocId" type="xs:int"></xs:element>
+				<xs:element name="BaseDocId" type="xs:int"></xs:element>
+				<xs:element name="ImageBl" type="xs:string" maxOccurs="unbounded"
+					minOccurs="1"></xs:element>
+				<xs:element name="request" type="xs:string"></xs:element>
+				<xs:element name="response" type="xs:string"></xs:element>
+				<xs:element name="IdsForDel" type="xs:string"></xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="singledoc">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="datedoc " type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="counterPred " type="xs:string"
+				maxOccurs="1" minOccurs="1">
+			</xs:element>
+
+			<xs:element name="counterPers " type="xs:string"
+				maxOccurs="1" minOccurs="1">
+			</xs:element>
+
+			<xs:element name="number" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+
+			<xs:element name="crdatetime" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="xmldata" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="bldoc" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<!--<xs:element name="bldoc" type="xs:hexBinary" maxOccurs="1" minOccurs="1"> 
+				</xs:element> -->
+			<xs:element name="security" type="edtsave:signature"
+				maxOccurs="1" minOccurs="1">
+			</xs:element>
+			<xs:element name="xdata" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="signatures" type="xs:string" maxOccurs="unbounded"
+				minOccurs="0">
+			</xs:element>
+
+			<xs:element name="lastsignpersid" type="xs:int" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="predid" type="xs:int" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="wrkid" type="xs:int" maxOccurs="1"
+				minOccurs="1"></xs:element>
+			<xs:element name="whereId" type="xs:string"></xs:element>
+			<xs:element name="IsPare" type="xs:string"></xs:element>
+			<xs:element name="pareId" type="xs:int"></xs:element>
+			<xs:element name="BaseId" type="xs:int" maxOccurs="1"
+				minOccurs="1"></xs:element>
+			<xs:element name="fr" type="xs:int" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="tab" type="xs:int" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+
+			<xs:element name="NewDocId" type="xs:int" maxOccurs="1"
+				minOccurs="1"></xs:element>
+			<xs:element name="opisanie" type="xs:string" maxOccurs="1"
+				minOccurs="1"></xs:element>
+
+		</xs:sequence>
+		<xs:attribute name="unlock" type="xs:int"></xs:attribute>
+		<xs:attribute name="id" type="xs:int" use="required">
+		</xs:attribute>
+
+
+
+
+	</xs:complexType>
+
+
+
+
+	<!--<xs:element name="saveResponse" > <xs:annotation> <xs:documentation>qwerty</xs:documentation> 
+		</xs:annotation> <xs:complexType> <xs:sequence> <xs:element name="saveResponse" 
+		type="xs:string"></xs:element> </xs:sequence> </xs:complexType> </xs:element> -->
+	<xs:element name="saveResponse" type="xs:string" />
+	<!--<xs:complexType> <xs:sequence> <xs:element name="security" type="edtsave:signature" 
+		maxOccurs="1" minOccurs="1" /> <xs:element name="saveResponse" type="xs:string" 
+		maxOccurs="1" minOccurs="1" /> </xs:sequence> </xs:complexType> </xs:element> -->
+	<xs:element name="SendTo">
+		<xs:annotation>
+			<xs:documentation>qwerty</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1"></xs:element>
+				<xs:element name="docId" type="xs:string"></xs:element>
+				<xs:element name="wrkid" type="xs:int"></xs:element>
+				<xs:element name="sigsSize" type="xs:int"></xs:element>
+				<xs:element name="docToCreate" type="xs:string"></xs:element>
+				<xs:element name="response" type="xs:string"></xs:element>
+				<xs:element name="whereIds" type="xs:int" maxOccurs="unbounded"
+					minOccurs="1">
+
+				</xs:element>
+				<xs:element name="whereName" type="xs:string" maxOccurs="unbounded"
+					minOccurs="1">
+
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="setWhere">
+		<xs:annotation>
+			<xs:documentation>qwerty</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="setWhereResp" type="xs:string"></xs:element>
+				<xs:element name="whereIds" type="xs:int">
+
+				</xs:element>
+				<xs:element name="docID" type="xs:int">
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+
+	<xs:complexType name="signature">
+		<xs:sequence>
+			<xs:element name="username" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="timestamp" type="xs:long" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+
+			<xs:element name="sign" type="xs:hexBinary" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="logonstatus" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="certid" type="xs:string" maxOccurs="1"
+				minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+
+	<xs:element name="getDoc">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" maxOccurs="1" minOccurs="1" type="xs:int">
+				</xs:element>
+				<xs:element name="BaseId" type="xs:int" maxOccurs="unbounded"
+					minOccurs="1"></xs:element>
+				<xs:element name="isPare" maxOccurs="1" minOccurs="1"
+					type="xs:int">
+				</xs:element>
+				<xs:element name="IsGroupSgn" type="xs:boolean"></xs:element>
+				<xs:element name="GroupSigner" type="xs:string"></xs:element>
+				<xs:element name="CountBaseId" type="xs:int"></xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1">
+				</xs:element>
+				<xs:element name="resp" type="xs:string" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="lockName" type="xs:string" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="status" type="xs:string" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="role" type="xs:int" maxOccurs="1"
+					minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="releaseDoc">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" maxOccurs="1" minOccurs="1" type="xs:int">
+				</xs:element>
+				<xs:element name="baseid" maxOccurs="1" minOccurs="1"
+					type="xs:int">
+				</xs:element>
+				<xs:element name="certserial" type="xs:string" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="resp" type="xs:string" maxOccurs="1"
+					minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="dropDoc">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" maxOccurs="1" minOccurs="1" type="xs:int">
+				</xs:element>
+				<xs:element name="reason" type="xs:string" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1">
+				</xs:element>
+				<xs:element name="resp" type="xs:string" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="wrkid" type="xs:int" maxOccurs="1"
+					minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="releaseWork">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="userid" maxOccurs="1" minOccurs="1"
+					type="xs:int">
+				</xs:element>
+				<xs:element name="predid" type="xs:int" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="security" type="edtsave:staticsecurity"
+					maxOccurs="1" minOccurs="1">
+				</xs:element>
+				<xs:element name="resp" type="xs:string" maxOccurs="1"
+					minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="enterWork">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="userid" maxOccurs="1" minOccurs="1"
+					type="xs:int">
+				</xs:element>
+				<xs:element name="predid" type="xs:int" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="security" type="edtsave:staticsecurity"
+					maxOccurs="1" minOccurs="1">
+				</xs:element>
+				<xs:element name="resp" type="xs:string" maxOccurs="1"
+					minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+
+	<xs:complexType name="staticsecurity">
+		<xs:sequence>
+			<xs:element name="certid" type="xs:string" maxOccurs="1"
+				minOccurs="1"></xs:element>
+			<xs:element name="username" type="xs:string" maxOccurs="1"
+				minOccurs="1"></xs:element>
+			<xs:element name="signature" type="xs:hexBinary"
+				maxOccurs="1" minOccurs="1"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:element name="userRequisites">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="wrkid" type="xs:int" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="wrkname" type="xs:string" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="dorname" type="xs:string" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="ukp_code" type="xs:int" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="predid" type="xs:string" maxOccurs="1"
+					minOccurs="1"></xs:element>
+
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getNum">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="num" type="xs:int" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="predid" type="xs:int" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="period" type="xs:int" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="doctype" type="xs:string" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<!-- PORTAL BEANS -->
+
+	<xs:element name="recipientData">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="wrkid" type="xs:int" minOccurs="1"
+					maxOccurs="1"></xs:element>
+				<xs:element name="docid" type="xs:int" minOccurs="1"
+					maxOccurs="1"></xs:element>
+
+				<xs:element name="recipients" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="wrkid" type="xs:int" minOccurs="1"
+								maxOccurs="1"></xs:element>
+							<xs:element name="name" type="xs:string" minOccurs="1"
+								maxOccurs="1"></xs:element>
+							<xs:element name="issm" type="xs:int" minOccurs="1"
+								maxOccurs="1"></xs:element>
+							<xs:element name="stamp" type="xs:int" minOccurs="1"
+								maxOccurs="1"></xs:element>
+							<xs:element name="okpo" type="xs:long" minOccurs="1"
+								maxOccurs="1"></xs:element>
+							<xs:element name="iconsrc" type="xs:string" minOccurs="1"
+								maxOccurs="1"></xs:element>
+
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="docsToCreate">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="wrkid" type="xs:int" minOccurs="1"
+					maxOccurs="1"></xs:element>
+				<xs:element name="docs" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="docid" type="xs:int" minOccurs="1"
+								maxOccurs="1"></xs:element>
+							<xs:element name="docname" type="xs:string" minOccurs="1"
+								maxOccurs="1"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="docHtml">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="docid" type="xs:int" minOccurs="1"
+					maxOccurs="1"></xs:element>
+				<xs:element name="html" type="xs:string" minOccurs="1"
+					maxOccurs="1"></xs:element>
+				<xs:element name="xformsMapping" type="xs:string"
+					minOccurs="1" maxOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+
+
+	<xs:element name="joinOrgs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="item" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="wrkid" type="xs:int" minOccurs="1"
+								maxOccurs="1"></xs:element>
+							<xs:element name="okpo" type="xs:int" minOccurs="1"
+								maxOccurs="1"></xs:element>
+							<xs:element name="wrkname" type="xs:string" minOccurs="1"
+								maxOccurs="1"></xs:element>
+							<xs:element name="iconsrc" type="xs:string" minOccurs="1"
+								maxOccurs="1"></xs:element>
+
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+
+	<xs:element name="loginRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="str" minOccurs="1" maxOccurs="1"
+					type="xs:string"></xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="loginResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="res" minOccurs="1" maxOccurs="1"
+					type="xs:string"></xs:element>
+
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+
+	<xs:element name="counterparts">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="predid" minOccurs="1" maxOccurs="1"
+					type="xs:int"></xs:element>
+
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+
+				<xs:element name="data" minOccurs="0" maxOccurs="unbounded"
+					type="edtsave:counterpartData">
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="CounterpartsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="type" maxOccurs="unbounded" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string" maxOccurs="1"
+								minOccurs="1" />
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:int" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="counterpartData">
+		<xs:sequence>
+			<xs:element name="id" minOccurs="1" maxOccurs="1" type="xs:int"></xs:element>
+			<xs:element name="name" minOccurs="1" maxOccurs="1"
+				type="xs:string"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+
+	<xs:element name="counterPers">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" minOccurs="1" maxOccurs="1" type="xs:int"></xs:element>
+				<xs:element name="predId" minOccurs="1" maxOccurs="1"
+					type="xs:int"></xs:element>
+				<xs:element name="predSnd" minOccurs="1" maxOccurs="1"
+					type="xs:int"></xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+
+				<xs:element name="data" minOccurs="0" maxOccurs="unbounded"
+					type="edtsave:counterPersData">
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="CounterPersResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="type" maxOccurs="unbounded" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string" maxOccurs="1"
+								minOccurs="1" />
+							<xs:element name="template" type="xs:hexBinary"
+								maxOccurs="1" minOccurs="1" />
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:int" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="counterPersData">
+		<xs:sequence>
+			<xs:element name="id" minOccurs="1" maxOccurs="1" type="xs:int"></xs:element>
+			<xs:element name="name" minOccurs="1" maxOccurs="1"
+				type="xs:string"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+
+
+
+	<xs:element name="DocumentsTableRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="filter" maxOccurs="1" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="wrk_filter" type="xs:int" maxOccurs="1"
+								minOccurs="0" />
+							<xs:element name="funcRole" type="xs:int" maxOccurs="1"
+								minOccurs="0" />
+							<xs:element name="pred_filter" type="xs:int"
+								maxOccurs="1" minOccurs="0" />
+							<xs:element name="name_filter" type="xs:int"
+								maxOccurs="1" minOccurs="0" />
+							<xs:element name="page" type="xs:int" maxOccurs="1"
+								minOccurs="0" />
+							<xs:element name="formType" type="xs:int" maxOccurs="1"
+								minOccurs="0" />
+							<xs:element name="predId" type="xs:int" maxOccurs="1"
+								minOccurs="0" />
+							<xs:element name="persId" type="xs:int" maxOccurs="1"
+								minOccurs="0" />
+							<xs:element name="workerId" type="xs:int" maxOccurs="1"
+								minOccurs="0" />
+							<xs:element name="start" type="xs:int" maxOccurs="1"
+								minOccurs="0" />
+							<xs:element name="limit" type="xs:int" maxOccurs="1"
+								minOccurs="0" />
+							<xs:element name="sort" type="xs:string" maxOccurs="1"
+								minOccurs="0" />
+							<xs:element name="shift" type="xs:string" maxOccurs="1"
+								minOccurs="0" />
+							<xs:element name="dir" type="xs:string" maxOccurs="1"
+								minOccurs="0" />
+							<xs:element name="dateBefore" type="xs:string"
+								maxOccurs="1" minOccurs="0" />
+							<xs:element name="dateAfter" type="xs:string"
+								maxOccurs="1" minOccurs="0" />
+							<xs:element name="dateEqual" type="xs:string"
+								maxOccurs="1" minOccurs="0" />
+							<xs:element name="idList" type="xs:long" maxOccurs="unbounded"
+								minOccurs="0" />
+							<xs:element name="systemWorker" type="xs:boolean"
+								maxOccurs="1" minOccurs="0">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DocumentsTableResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="totalCount" type="xs:int" maxOccurs="1"
+					minOccurs="1" />
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+				<xs:element name="data" maxOccurs="1" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="doc" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="name" type="xs:string" maxOccurs="1"
+											minOccurs="1" />
+										<xs:element name="number" type="xs:string"
+											maxOccurs="1" minOccurs="1" />
+										<xs:element name="creator" type="xs:string"
+											maxOccurs="1" minOccurs="1" />
+										<xs:element name="createDate" type="xs:string"
+											maxOccurs="1" minOccurs="1" />
+										<xs:element name="lastSigner" type="xs:string"
+											maxOccurs="1" minOccurs="1" />
+										<xs:element name="lastDate" type="xs:string"
+											maxOccurs="1" minOccurs="1" />
+										<xs:element name="cDel" type="xs:string" maxOccurs="1"
+											minOccurs="1" />
+										<xs:element name="cCreateSource" type="xs:string"
+											maxOccurs="1" minOccurs="1" />
+										<xs:element name="short" type="xs:string"
+											maxOccurs="1" minOccurs="1" />
+										<xs:element name="sf_sign" type="xs:int" maxOccurs="1"
+											minOccurs="0" />
+
+									</xs:sequence>
+									<xs:attribute name="id" type="xs:long" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="UserRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+				<xs:element name="IsNews" type="xs:int" maxOccurs="1"
+					minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="UserResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="person" maxOccurs="1" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string" maxOccurs="1"
+								minOccurs="1" />
+							<xs:element name="departmentName" type="xs:string"
+								maxOccurs="1" minOccurs="1" />
+							<xs:element name="IsNews" type="xs:int" maxOccurs="1"
+								minOccurs="1" />
+							<xs:element name="News" type="xs:string" maxOccurs="1"
+								minOccurs="1" />
+							<xs:element name="workInfo" maxOccurs="unbounded"
+								minOccurs="1">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="funcRole" type="xs:int"
+											maxOccurs="1" minOccurs="1" />
+										<xs:element name="workId" type="xs:int" maxOccurs="1"
+											minOccurs="1" />
+										<xs:element name="workName" type="xs:string"
+											maxOccurs="1" minOccurs="1" />
+										<xs:element name="predId" type="xs:int" maxOccurs="1"
+											minOccurs="1" />
+										<xs:element name="predName" type="xs:string"
+											maxOccurs="1" minOccurs="1" />
+										<xs:element name="predRZD" type="xs:string"
+											maxOccurs="1" minOccurs="1" />
+										<xs:element name="dorId" type="xs:int" maxOccurs="1"
+											minOccurs="1" />
+										<xs:element name="dorName" type="xs:string"
+											maxOccurs="1" minOccurs="1" />
+										<xs:element name="predCode" type="xs:int"
+											maxOccurs="1" minOccurs="1" />
+										<xs:element name="availableForms" type="xs:string"
+											maxOccurs="1" minOccurs="1" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:int" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="FormTypesRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="workId" type="xs:int" maxOccurs="1"
+					minOccurs="1" />
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="FormTypesResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="type" maxOccurs="unbounded" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string" maxOccurs="1"
+								minOccurs="1" />
+							<xs:element name="template" type="xs:hexBinary"
+								maxOccurs="1" minOccurs="1" />
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:int" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="TemplateRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" type="xs:int" maxOccurs="1"
+					minOccurs="1" />
+				<xs:element name="predId" type="xs:int" maxOccurs="1"
+					minOccurs="1" />
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="TemplateResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="type" maxOccurs="1" minOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string" maxOccurs="1"
+								minOccurs="1" />
+							<xs:element name="template" type="xs:hexBinary"
+								maxOccurs="1" minOccurs="1" />
+							<xs:element name="isHV" type="xs:int" maxOccurs="1"
+								minOccurs="1"></xs:element>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:int" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DocumentSourceRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="sourceId" type="xs:long" maxOccurs="1"
+					minOccurs="1" />
+				<xs:element name="predId" type="xs:int" maxOccurs="1"
+					minOccurs="1" />
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DocumentSourceResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="type" maxOccurs="1" minOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string" maxOccurs="1"
+								minOccurs="1" />
+							<xs:element name="data" type="xs:hexBinary" maxOccurs="1"
+								minOccurs="1" />
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:int" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DocumentRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" maxOccurs="1" minOccurs="1" type="xs:long" />
+				<xs:element name="role" type="xs:int" maxOccurs="1"
+					minOccurs="1" />
+				<xs:element name="forceDrop" type="xs:boolean" maxOccurs="1"
+					minOccurs="1"></xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DocumentResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" maxOccurs="1" minOccurs="1" type="xs:long" />
+				<xs:element name="type" maxOccurs="1" minOccurs="1"
+					type="xs:string" />
+				<xs:element name="data" type="xs:string" maxOccurs="1"
+					minOccurs="1" />
+				<xs:element name="exData" type="xs:string" maxOccurs="unbounded"
+					minOccurs="0"></xs:element>
+				<xs:element name="status" type="xs:string" maxOccurs="1"
+					minOccurs="1" />
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1" />
+				<xs:element name="isHV" maxOccurs="1" minOccurs="1" type="xs:int" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="getDocQuick">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="id" maxOccurs="1" minOccurs="1" type="xs:long">
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1">
+				</xs:element>
+				<xs:element name="wrkid" type="xs:int" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="predid" type="xs:int" maxOccurs="1"
+					minOccurs="0">
+				</xs:element>
+				<xs:element name="dorid" type="xs:int" maxOccurs="1"
+					minOccurs="0">
+				</xs:element>
+				<xs:element name="syswrk" type="xs:boolean" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="resp" type="xs:string" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="status" type="xs:string" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="formname" type="xs:string" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="getReport">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="predid" maxOccurs="1" minOccurs="1"
+					type="xs:int">
+				</xs:element>
+
+				<xs:element name="dorId" maxOccurs="1" minOccurs="1"
+					type="xs:int">
+				</xs:element>
+
+				<xs:element name="date1" type="xs:string" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+
+				<xs:element name="date2" type="xs:string" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1">
+				</xs:element>
+				<xs:element name="form" type="xs:string" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+
+				<xs:element name="wrkid" type="xs:int" maxOccurs="1"
+					minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="DorsRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="workId" type="xs:int" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="DorsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="allDors" maxOccurs="unbounded"
+					minOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="id" type="xs:int" maxOccurs="1"
+								minOccurs="1">
+							</xs:element>
+							<xs:element name="name" type="xs:string" maxOccurs="1"
+								minOccurs="1">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="PredsRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="dorid" type="xs:int" maxOccurs="1"
+					minOccurs="1">
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="PredsResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="enterprise" maxOccurs="unbounded"
+					minOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="id" type="xs:int" maxOccurs="1"
+								minOccurs="1">
+							</xs:element>
+							<xs:element name="name" type="xs:string" maxOccurs="1"
+								minOccurs="1">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+
+	<xs:element name="EnclosedDoc">
+		<xs:annotation>
+			<xs:documentation>qwerty</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DocumentName" type="xs:string"
+					maxOccurs="unbounded" minOccurs="1"></xs:element>
+				<xs:element name="DocId" type="xs:int"></xs:element>
+				<xs:element name="BaseDocId" type="xs:int"></xs:element>
+				<xs:element name="DocumentBl" type="xs:string" maxOccurs="unbounded"
+					minOccurs="1"></xs:element>
+				<xs:element name="DocumentFname" type="xs:string"
+					maxOccurs="unbounded" minOccurs="1"></xs:element>
+				<xs:element name="DocumentDataGroup" type="xs:string"
+					maxOccurs="unbounded" minOccurs="1"></xs:element>
+				<xs:element name="IdsForDel" type="xs:string"></xs:element>
+				<xs:element name="request" type="xs:string"></xs:element>
+				<xs:element name="response" type="xs:string"></xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="EncloseDocRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DocumentName" type="xs:string"
+					maxOccurs="unbounded" minOccurs="1"></xs:element>
+				<xs:element name="DocId" type="xs:int"></xs:element>
+				<xs:element name="BaseDocId" type="xs:int"></xs:element>
+				<xs:element name="DocumentBl" type="xs:string" maxOccurs="unbounded"
+					minOccurs="1"></xs:element>
+				<xs:element name="DocumentFname" type="xs:string"
+					maxOccurs="unbounded" minOccurs="1"></xs:element>
+				<xs:element name="DocumentDataGroup" type="xs:string"
+					maxOccurs="unbounded" minOccurs="1"></xs:element>
+				<xs:element name="IdsForDel" type="xs:string"></xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="EncloseDocResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="xs:string"></xs:element>
+				<xs:element name="security" type="edtsave:signature"
+					maxOccurs="1" minOccurs="1"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+
+</xs:schema>

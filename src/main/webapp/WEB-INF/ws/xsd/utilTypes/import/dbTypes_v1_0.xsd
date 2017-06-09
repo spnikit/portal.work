@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://iit.ru/xsd/utilTypes/import/dbTypes_v1_0"
+	xmlns:tns="http://iit.ru/xsd/utilTypes/import/dbTypes_v1_0">
+	<element name="torReportRecord" type="tns:TorReportRecord" id="torReportRecord" />
+	<element name="docStoreRecord" type="tns:DocStoreRecord" id="docStoreRecord" />
+	<element name="docStoreFlowRecord" type="tns:DocStoreFlowRecord"
+		id="docStoreFlowRecord" />
+	<complexType name="TorReportRecord">
+		<sequence>
+			<element name="id" type="long"></element>
+			<element name="coach" type="long"></element>
+			<element name="docId" type="long"></element>
+			<element name="typeId" type="int"></element>
+			<element name="state" type="int"></element>
+			<element name="info" type="string" nillable="true"></element>
+			<element name="packId" type="long" nillable="true"></element>
+			<element name="lastUpdate" type="dateTime"></element>
+		</sequence>
+	</complexType>
+	<complexType name="DocStoreRecord">
+		<sequence>
+			<element name="docId" type="long" />
+			<element name="typeId" type="int" />
+			<element name="predId" type="int" />
+			<element name="number" type="string" nillable="true" />
+			<element name="shortCont" type="string" nillable="true" />
+			<element name="createTS" type="dateTime" />
+			<element name="signLvl" type="int" nillable="true" />
+			<element name="lastSignWrkid" type="int" nillable="true" />
+			<element name="lastSignTS" type="dateTime" nillable="true" />
+			<element name="lastSignPersId" type="int" nillable="true" />
+			<element name="dropTime" type="dateTime" nillable="true" />
+			<element name="dropText" type="string" nillable="true" />
+			<element name="dropId" type="int" nillable="true" />
+			<element name="inUseId" type="int" nillable="true" />
+			<element name="openTime" type="dateTime" nillable="true" />
+			<element name="docData" type="string" />
+			<element name="blDoc" type="string" />
+		</sequence>
+	</complexType>
+	<complexType name="DocStoreFlowRecord">
+		<sequence>
+			<element name="docId" type="long" />
+			<element name="order" type="int" nillable="true" />
+			<element name="workId" type="int" />
+			<element name="dt" type="dateTime" nillable="true"/>
+			<element name="persId" type="int" nillable="true" />
+			<element name="parent" type="int" nillable="true" />
+			<element name="exp" type="string" nillable="true" />
+			<element name="tsp" type="base64Binary" nillable="true" />
+			<element name="predId" type="int" />
+			<element name="stage" type="int" />
+			<element name="signType" type="int" />
+		</sequence>
+	</complexType>
+</schema>

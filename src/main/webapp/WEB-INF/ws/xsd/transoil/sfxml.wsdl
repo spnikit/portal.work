@@ -1,0 +1,101 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap12bind="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://iit.ru/SFxmltotrans" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://iit.ru/SFxmltotrans" name="SFService" targetNamespace="http://iit.ru/SFxmltotrans">
+<types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xs1="http://iit.ru/SFxmltotrans" targetNamespace="http://iit.ru/SFxmltotrans" attributeFormDefault="unqualified" elementFormDefault="qualified">
+<xs:complexType name="SFXMLtype">
+<xs:sequence>
+<xs:element name="sfxml" type="xs:hexBinary"/>
+<xs:element name="sfsign" type="xs:hexBinary"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="SFxml_Request">
+<xs:sequence>
+<xs:element name="etdid" type="xs:long"/>
+<xs:element name="xmltable">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="row" type="tns:XMLtype" maxOccurs="10"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="SF" type="tns:SFXMLtype"/>
+<xs:element name="docdata" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="SFxml_Response">
+<xs:sequence>
+<xs:element name="etdid" type="xs:long"/>
+<xs:element name="code" type="xs:int"/>
+<xs:element name="description" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="XMLtype">
+<xs:sequence>
+<xs:element name="number" type="xs:int"/>
+<xs:element name="xml" type="xs:hexBinary"/>
+<xs:element name="sign" type="xs:hexBinary"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="SFxml">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="SFxmlRequest" type="tns:SFxml_Request"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="SFxmlResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="return" type="tns:SFxml_Response"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>
+</types>
+<message name="SFxmlRequestMessage">
+<part name="parameters" element="tns:SFxml"/>
+</message>
+<message name="SFxmlResponseMessage">
+<part name="parameters" element="tns:SFxmlResponse"/>
+</message>
+<portType name="SFServicePortType">
+<operation name="SFxml">
+<input message="tns:SFxmlRequestMessage"/>
+<output message="tns:SFxmlResponseMessage"/>
+</operation>
+</portType>
+<binding name="SFServiceSoapBinding" type="tns:SFServicePortType">
+<soapbind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="SFxml">
+<soapbind:operation style="document" soapAction="http://iit.ru/SFxmltotrans#SFService:SFxml"/>
+<input>
+<soapbind:body use="literal"/>
+</input>
+<output>
+<soapbind:body use="literal"/>
+</output>
+</operation>
+</binding>
+<binding name="SFServiceSoap12Binding" type="tns:SFServicePortType">
+<soap12bind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="SFxml">
+<soap12bind:operation style="document" soapAction="http://iit.ru/SFxmltotrans#SFService:SFxml"/>
+<input>
+<soap12bind:body use="literal"/>
+</input>
+<output>
+<soap12bind:body use="literal"/>
+</output>
+</operation>
+</binding>
+<service name="SFService">
+<port name="SFServiceSoap" binding="tns:SFServiceSoapBinding">
+<documentation>
+<wsi:Claim xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" conformsTo="http://ws-i.org/profiles/basic/1.1"/>
+</documentation>
+<soapbind:address location="https://sapws.transoil.su/toil_bp_dev_sav/ws/SFService.1cws"/>
+</port>
+<port name="SFServiceSoap12" binding="tns:SFServiceSoap12Binding">
+<soap12bind:address location="https://sapws.transoil.su/toil_bp_dev_sav/ws/SFService.1cws"/>
+</port>
+</service>
+</definitions>

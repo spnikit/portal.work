@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://iit.ru/portal:8888/portal"
+	xmlns:tns="http://iit.ru/portal:8888/portal">
+
+	<element name="VersionRequest">
+		<complexType>
+			<sequence />
+		</complexType>
+	</element>
+	<element name="VersionResponse">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="VersionResult" nillable="true"
+					type="string" />
+			</sequence>
+		</complexType>
+	</element>
+</schema>

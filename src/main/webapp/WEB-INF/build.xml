@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="imsjob" default="build" basedir=".">
+
+	<property name="WS_HOME" value="\home\vovako\JavaLibs\ws-libs" />
+	<property name="encoding" value="UTF-8" />
+	<property name="trg" value="1.5" />
+	<property name="debug" value="on" />
+	<property name="optimize" value="true" />
+
+
+	<path id="xbean.classpath">
+		<fileset dir="${WS_HOME}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<echo message="${WS_HOME}"></echo>
+	<taskdef name="xmlbean" classname="org.apache.xmlbeans.impl.tool.XMLBean"
+		classpathref="xbean.classpath" />
+
+
+
+	<path id="project.classpath">
+		<fileset dir="\home\vovako\JavaLibs\ws-libs">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<property name="cp" refid="project.classpath" />
+
+	<echo message="Classpath is ${cp}" />
+
+
+	<target name="init">
+		<echo message="Start init" />
+
+	</target>
+
+	<target name="build">
+
+		<xmlbean schema="ws/xsd/etdxml.xsd" destfile="./lib/etdxml-xsd.jar"
+			classpathref="xbean.classpath" />
+		<copy file="../WEB-INF/lib/etdxml-xsd.jar" tofile="./lib/etd-xsd.jar" />
+		<!--<xmlbean schema="xsd/edt.xsd" destfile="./lib/etd-xsd.jar" classpathref="xbean.classpath"/> 
+			<copy file="../WEB-INF/lib/etd-xsd.jar" tofile="./lib/etd-xsd.jar"/> <xmlbean 
+			schema="ws/xsd/etddoc.xsd" destfile="./lib/etddoc.jar" classpathref="xbean.classpath"/> 
+			<copy file="../WEB-INF/lib/etddoc.jar" tofile="./lib/etddoc.jar"/> <xmlbean 
+			schema="ws/xsd/SynchronizeXfdlDoc.xsd" destfile="./lib/SynchronizeXfdlDoc-xsd.jar" 
+			classpathref="xbean.classpath"/> <copy file="../WEB-INF/lib/SynchronizeXfdlDoc-xsd.jar" 
+			tofile="./lib/SynchronizeXfdlDoc-xsd.jar"/> <xmlbean schema="ws/xsd/initializesync.xsd" 
+			destfile="../portal/initializesync-xsd.jar" classpathref="xbean.classpath"/> 
+			<copy file="../portal/initializesync-xsd.jar" tofile="./lib/initializesync-xsd.jar"/> 
+			<xmlbean schema="ws/xsd/etdegrposync.xsd" destfile="../portal/etdegrposync-xsd.jar" 
+			classpathref="xbean.classpath"/> <copy file="../portal/etdegrposync-xsd.jar" 
+			tofile="./lib/etdegrposync-xsd.jar"/> <xmlbean schema="ws/xsd/SynchronizeXfdlDoc.xsd" 
+			destfile="./lib/SynchronizeXfdlDoc-xsd.jar" classpathref="xbean.classpath"/> 
+			<copy file="../WEB-INF/lib/SynchronizeXfdlDoc-xsd.jar" tofile="./lib/SynchronizeXfdlDoc-xsd.jar"/> -->
+		<!--<xmlbean schema="xsd/util.xsd" destfile="../portal/util-xsd.jar" classpathref="xbean.classpath"/> 
+			<copy file="../portal/util-xsd.jar" tofile="./lib/util-xsd.jar"/> <xmlbean 
+			schema="ws/xsd/CruvVu23.xsd" destfile="../CruvVu23.jar" classpathref="xbean.classpath"/> -->
+		<!--xmlbean schema="xsd/ws1.xsd" destfile="../portal/ws1-xsd.jar" classpathref="xbean.classpath"/> 
+			<xmlbean schema="xsd/ws2.xsd" destfile="../portal/ws2-xsd.jar" classpathref="xbean.classpath"/> 
+			<xmlbean schema="xsd/ws3.xsd" destfile="../portal/ws3-xsd.jar" classpathref="xbean.classpath"/> 
+			<xmlbean schema="xsd/ws4.xsd" destfile="../portal/ws4-xsd.jar" classpathref="xbean.classpath"/ -->
+
+		<!--ETD SIGNATURE <xmlbean schema="ws/xsd/ETDSignature.xsd" destfile="./lib/ETDSignature-xsd.jar" 
+			classpathref="xbean.classpath"/> -->
+
+		<!--ETD SIGNATURE -->
+
+		<!--PORTAL S/F (Invoice) <xmlbean schema="ws/Invoice/xsd/NoticeSheme.xsd" 
+			destfile="./lib/NoticeSheme-xsd.jar" classpathref="xbean.classpath"/> <xmlbean 
+			schema="ws/Invoice/xsd/SetNoticeSheme.xsd" destfile="./lib/SetNoticeSheme-xsd.jar" 
+			classpathref="xbean.classpath"/> -->
+		<!--PORTAL S/F (Invoice) -->
+
+
+		<!--FNS -->
+		<!-- <xmlbean schema="ws/FNS/xsd/DP_IZVPOL_1_982_00_01_01_01.xsd" destfile="./lib/DP_IZVPOL_1_982_00_01_01_01-xsd.jar" 
+			classpathref="xbean.classpath"/> <xmlbean schema="ws/FNS/xsd/ON_SFAKT_1_897_01_05_01_01.xsd" 
+			destfile="./lib/ON_SFAKT_1_897_01_05_01_01-xsd.jar" classpathref="xbean.classpath"/> 
+			<xmlbean schema="ws/FNS/xsd/DP_PDOTPR_1_983_00_01_01_01.xsd" destfile="./lib/DP_PDOTPR_1_983_00_01_01_01-xsd.jar" 
+			classpathref="xbean.classpath"/> <xmlbean schema="ws/FNS/xsd/DP_PDPOL_1_984_00_01_01_01.xsd" 
+			destfile="./lib/DP_PDPOL_1_984_00_01_01_01-xsd.jar" classpathref="xbean.classpath"/> -->
+		<!--FNS -->
+		<!--TTK -->
+		<xmlbean schema="ws/TTK/xsd/Test2.xsd" destfile="./lib/Test2-xsd.jar"
+			classpathref="xbean.classpath" />
+
+		<!--TTK <xmlbean schema="ws/TTK/xsd/TTK.xsd" destfile="./lib/TTK-xsd.jar" 
+			classpathref="xbean.classpath"/> <xmlbean schema="ws/TTK/xsd/SellerConfirmation.xsd" 
+			destfile="./lib/SellerConfirmation-xsd.jar" classpathref="xbean.classpath"/> 
+			<xmlbean schema="ws/TTK/xsd/BuyerConfirmation.xsd" destfile="./lib/BuyerConfirmation-xsd.jar" 
+			classpathref="xbean.classpath"/> <xmlbean schema="ws/TTK/xsd/BuyerInvoice.xsd" 
+			destfile="./lib/BuyerInvoice-xsd.jar" classpathref="xbean.classpath"/> <xmlbean 
+			schema="ws/TTK/xsd/SellerNoticeInvoice.xsd" destfile="./lib/SellerNoticeInvoice-xsd.jar" 
+			classpathref="xbean.classpath"/> <xmlbean schema="ws/xsd/portdoc.xsd" destfile="./lib/portdoc.jar" 
+			classpathref="xbean.classpath"/> -->
+		<!--<xmlbean schema="ws/xsd/CruvVu23.xsd" destfile="../CruvVu23.jar" classpathref="xbean.classpath"/> 
+			<xmlbean schema="ws/xsd/fpup.xsd" destfile="./lib/fpup-xmlbeans.jar" classpathref="xbean.classpath"/> -->
+		<!--<xmlbean schema="xsd/CruvVu23.xsd" destfile="../CruvVu23.jar" classpathref="xbean.classpath"/> -->
+		<!--<xmlbean schema="xsd/wrkname.xsd" destfile="../wrkname.jar" classpathref="xbean.classpath"/> 
+			<xmlbean schema="xsd/CheckVu36.xsd" destfile="../CheckVu36.jar" classpathref="xbean.classpath"/> 
+			<xmlbean schema="xsd/vu36exist.xsd" destfile="../vu36exist-xmlbean.jar" classpathref="xbean.classpath"/> 
+			<xmlbean schema="xsd/CruvVu23.xsd" destfile="../CruvVu23.jar" classpathref="xbean.classpath"/> 
+			<xmlbean schema="xsd/fpup.xsd" destfile="./lib/fpup-xmlbeans.jar" classpathref="xbean.classpath"/> -->
+		<!-- <xmlbean schema="xsd/getlistnew.xsd" destfile="./lib/getlistnew-xmlbeans.jar" 
+			classpathref="xbean.classpath"/> <xmlbean schema="xsd/getdoc.xsd" destfile="./lib/getdoc-xmlbeans.jar" 
+			classpathref="xbean.classpath"/> <xmlbean schema="xsd/CruvVu23.xsd" destfile="../CruvVu23.jar" 
+			classpathref="xbean.classpath"/> <xmlbean schema="xsd/fpup.xsd" destfile="./lib/fpup-xmlbeans.jar" 
+			classpathref="xbean.classpath"/> -->
+
+		<!--copy file="../portal/ws1-xsd.jar" tofile="./lib/ws1-xsd.jar"/> <copy 
+			file="../portal/ws2-xsd.jar" tofile="./lib/ws2-xsd.jar"/> <copy file="../portal/ws3-xsd.jar" 
+			tofile="./lib/ws3-xsd.jar"/> <copy file="../portal/ws4-xsd.jar" tofile="./lib/ws4-xsd.jar"/ -->
+
+		<!--<copy file="../etd-xsd.jar" tofile="C:/WORK/Workspace/wsedt3_new/WebContent/WEB-INF/lib/etd-xsd.jar"/> --><!--<copy file="../wrkname.jar" tofile="./lib/wrkname.jar"/> <copy file="../CheckVu36.jar" 
+			tofile="./lib/CheckVu36.jar"/> <copy file="../vu36exist-xmlbean.jar" tofile="./lib/vu36exist-xmlbean.jar"/> 
+			<copy file="../CruvVu23.jar" tofile="./lib/CruvVu23.jar"/> <copy file="../CruvVu23.jar" 
+			tofile="./lib/CruvVu23.jar"/> -->
+	</target>
+
+
+</project>

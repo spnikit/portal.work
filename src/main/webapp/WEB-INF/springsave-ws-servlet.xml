@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<description>WS rjd</description>
+
+	<bean id="etdDocumentDao" class="ru.aisa.rgd.etd.dao.ETDDocumentDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="etdUserDao" class="ru.aisa.rgd.etd.dao.ETDUserDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="etdFormDao" class="ru.aisa.rgd.etd.dao.ETDFormDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="etdCounterpartsDao" class="ru.aisa.rgd.etd.dao.ETDCounterpartsDAO">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="etdCounterPersDao" class="ru.aisa.rgd.etd.dao.ETDCounterPersDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="etdDeleteDao" class="ru.aisa.rgd.etd.dao.ETDDeleteDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+
+	<bean id="etdsyncDao" class="ru.aisa.rgd.etd.dao.ETDSyncServiceDAO">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="etdFacade" class="ru.aisa.rgd.etd.dao.ETDFacade">
+		<property name="documentDao" ref="etdDocumentDao" />
+		<property name="userDao" ref="etdUserDao" />
+		<property name="formDao" ref="etdFormDao" />
+		<property name="deleteDao" ref="etdDeleteDao" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="enterpriseDao" ref="enterpriseDao" />
+		<property name="counterpartsDao" ref="etdCounterpartsDao" />
+		<property name="counterPersDao" ref="etdCounterPersDao" />
+	</bean>
+
+
+	<bean id="EtdSyncFacade" class="ru.aisa.rgd.etd.dao.ETDSyncServiceFacade">
+		<property name="syncDao" ref="etdsyncDao" />
+	</bean>
+
+	<bean id="srvFacade" class="ru.aisa.rgd.ws.dao.JdbcServiceFacade">
+		<property name="documentDao" ref="documentDao" />
+		<property name="enterpriseDao" ref="enterpriseDao" />
+		<property name="roadDao" ref="roadDao" />
+		<property name="templateDao" ref="templateDao" />
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+	<bean id="dateformat" class="java.text.SimpleDateFormat">
+		<constructor-arg type="java.lang.String" value="yyyy-MM-dd" />
+	</bean>
+	<bean id="datetimeformat" class="java.text.SimpleDateFormat">
+		<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+	</bean>
+	<bean id="timeformat" class="java.text.SimpleDateFormat">
+		<constructor-arg type="java.lang.String" value="HH:mm:ss" />
+	</bean>
+
+	<import resource="shortContentDescription.xml" />
+
+	<bean id="endpointMapping"
+		class="org.springframework.ws.soap.server.endpoint.mapping.SoapActionEndpointMapping">
+		<property name="mappings">
+			<props>
+
+				<prop key="http://www.aisa.ru/edtsave/saveRequest">saveEndpoint</prop>
+
+			</props>
+		</property>
+		<property name="interceptors">
+			<list>
+				<ref bean="loggingInterceptor" />
+				<ref bean="securityInterceptor20" />
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/xsd/edt.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+
+
+	<!-- start ENDPOINTS SECTION -->
+	<bean id="securitymanager" class="sheff.rjd.utils.SecurityManager">
+		<constructor-arg value="classpath:prefs.xml" />
+		<constructor-arg value="AQViCj4CCf8=" />
+		<constructor-arg value="q+gyFXn7WJRzE5BhDpltK2YiOl6AORs2obPpMSjUNYI=" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ocsp" ref="ocsp" />
+		<property name="algorithm" ref="algorithm" />
+		<property name="jcp" ref="jcp" />
+	</bean>
+
+	<bean id="securityInterceptor20" class="sheff.rjd.utils.SecurityInterceptor20">
+		<property name="securityManager" ref="securitymanager" />
+	</bean>
+
+	<bean id="saveEndpoint" class="sheff.rjd.ws.TempSaveDocEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<!--<property name="securityManager" ref="securitymanager" /> -->
+		<property name="ds" ref="DSrjd" />
+		<property name="transTemplate" ref="TransTemplate" />
+		<!-- <property name="afterSign" ref="afterSign"></property> -->
+		<property name="formControllers" ref = "formControllers" /> 
+	</bean>
+
+
+	<bean id="algorithm" class="java.lang.String">
+		<constructor-arg value="GOST3411withGOST3410DHEL" />
+	</bean>
+	<bean id="sig" class="java.security.Signature" factory-method="getInstance">
+		<constructor-arg ref="algorithm" />
+		<constructor-arg ref="jcp" />
+	</bean>
+	<bean id="jcp" class="ru.CryptoPro.JCP.JCP">
+	</bean>
+
+
+	<bean id="ocsp" class="sheff.rjd.utils.OCSPutils">
+		<constructor-arg>
+			<list>
+				<value>CArzd.cer</value>
+				<value>CArzd2.cer</value>
+				<value>CArzd3.cer</value>
+				<value>CA KTTK.cer</value>
+				<value>CA KTTK2.cer</value>
+				<value>CA KTTK3.cer</value>
+				<value>CA KTTK4.cer</value>
+				<value>CA KTTK5.cer</value>
+				<value>CA KTTK6.cer</value>
+				<value>CA1 KTTK.cer</value>
+				<value>CA1 KTTK2.cer</value>
+				<value>CA1 KTTK3.cer</value>
+				<value>CA1 KTTK4.cer</value>
+				<value>CA1 KTTK5.cer</value>
+				<value>CA1 KTTK6.cer</value>
+				<value>CA NIIAS.cer</value>
+				<value>CA1 NIIAS.cer</value>
+				<value>CA2 NIIAS.cer</value>
+				<value>TTK2.cer</value>
+			</list>
+		</constructor-arg>
+
+		<!--<constructor-arg> <list> <value>http://10.250.2.148/ocsp/ocsp.srf</value> 
+			<value>http://10.250.2.158/ocsp/ocsp.srf</value> <value>http://10.23.234.82/ocsp/ocsp.srf</value> 
+			<value>http://10.58.199.66/ocsp/ocsp.srf</value> <value>http://10.24.223.12/ocsp/ocsp.srf</value> 
+			<value>http://10.248.33.15/ocsp/ocsp.srf</value> <value>http://10.248.33.16/ocsp/ocsp.srf</value> 
+			</list> </constructor-arg> -->
+		<constructor-arg>
+			<list>
+				<value>http://ocsp.pkitrans.ru/ocspca1_niias/ocsp.srf</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg>
+			<list>
+				<value>5000</value>
+			</list>
+		</constructor-arg>
+		<property name="hashCarzd" value="118292249" />
+		<property name="truevalue" value="0" />
+		<property name="enabled" value="yes" />
+	</bean>
+	<bean id="tsp" class="sheff.rjd.utils.TSPutils">
+		<property name="url">
+			<!--<list> <value>http://10.250.2.148/tsp/tsp.srf</value> <value>http://10.250.2.158/tsp/tsp.srf</value> 
+				<value>http://10.23.234.82/tsp/tsp.srf</value> <value>http://10.58.199.66/tsp/tsp.srf</value> 
+				<value>http://10.24.223.12/tsp/tsp.srf</value> <value>http://10.248.33.13/tsp/tsp.srf</value> 
+				<value>http://10.248.33.14/tsp/tsp.srf</value> </list> -->
+			<list>
+				<value>http://tsp.pkitrans.ru/tspca1_niias/tsp.srf</value>
+
+			</list>
+		</property>
+		<property name="timeout">
+			<list>
+				<value>5000</value>
+			</list>
+		</property>
+		<property name="enabled" value="yes" />
+	</bean>
+
+
+	<!-- bean id="firstrunner" class="sheff.rjd.utils.FirstSoapReqRunner"/ -->
+
+	<bean id="edt"
+		class="org.springframework.ws.wsdl.wsdl11.DynamicWsdl11Definition">
+		<description>http://localhost:9086/wsed2t/edtsave.wsdl</description>
+		<property name="builder">
+			<bean
+				class="org.springframework.ws.wsdl.wsdl11.builder.XsdBasedSoap11Wsdl4jDefinitionBuilder">
+				<property name="schema" value="/WEB-INF/xsd/edt.xsd" />
+				<property name="portTypeName" value="Edt" />
+				<property name="locationUri"
+					value="http://localhost:9080/IIT/portal/wsss/services" />
+			</bean>
+		</property>
+	</bean><!-- <import resource="spring-agu-servlet.xml" /> -->
+	<!-- <import resource="deleteDocsDescription.xml" />
+	<import resource="afterSign.xml" />
+	<import resource="afterSave.xml" /> -->
+	<import resource="formControllers.xml" />  
+
+	<bean id="change_char" class="sheff.rjd.utils.Change_char">
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+
+</beans>

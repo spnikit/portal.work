@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean init-method="init" class="ru.aisa.etdadmin.Utils" id="init">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<!-- prop key="/test.form">testController</prop -->
+				<prop key="/rights">rights</prop>
+				<prop key="/formtypes">formtypes</prop>
+				<prop key="/wrknames">wrkNames</prop>
+				<prop key="/departments">departments</prop>
+				<prop key="/users">users</prop>
+				<prop key="/forms">forms</prop>
+				<prop key="/groups">groups</prop>
+				<prop key="/signdetails">signDetails</prop>
+				<prop key="/pred">pred</prop>
+				<prop key="/prednames">predNames</prop>
+				<prop key="/admins">admins</prop>
+				<prop key="/roads">roads</prop>
+				<prop key="/roles">roles</prop>
+				<prop key="/url">url</prop>
+				<prop key="/package">package</prop>
+				<prop key="/news">news</prop>
+				<prop key="/newsWS">newsWS</prop>
+				<prop key="/cnsi">cnsi</prop>
+				<prop key="/rolemanager">rolemanager</prop>
+				<prop key="/userrolestore">userrolestore</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="PrepTemplateCnsi"
+		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg ref="DScnsi" />
+	</bean>
+
+	<bean id="cnsi" class="ru.aisa.etdadmin.controllers.NormalImpl.Cnsi"
+		init-method="init">
+		<property name="ds" ref="DSrjd" />
+		<property name="dscnsi" ref="DScnsi" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="jt" ref="JdbcTemplate" />
+		<property name="npjtcnsi" ref="PrepTemplateCnsi" />
+		<!-- property name="procname" value="IC00.GETNSI" / -->
+		<property name="procname" value="@LNSI01.GETNSI" />
+		<property name="sb" ref="sb" />
+		<property name="triggers">
+			<list>
+				<ref bean="cronTriggerMo" />
+				<ref bean="cronTriggerTu" />
+				<ref bean="cronTriggerWe" />
+				<ref bean="cronTriggerTh" />
+				<ref bean="cronTriggerFr" />
+				<ref bean="cronTriggerSa" />
+				<ref bean="cronTriggerSu" />
+			</list>
+		</property>
+
+	</bean>
+
+	<bean id="package" class="ru.aisa.etdadmin.controllers.MultipartImpl.Package">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="transT" ref="TransTemplate" />
+	</bean>
+
+	<bean id="rights" class="ru.aisa.etdadmin.controllers.NormalImpl.Rights">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="transT" ref="TransTemplate" />
+	</bean>
+	<bean id="formtypes" class="ru.aisa.etdadmin.controllers.SimpleImpl.FormTypes">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+	<bean id="wrkNames" class="ru.aisa.etdadmin.controllers.SimpleImpl.WrkNames">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+	<bean id="departments" class="ru.aisa.etdadmin.controllers.SimpleImpl.Departments">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+	<bean id="users" class="ru.aisa.etdadmin.controllers.MultipartImpl.Users">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="transT" ref="TransTemplate" />
+		<property name="ch" ref="ch" />
+	</bean>
+	<bean id="ch"
+		class="ru.aisa.etdadmin.controllers.MultipartImpl.OCSPUtilsForAdmin">
+		<constructor-arg>
+			<list>
+				<value>CArzd.cer</value>
+				<value>CArzd2.cer</value><!-- <value>TTK2.cer</value> -->
+			</list>
+		</constructor-arg>
+
+		<constructor-arg>
+			<list>
+				<value>http://10.250.2.148/ocsp/ocsp.srf</value>
+				<value>http://10.250.2.158/ocsp/ocsp.srf</value>
+				<value>http://10.23.234.82/ocsp/ocsp.srf</value>
+				<value>http://10.58.199.66/ocsp/ocsp.srf</value>
+				<value>http://10.24.223.12/ocsp/ocsp.srf</value>
+				<value>http://10.248.33.15/ocsp/ocsp.srf</value>
+				<value>http://10.248.33.16/ocsp/ocsp.srf</value>
+			</list>
+		</constructor-arg>
+		<constructor-arg>
+			<list>
+				<value>5000</value>
+				<value>5000</value>
+				<value>5000</value>
+				<value>5000</value>
+				<value>5000</value>
+				<value>5000</value>
+				<value>5000</value>
+			</list>
+		</constructor-arg>
+		<property name="hashCarzd" value="118292249" />
+		<property name="truevalue" value="0" />
+		<property name="enabled" value="yes" />
+	</bean>
+	<bean id="forms" class="ru.aisa.etdadmin.controllers.MultipartImpl.Forms">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="transT" ref="TransTemplate" />
+	</bean>
+	<bean id="groups" class="ru.aisa.etdadmin.controllers.NormalImpl.Groups">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="transT" ref="TransTemplate" />
+	</bean>
+	<bean id="rolemanager" class="ru.aisa.etdadmin.controllers.NormalImpl.RoleManager">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="transT" ref="TransTemplate" />
+		<property name="ch" ref="ch" />
+	</bean>
+	<bean id="etdUserDao" class="ru.aisa.rgd.etd.dao.ETDUserDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="userrolestore" class="ru.aisa.etdadmin.controllers.SimpleImpl.RoleGetter">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="transT" ref="TransTemplate" />
+		<property name="userDao" ref="etdUserDao" />
+	</bean>
+	<bean id="signDetails" class="ru.aisa.etdadmin.controllers.NormalImpl.SignDetails">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="transT" ref="TransTemplate" />
+	</bean>
+	<bean id="pred" class="ru.aisa.etdadmin.controllers.NormalImpl.Pred">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="transT" ref="TransTemplate" />
+		<property name="ch" ref="ch" />
+	</bean>
+	<bean id="predNames" class="ru.aisa.etdadmin.controllers.SimpleImpl.PredNames">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+	<bean id="admins" class="ru.aisa.etdadmin.controllers.NormalImpl.Admins">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="transT" ref="TransTemplate" />
+	</bean>
+	<bean id="roads" class="ru.aisa.etdadmin.controllers.SimpleImpl.Roads">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+	<bean id="roles" class="ru.aisa.etdadmin.controllers.NormalImpl.Roles">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="transT" ref="TransTemplate" />
+	</bean>
+	<bean id="url" class="ru.aisa.etdadmin.controllers.NormalImpl.Urls">
+		<property name="ds" ref="DSrjd" />
+		<property name="casesens" value="1" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="transT" ref="TransTemplate" />
+		<property name="wst" ref="wst_standart" />
+	</bean>
+	<bean id="news" class="ru.aisa.etdadmin.News">
+		<property name="news" ref="newscontent" />
+	</bean>
+	<bean id="newsWS" class="ru.aisa.etdadmin.NewsWS">
+		<property name="news" ref="newscontent" />
+	</bean>
+
+	<bean id="newscontent" class="ru.aisa.etdadmin.StringHolder">
+	</bean>
+
+
+	<bean id="sb"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cronTriggerMo" />
+				<ref bean="cronTriggerTu" />
+				<ref bean="cronTriggerWe" />
+				<ref bean="cronTriggerTh" />
+				<ref bean="cronTriggerFr" />
+				<ref bean="cronTriggerSa" />
+				<ref bean="cronTriggerSu" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="cronTriggerMo" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="jobDetail" />
+		<property name="cronExpression" value="0 15 00 ? * MON" />
+	</bean>
+	<bean id="cronTriggerTu" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="jobDetail" />
+		<property name="cronExpression" value="0 15 00 ? * TUE" />
+	</bean>
+	<bean id="cronTriggerWe" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="jobDetail" />
+		<property name="cronExpression" value="0 15 00 ? * WED" />
+	</bean>
+	<bean id="cronTriggerTh" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="jobDetail" />
+		<property name="cronExpression" value="0 15 00 ? * THU" />
+	</bean>
+	<bean id="cronTriggerFr" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="jobDetail" />
+		<property name="cronExpression" value="0 15 00 ? * FRI" />
+	</bean>
+	<bean id="cronTriggerSa" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="jobDetail" />
+		<property name="cronExpression" value="0 15 00 ? * SAT" />
+	</bean>
+	<bean id="cronTriggerSu" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="jobDetail" />
+		<property name="cronExpression" value="0 15 00 ? * SUN" />
+	</bean>
+
+	<bean id="jobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="cnsi" />
+		<!-- property name="targetClass" value="ru.aisa.etdadmin.controllers.NormalImpl.Cnsi" 
+			/ -->
+		<property name="targetMethod" value="doSync" />
+	</bean>
+
+</beans>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://warecs.ru/IIT/send_to_portal/" 
+xmlns="http://www.w3.org/2001/XMLSchema" 
+xmlns:tns="http://warecs.ru/IIT/send_to_portal/">
+
+    <element name="SendPortalRequest" type="tns:RequestType"></element>
+
+    <element name="SendPortalResponse" type="tns:ResponseType"></element>
+    
+    <complexType name="ResponseType">
+    	<sequence>
+    		<element name="docid" type="long" maxOccurs="1" minOccurs="1"/>
+    		<element name="code" type="int" maxOccurs="1" minOccurs="1"/>
+    		<element name="description" type="string" maxOccurs="1" minOccurs="1"/>
+    		</sequence>
+    </complexType>
+
+<simpleType name="type_doc">
+<annotation>
+<documentation>Код типа документа;
+B01   -   Акт приема-передачи КП в ремонт;
+B02   -   Акт приема-передачи ЗЧ в ремонт;
+B03   -   ВУ-50;
+B04   -   Акт выбраковки;
+B05   -   Акт освидетельствования;
+B06   -  Уведомление об окончании ремонта;
+B07   -   Акт приема-передачи КП из ремонта;
+B08   -   Акт приема-передачи ЗЧ из ремонта;
+B09   -   МХ-1;
+B10   -   МХ-3;
+B11   -   ФПУ-26;
+B12   -   ГУ-45;
+B13   -   ФПУ-26 ремонтопригодность;
+C04   -   Комплект на пересылку в ремонт;
+C05   -   Комплект ремонтопригодности;
+C06   -  Комплект завершение ремонта.
+					</documentation>
+				</annotation>
+		<restriction base="string">
+			<enumeration value="B01"></enumeration>
+			<enumeration value="B02"></enumeration>
+			<enumeration value="B03"></enumeration>
+			<enumeration value="B04"></enumeration>
+			<enumeration value="B05"></enumeration>
+			<enumeration value="B06"></enumeration>
+			<enumeration value="B07"></enumeration>
+			<enumeration value="B08"></enumeration>
+			<enumeration value="B09"></enumeration>
+			<enumeration value="B10"></enumeration>
+			<enumeration value="B11"></enumeration>
+			<enumeration value="B12"></enumeration>
+			<enumeration value="B13"></enumeration>
+			<enumeration value="C04"></enumeration>
+			<enumeration value="C05"></enumeration>
+			<enumeration value="C06"></enumeration>
+	</restriction>
+	</simpleType>
+    <complexType name="RequestType">
+    	<sequence>
+    	<element name="docid" type="long" maxOccurs="1" minOccurs="1"/>
+    	<element name="type" type="tns:type_doc" maxOccurs="1" minOccurs="1"/>
+    	<element name="xml" type="string" maxOccurs="1" minOccurs="1"/>
+    	<element name="mark" type="int" maxOccurs="1" minOccurs="0"/>
+    	</sequence>
+    </complexType>
+</schema>

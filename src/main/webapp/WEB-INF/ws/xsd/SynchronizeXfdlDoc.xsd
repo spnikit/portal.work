@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://etd.gvc.rzd:8888/WAS/ETD/synchronizeXfdlDoc"
+	xmlns:tns="http://etd.gvc.rzd:8888/WAS/ETD/synchronizeXfdlDoc">
+	<element name="synchronizeXfdlDocRequest" type="tns:SynchronizeXfdlDocRequest"></element>
+	<element name="synchronizeXfdlDocResponse" type="tns:SynchronizeXfdlDocResponse"></element>
+	<complexType name="SynchronizeXfdlDocRequest">
+		<sequence>
+			<element name="srcSystem" type="tns:nameSystem" minOccurs="1"
+				maxOccurs="1" default="UNKNOWN">
+				<annotation>
+					<documentation>Имя системы из которой происходит запрос
+					</documentation>
+				</annotation>
+			</element>
+			<element name="destSystem" type="tns:nameSystem" minOccurs="1"
+				maxOccurs="1" default="UNKNOWN">
+				<annotation>
+					<documentation>Имя системы куда доставляется запрос
+					</documentation>
+				</annotation>
+			</element>
+			<element name="security" minOccurs="1" maxOccurs="1"
+				nillable="true" type="tns:security">
+			</element>
+			<element name="etdDocId" type="long" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation> Id документа в АС ЭТД. Если документ еще не
+						существует в АСЭТД то данный элемент должен содержать
+						отрицательное число
+					</documentation>
+				</annotation>
+			</element>
+			<element name="formName" type="string" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>Имя формы</documentation>
+				</annotation>
+			</element>
+			<element name="blobDoc" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>Сама форма</documentation>
+				</annotation>
+				<complexType>
+					<simpleContent>
+						<extension base="string">
+							<attribute name="encoding" use="optional" default="base64-gzip+header"
+								type="tns:encodingBlob">
+							</attribute>
+						</extension>
+					</simpleContent>
+				</complexType>
+			</element>
+			<element name="action" minOccurs="1" maxOccurs="1" type="tns:action">
+				<annotation>
+					<documentation>Действие произошедшее с формой: простое сохранение,
+						сохранение с подписанием(skip'овские подписи не учитываются) или
+						отклонение
+					</documentation>
+				</annotation>
+			</element>
+			<element name="countSignatures" minOccurs="1" maxOccurs="1"
+				type="int">
+				<annotation>
+					<documentation>Количество подписей в передаваемом
+						документе(skip'овские подписи не учитываются)
+					</documentation>
+				</annotation>
+			</element>
+			<element maxOccurs="1" minOccurs="0" name="SignatureTable" type="tns:SignatureFlowTable">
+			<annotation>
+					<documentation>Массив подписей из внешней системы
+					</documentation>
+				</annotation>
+			</element>
+			<element name="isEditForm" type="boolean" default="false"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Может ли принимающая сторона редактирвоать форму.
+						Если да, то отредактированная форма(если в ней произошли
+						изменения) должна вернуться в ответе.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="params" minOccurs="0" maxOccurs="1"
+				type="tns:addParams">
+				<annotation>
+					<documentation>Дополнительные параметры</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="SynchronizeXfdlDocResponse">
+		<sequence>
+			<element name="code" type="int" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>
+						Код ошибки. -1 - неизвестная ошибка, 0 - ошибки нет, от 1 до 999 -
+						стандарнтые ошибки, 1000 и более - ошибки при сохранении
+						конкретных форм.
+						<br />
+						1 - подпись запроса не валидна
+						<br />
+						2 - Неправльно указана либо исходная система, либо система
+						назначения
+						<br />
+						3 - нет прав на создание или редактирование формы
+						<br />
+						4 - нет прав на редактирование формы
+						<br />
+						5 - нет прав на отклонение формы
+					</documentation>
+				</annotation>
+			</element>
+			<element name="description" type="string" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>Описание ошибки</documentation>
+				</annotation>
+			</element>
+			<element name="etdDocId" type="long" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation> Id документа в АС ЭТД. Если документ еще не
+						существует в АСЭТД то данный элемент должен содержать
+						отрицательное число
+					</documentation>
+				</annotation>
+			</element>
+			<element name="isUpdateForm" type="boolean" default="false"
+				maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Редактировалась ли форма(только при разрешении в
+						запросе). Если редактировалась то ответ также содержит форму.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="blobDoc" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>Сама форма. Данный элемент должен присутствовать
+						только если в форме произошли какие либо изменения
+					</documentation>
+				</annotation>
+				<complexType>
+					<simpleContent>
+						<extension base="string">
+							<attribute name="encoding" use="optional" default="base64-gzip+header"
+								type="tns:encodingBlob">
+							</attribute>
+						</extension>
+					</simpleContent>
+				</complexType>
+			</element>
+			<element name="params" minOccurs="0" maxOccurs="1"
+				type="tns:addParams">
+				<annotation>
+					<documentation>Дополнительные параметры</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<simpleType name="encodingBlob">
+		<restriction base="string">
+			<enumeration value="base64-gzip"></enumeration>
+			<enumeration value="base64-gzip+header"></enumeration>
+			<enumeration value="text"></enumeration>
+		</restriction>
+	</simpleType>
+	<simpleType name="action">
+		<restriction base="string">
+			<enumeration value="simpleSave"></enumeration>
+			<enumeration value="signing"></enumeration>
+			<enumeration value="declining"></enumeration>
+			<enumeration value="update"></enumeration>
+		</restriction>
+	</simpleType>
+	<simpleType name="nameSystem">
+		<restriction base="string">
+			<enumeration value="ASETD"></enumeration>
+			<enumeration value="Portal"></enumeration>
+			<enumeration value="UNKNOWN"></enumeration>
+		</restriction>
+	</simpleType>
+	<complexType name="security">
+		<simpleContent>
+			<extension base="hexBinary">
+				<attribute name="typeSecurity" type="string"></attribute>
+			</extension>
+		</simpleContent>
+	</complexType>
+	<simpleType name="reservedNamesOfParams">
+		<restriction base="string">
+			<enumeration value="_signPerson">
+				<annotation>
+					<documentation>ФИО подписанта</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="_declinePerson">
+				<annotation>
+					<documentation>ФИО отклонившего документ</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="_declineReason">
+				<annotation>
+					<documentation>Причина отклонения</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="_portalINN">
+				<annotation>
+					<documentation>ИНН(индивидуальный налоговый номер). Необходимо для
+						маршрутизации на Портале
+					</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="_portalKPP">
+				<annotation>
+					<documentation>КПП(код причины постановки на учёт). Необходимо для
+						маршрутизации на Портале
+					</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="_portalOKPO">
+				<annotation>
+					<documentation>ОКПО(общероссийский код предприятий и организаций).
+						Необходимо для маршрутизации на Портале
+					</documentation>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+	<!-- не используется т.к. использует java deprecated API -->
+	<!-- <simpleType name="namesOfParams"> -->
+	<!-- <union memberTypes="tns:reservedNamesOfParams string"> -->
+	<!-- </union> -->
+	<!-- </simpleType> -->
+	<complexType name="SignatureFlow">
+       <sequence>
+<element minOccurs="1" name="xml" nillable="true" type="base64Binary" >
+				<annotation>
+					<documentation>XML-docdata в Base64-формате
+					</documentation>
+				</annotation>
+			</element>
+<element minOccurs="1" name="sign" nillable="true" type="base64Binary">
+				<annotation>
+					<documentation>Подпись в Base64-формате
+					</documentation>
+				</annotation>
+			</element>
+		</sequence>
+ </complexType>	
+
+<complexType name="SignatureFlowTable">
+       <sequence>
+		<element name="Signatures" minOccurs="1" maxOccurs="unbounded" type="tns:SignatureFlow"></element>
+		</sequence>
+ </complexType>	
+ 
+ 
+ 
+	<complexType name="addParams">
+		<sequence>
+			<element name="param" maxOccurs="unbounded" minOccurs="0">
+				<complexType>
+					<simpleContent>
+						<extension base="string">
+							<attribute name="name" type="string">
+								<annotation>
+									<documentation>Все параметры, имена которых начинается со знака
+										подчеркивания('_') являются зарезервированными
+									</documentation>
+								</annotation>
+							</attribute>
+						</extension>
+					</simpleContent>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

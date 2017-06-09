@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="formFacade" class="ru.aisa.etd.form.controllers.FormFacade">
+		<property name="formControllersArray" ref="formControllers" />
+		<property name="reportControllersArray" ref="reportControllers" />
+		<property name="facade" ref="_Facade" />
+		<property name="ds" ref="DSrjd" />
+		<property name="arraySignExecutors" ref="arraySignExecutors"/>
+		<property name="messageManager" ref="messMgr"/>
+		<property name="transactionTemplate" ref="TransTemplate" />
+		<property name="tsp" ref="tsp" />
+		<property name="afterSignExecutors" ref="afterSignArray"/>
+		<property name="afterSaveExecutors" ref="afterSaveArray"/>
+		<property name="portalsSender" ref="documentToQueSender"/>
+	</bean>
+</beans>

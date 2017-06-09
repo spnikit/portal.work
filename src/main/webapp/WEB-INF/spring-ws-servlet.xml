@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<description>WS rjd</description>
+
+
+	<bean id="db2dateformat" class="java.text.SimpleDateFormat">
+		<constructor-arg type="java.lang.String" value="dd.MM.yyyy" />
+	</bean>
+
+	<bean id="etdDocumentDao" class="ru.aisa.rgd.etd.dao.ETDDocumentDao">
+		<constructor-arg ref="DSrjd" />
+		<property name="db2dateformat" ref="db2dateformat" />
+		<property name="stringdateformat" ref="stringdateformat" />
+
+	</bean>
+	<bean id="etdUserDao" class="ru.aisa.rgd.etd.dao.ETDUserDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="etdFormDao" class="ru.aisa.rgd.etd.dao.ETDFormDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="etdCounterpartsDao" class="ru.aisa.rgd.etd.dao.ETDCounterpartsDAO">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="etdCounterPersDao" class="ru.aisa.rgd.etd.dao.ETDCounterPersDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="etdDeleteDao" class="ru.aisa.rgd.etd.dao.ETDDeleteDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="flowTypesDao" class="ru.aisa.rgd.etd.dao.ETDFlowTypesDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="etdsfnoticeDao" class="ru.aisa.rgd.etd.dao.ETDSFNoticeDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+
+	<bean id="etddocstatusdao" class="ru.aisa.rgd.etd.dao.ETDDocStatusDao">
+		<constructor-arg ref="DSrjd" />
+	</bean>
+	<bean id="etdFacade" class="ru.aisa.rgd.etd.dao.ETDFacade">
+		<property name="documentDao" ref="etdDocumentDao" />
+		<property name="userDao" ref="etdUserDao" />
+		<property name="formDao" ref="etdFormDao" />
+		<property name="deleteDao" ref="etdDeleteDao" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="enterpriseDao" ref="enterpriseDao" />
+		<property name="counterpartsDao" ref="etdCounterpartsDao" />
+		<property name="counterPersDao" ref="etdCounterPersDao" />
+		<property name="flowTypesDao" ref="flowTypesDao" />
+		<property name="etdsfnoticedao" ref="etdsfnoticeDao" />
+		<property name="etdDocStatusdao" ref="etddocstatusdao" />
+	</bean>
+
+	<bean id="srvFacade" class="ru.aisa.rgd.ws.dao.JdbcServiceFacade">
+		<property name="documentDao" ref="documentDao" />
+		<property name="enterpriseDao" ref="enterpriseDao" />
+		<property name="roadDao" ref="roadDao" />
+		<property name="templateDao" ref="templateDao" />
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+	<bean id="dateformat" class="java.text.SimpleDateFormat">
+		<constructor-arg type="java.lang.String" value="yyyy-MM-dd" />
+	</bean>
+	<bean id="datetimeformat" class="java.text.SimpleDateFormat">
+		<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+	</bean>
+	<bean id="timeformat" class="java.text.SimpleDateFormat">
+		<constructor-arg type="java.lang.String" value="HH:mm:ss" />
+	</bean>
+	<bean id="stringdateformat" class="java.text.SimpleDateFormat">
+		<constructor-arg type="java.lang.String" value="dd.MM.yyyy" />
+	</bean>
+
+	<import resource="shortContentDescription.xml" />
+
+	<bean id="endpointMapping"
+		class="org.springframework.ws.soap.server.endpoint.mapping.SoapActionEndpointMapping">
+		<property name="mappings">
+			<props>
+				<!-- New version -->
+				<prop key="http://www.aisa.ru/edt/getnotice">GetNoticeEndpoint1</prop>
+				<prop key="http://www.aisa.ru/edt/setnotice">SetNoticeEndpoint1</prop>
+				<prop key="http://www.aisa.ru/edt/uved">UvedEndpoint1</prop>
+				<prop key="http://www.aisa.ru/edt/sfids">GetSFIdsEndpoint1</prop>
+				<prop key="http://www.aisa.ru/edt/documents">documentsEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/archiveDocuments">archiveDocumentsEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/droppedDocuments">droppedDocumentsEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/finDocuments">finDocumentsEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/userInformation">userInformationEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/news">newsEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/createTypes">createTypesEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/template">templateEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/document">documentEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/counterparts">counterparts</prop>
+				<prop key="http://www.aisa.ru/edt/counterpers">counterPers</prop>
+				<prop key="http://www.aisa.ru/edt/flowtypes">flowTypes</prop>
+				<prop key="http://www.aisa.ru/edt/image">GetEnclosedImageEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/image_enclose">EncloseImageEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/getNextDocId">GetNextDocIdEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/encloseddocs_enclose">EnclosedDocumentsEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/encloseddocs">GetEnclosedDocumentsEndpoint</prop>
+				<prop key="http://www.aisa.ru/edtsave/saveRequest">saveEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/dropDocRequest">DropDocumentsEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/sfnotice">SFNoticeEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/sfviewnotice">SFViewNoticeEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/documentstatus">GetDocStatusEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/getpackdocs">GetPackDocsEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/getrtkdocs">GetRTKDocsEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/getcssdocs">GetCSSDocsEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/getrempred">GetRempredEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/gethistory">GetHistoryEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/getperstypes">GetPersTypesEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/fakesignpack">FakeSignPackEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/uvedSF">UvedEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/SetuvedSF">SetUvedEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/motivdecline">MotivDeclineEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/dropTorg12Request">DropTorg12Endpoint</prop>
+				<prop key="http://www.aisa.ru/edt/dropMORequest">DropMOEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/getvrkdocs">GetVRKDocsEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/setvrkdocs">SetVRKDocsEndpoint</prop>
+				<prop key="http://www.aisa.ru/edt/isSignPackage">isSignPackage</prop>
+
+			</props>
+		</property>
+		<property name="interceptors">
+			<list>
+				<ref bean="loggingInterceptor" />
+				<ref bean="securityInterceptor" />
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="SetUvedEndpoint"
+		class="com.aisa.portal.invoice.notice.endpoints.SetUvedEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="facade" ref="_FacadeTTK" />
+		<property name="wst" ref="wst_standart" />
+		<property name="url" ref="urlOper" />
+		<property name="sendtotransoil" ref="transservice" />
+		<property name="sendtonoticeetd" ref="transserviceetd" />
+	</bean>
+
+	<bean id="UvedEndpoint" class="com.aisa.portal.invoice.notice.endpoints.UvedEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="facade" ref="_FacadeTTK" />
+	</bean>
+
+	<bean id="GetSFIdsEndpoint1"
+		class="com.aisa.portal.invoice.notice.endpoints.GetSFIdsEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="facade" ref="_FacadeTTK" />
+	</bean>
+
+	<bean id="MotivDeclineEndpoint" class="ru.aisa.rgd.etd.ws.MotivDeclineEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+		<property name="sendtoetd" ref="sendtoetd" />
+		<property name="formControllers" ref = "formControllers" /> 
+		
+	</bean>
+
+
+	<bean id="FakeSignPackEndpoint" class="ru.aisa.rgd.etd.ws.FakeSignPackEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+		<property name="formControllers" ref = "formControllers" /> 
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean>
+
+
+
+	<bean id="GetPersTypesEndpoint" class="ru.aisa.rgd.etd.ws.GetPersTypesEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+	</bean>
+
+
+	<bean id="GetHistoryEndpoint" class="ru.aisa.rgd.etd.ws.HistorEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+		<property name="dateFormater" ref="dateformat" />
+		<property name="timeFormater" ref="timeformat" />
+	</bean>
+
+	<bean id="GetRempredEndpoint" class="ru.aisa.rgd.etd.ws.RemPredEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+	</bean>
+
+
+	<bean id="GetPackDocsEndpoint" class="ru.aisa.rgd.etd.ws.PackDocEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+	</bean>
+	<bean id="GetRTKDocsEndpoint" class="ru.aisa.rgd.etd.ws.PackRTKEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+	</bean>
+	<bean id="GetCSSDocsEndpoint" class="ru.aisa.rgd.etd.ws.PackCSSEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+	</bean>
+	<bean id="GetDocStatusEndpoint" class="ru.aisa.rgd.etd.ws.GetDocStatusEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+	</bean>
+	<bean id="SFViewNoticeEndpoint" class="ru.aisa.rgd.etd.ws.SFViewNoticeEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+	</bean>
+	<bean id="SFNoticeEndpoint" class="ru.aisa.rgd.etd.ws.SFNoticeEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+	</bean>
+
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/xsd/edt.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+	<bean id="DropDocumentsEndpoint" class="sheff.rjd.ws.DropDocEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<!-- <property name="afterSign" ref="afterSign"></property> -->
+		<property name="formControllers" ref = "formControllers" /> 
+	</bean>
+
+<bean id="DropTorg12Endpoint" class="sheff.rjd.ws.DropTorg12Endpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		
+	</bean>
+<bean id="DropMOEndpoint" class="sheff.rjd.ws.DropFpu26PPSEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="formControllers" ref = "formControllers" /> 
+		
+	</bean>
+
+	<!-- start ENDPOINTS SECTION -->
+
+	<bean id="GetNoticeEndpoint1"
+		class="com.aisa.portal.invoice.notice.endpoints.GetNoticeEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="facade" ref="_FacadeTTK" />
+	</bean>
+	<bean id="UvedEndpoint1" class="com.aisa.portal.invoice.notice.endpoints.UvedEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="facade" ref="_FacadeTTK" />
+	</bean>
+	<bean id="SetNoticeEndpoint1"
+		class="com.aisa.portal.invoice.notice.endpoints.SetNoticeEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="facade" ref="_FacadeTTK" />
+	</bean>
+	<bean id="securityInterceptor" class="sheff.rjd.utils.SecurityInterceptor20">
+		<property name="securityManager" ref="securitymanager" />
+	</bean>
+	<bean id="GetEnclosedDocumentsEndpoint" class="ru.aisa.rgd.ws.endpoint.GetEnclosedDocumentsEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	<bean id="EnclosedDocumentsEndpoint" class="ru.aisa.rgd.ws.endpoint.EndpointEncloseDoc">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="jt" ref="SimpleTemplate" />
+		<property name="transTemplate" ref="TransTemplate" />
+		</bean>
+
+	<bean id="GetEnclosedImageEndpoint" class="ru.aisa.rgd.ws.endpoint.GetEnclosedImageEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+
+	<bean id="EncloseImageEndpoint" class="ru.aisa.rgd.ws.endpoint.EndpointEncloseImage">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="jt" ref="SimpleTemplate" />
+		<property name="transTemplate" ref="TransTemplate" />
+		</bean>
+
+
+
+	<bean id="counterparts" class="ru.aisa.rgd.etd.ws.CounterpartsEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+		<property name="reportNames">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="counterPers" class="ru.aisa.rgd.etd.ws.CounterPersEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+		<property name="reportNames">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	<bean id="flowTypes" class="ru.aisa.rgd.etd.ws.FlowtypesEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+		<property name="reportNames">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	<bean id="GetNextDocIdEndpoint" class="ru.aisa.rgd.etd.ws.GetNextDocIdEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+
+
+	<bean id="documentsEndpoint" class="ru.aisa.rgd.etd.ws.ActiveDocumentsEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+		<property name="dateFormater" ref="dateformat" />
+		<property name="timeFormater" ref="timeformat" />
+		<property name="shortContentCreator" ref="shortContentCreator" />
+	</bean>
+	<bean id="archiveDocumentsEndpoint" class="ru.aisa.rgd.etd.ws.ArchiveDocumentsEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+		<property name="dateFormater" ref="dateformat" />
+		<property name="timeFormater" ref="timeformat" />
+		<property name="shortContentCreator" ref="shortContentCreator" />
+	</bean>
+
+
+	<bean id="finDocumentsEndpoint" class="ru.aisa.rgd.etd.ws.FinDocumentsEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+		<property name="dateFormater" ref="dateformat" />
+		<property name="timeFormater" ref="timeformat" />
+		<property name="shortContentCreator" ref="shortContentCreator" />
+	</bean>
+
+	<bean id="droppedDocumentsEndpoint" class="ru.aisa.rgd.etd.ws.DroppedDocumentsEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+		<property name="dateFormater" ref="dateformat" />
+		<property name="timeFormater" ref="timeformat" />
+		<property name="shortContentCreator" ref="shortContentCreator" />
+	</bean>
+
+	<bean id="userInformationEndpoint" class="ru.aisa.rgd.etd.ws.UserInformationEndpoint">
+
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+	</bean>
+	<bean id="newsEndpoint" class="ru.aisa.rgd.etd.ws.NewsEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+	<bean id="createTypesEndpoint" class="ru.aisa.rgd.etd.ws.CreateTypesEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+	</bean>
+
+	<bean id="templateEndpoint" class="ru.aisa.rgd.etd.ws.TemplateEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+	</bean>
+	<bean id="documentEndpoint" class="ru.aisa.rgd.etd.ws.DocumentEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+		<property name="formControllers" ref = "formControllers" /> 
+	</bean>
+
+	<bean id="saveEndpoint" class="sheff.rjd.ws.TempSaveDocEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="transTemplate" ref="TransTemplate" />
+		<!-- <property name="afterSign" ref="afterSign" />
+		<property name="afterSave" ref="afterSave" /> -->
+		<property name="formControllers" ref = "formControllers" /> 
+		<property name="tsp" ref="tsp" />
+	</bean>
+	
+	<bean id="GetVRKDocsEndpoint" class="ru.aisa.rgd.etd.ws.GetVRKSignDocsDocumentsEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+		</bean>
+	<bean id="SetVRKDocsEndpoint" class="ru.aisa.rgd.etd.ws.SetVRKSignDocsDocumentsEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="etdFacade" ref="etdFacade" />
+		<property name="signvrkservice" ref="signvrkservice" /> 
+	</bean>
+		
+	<bean id="isSignPackage" class="ru.aisa.rgd.etd.ws.IsSignPackageEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+
+	<bean id="tsp" class="sheff.rjd.utils.TSPutils">
+		<property name="url">
+			
+			<list>
+				<value>http://ocsp.rzd.ru/tsp/tsp.srf</value>
+
+			</list>
+		</property>
+		<property name="timeout">
+			<list>
+				<value>5000</value>
+			</list>
+		</property>
+		<property name="enabled" value="no" />
+	</bean>
+
+
+
+	<bean id="edt"
+		class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schema">
+			<bean class="org.springframework.xml.xsd.SimpleXsdSchema">
+				<property name="xsd" value="/WEB-INF/xsd/edt.xsd" />
+			</bean>
+		</property>
+		<property name="portTypeName" value="Edt" />
+		<property name="locationUri" value="http://localhost:9080/IIT/portal/ws/services" />
+	</bean>
+
+<import resource="formControllers.xml" />  
+
+	<!-- <import resource="deleteDocsDescription.xml" />
+	<import resource="afterSign.xml" />
+	<import resource="afterSave.xml" /> -->
+	
+
+
+	<bean id="change_char" class="sheff.rjd.utils.Change_char">
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+
+</beans>

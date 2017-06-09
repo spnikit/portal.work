@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="dispatcher" class="com.aisa.portal.invoice.ttk.dispatcher.PortalDispatcher">
+
+
+		<property name="urlToSign"
+			value="http://localhost:8080/WAS/ETD/etdsignature/services" />
+		<property name="wst" ref="wst_standart" />
+		<!-- <property name="jmsdao" ref="jmsdao"/> -->
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="maxtrial" value="3" />
+		<property name="disp1array">
+			<list>
+
+			</list>
+		</property>
+
+	</bean>
+
+</beans>

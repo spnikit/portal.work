@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://iit.ru/xsd/utilTypes/import/simpleResponses_v1_0"
+	xmlns:resp="http://iit.ru/xsd/utilTypes/import/simpleResponses_v1_0">
+	<element name="simpleServiceResponse" type="resp:SimpleServiceResponse" />
+	<complexType name="SimpleServiceResponse">
+		<sequence>
+			<element name="code" type="int" maxOccurs="1" minOccurs="1" />
+			<element name="description" type="string" maxOccurs="1"
+				minOccurs="1" />
+		</sequence>
+	</complexType>
+</schema>

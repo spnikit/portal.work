@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://etd.gvc.rzd:8888/iit/portal/bldoc"
+	xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://etd.gvc.rzd:8888/iit/portal/bldoc">
+
+	<element name="BlDocRequest" type="tns:RequestType"></element>
+
+	<element name="BlDocResponse" type="tns:ResponseType"></element>
+
+	<complexType name="ResponseType">
+		<sequence>
+			<element name="etddocid" type="long" maxOccurs="1" minOccurs="1" />
+			<element name="code" type="int" maxOccurs="1" minOccurs="1" />
+			<element name="description" type="string" maxOccurs="1"
+				minOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<simpleType name="BlDoc">
+		<restriction base="string"></restriction>
+	</simpleType>
+
+	<complexType name="RequestType">
+		<sequence>
+			<element name="etddocid" type="long" maxOccurs="1" minOccurs="1" />
+			<element name="formname" type="string" maxOccurs="1"
+				minOccurs="1" />
+			<element name="bldoc" type="tns:BlDoc" maxOccurs="1"
+				minOccurs="1" />
+		</sequence>
+	</complexType>
+</schema>

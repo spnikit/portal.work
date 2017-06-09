@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://iit.ru/xsd/utilTypes/import/specTypes_v1_0"
+	xmlns:tns="http://iit.ru/xsd/utilTypes/import/specTypes_v1_0">
+	<simpleType name="inn">
+		<restriction base="string">
+			<pattern value="\d{1,16}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="kpp">
+		<restriction base="string">
+			<pattern value="\d{1,15}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="okpo">
+		<restriction base="string">
+			<pattern value="\d{1,11}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="mrmSessionId">
+		<restriction base="positiveInteger">
+			<totalDigits value="50"></totalDigits>
+		</restriction>
+	</simpleType>
+	<complexType name="innKppOkpo">
+		<sequence>
+			<element name="okpo" type="tns:okpo" maxOccurs="1" minOccurs="1" />
+			<element name="inn" type="tns:inn" maxOccurs="1" minOccurs="0" />
+			<element name="kpp" type="tns:kpp" maxOccurs="1" minOccurs="0" />
+		</sequence>
+	</complexType>
+</schema>

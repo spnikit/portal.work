@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://etd.gvc.rzd:8888/WAS/ETD/docdata"
+	xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://etd.gvc.rzd:8888/WAS/ETD/docdata">
+
+	<element name="DocDataRequest" type="tns:RequestType"></element>
+
+	<element name="DocDataResponse" type="tns:DocDataType"></element>
+
+	<complexType name="DocDataType">
+		<sequence>
+			<element name="code" type="int" maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="description" type="string" maxOccurs="1"
+				minOccurs="1"></element>
+			<element name="docname" type="string" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="doctype" type="int" maxOccurs="1" minOccurs="0">
+			</element>
+			<element name="isFinished" type="boolean" maxOccurs="1"
+				minOccurs="0">
+			</element>
+			<element name="docdata" type="tns:XMLData" maxOccurs="1"
+				minOccurs="0">
+			</element>
+
+
+		</sequence>
+	</complexType>
+
+	<complexType name="XMLData">
+		<sequence>
+			<any></any>
+		</sequence>
+	</complexType>
+
+	<complexType name="RequestType">
+		<sequence>
+			<element name="docid" type="long" maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="login" type="string" maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="password" type="string" maxOccurs="1"
+				minOccurs="1"></element>
+		</sequence>
+	</complexType>
+</schema>

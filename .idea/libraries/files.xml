@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="files">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/files/applet-xsd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/files/applet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/files/NoticeSheme-xsd.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/files/quickapplet.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

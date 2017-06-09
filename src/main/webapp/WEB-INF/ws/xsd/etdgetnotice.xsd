@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://iit.ru/portal/etdgetnotice"
+	xmlns:tns="http://iit.ru/portal/etdgetnotice">
+
+	<element name="EtdGetnoticeRequest">
+		<complexType>
+			<sequence>
+				<element maxOccurs="1" minOccurs="1" name="etdid" type="long" />
+				<element maxOccurs="1" minOccurs="1" name="confirmid" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="xtype" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="xml" type="hexBinary" />
+				<element maxOccurs="1" minOccurs="1" name="sign" type="hexBinary" />
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="EtdGetnoticeResponse">
+		<complexType>
+			<sequence>
+				<element maxOccurs="1" minOccurs="1" name="etdid" type="long" />
+				<element maxOccurs="1" minOccurs="1" name="code" type="int" />
+				<element maxOccurs="1" minOccurs="1" name="description"
+					type="string" />
+			</sequence>
+		</complexType>
+	</element>
+
+</schema>

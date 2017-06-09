@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.iit.ru/IIT/tor/asoupmess"
+	xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.iit.ru/IIT/tor/asoupmess">
+	<element name="ASOUPmessRequest" type="tns:ASOUPType"></element>
+	<element name="ASOUPmessResponse" type="tns:ReportType"></element>
+	<complexType name="ASOUPType">
+		<sequence>
+			<choice>
+			<element name="mess" type="string"/>
+			<element name="vagons" type="tns:vag_table"/>
+			<element name="location_type">
+				<simpleType>
+					<restriction base='int'>
+						<minInclusive value="1"></minInclusive>
+  		 				<maxInclusive value="2"></maxInclusive>
+  					</restriction>
+ 				 </simpleType>
+  			</element>
+			</choice>
+			<element name="repair_pred_kod" maxOccurs="1" minOccurs="1">
+				<simpleType>
+					<restriction base="int">
+						<maxInclusive value="9999"></maxInclusive>
+					</restriction>
+				</simpleType>
+			</element>
+			
+		</sequence>
+		
+	</complexType>
+	<complexType name="ReportType">
+		<sequence>
+			<element name="code" type="int" maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="description" type="string" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="docid" type="long" maxOccurs="1" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+	<complexType name="vag_table">
+		<sequence>
+			<element name="vagnumber" type="string" maxOccurs="50" minOccurs="1">
+			</element>
+			</sequence>
+	</complexType>
+</schema>

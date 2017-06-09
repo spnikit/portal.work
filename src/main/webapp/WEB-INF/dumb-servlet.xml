@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+
+	<!-- <import resource="afterSign.xml" />
+	<import resource="afterSave.xml" /> -->
+	<import resource="formControllers.xml" />
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<!-- prop key="/test.form">testController</prop -->
+				<prop key="/PredRelatesNames">PredRelatesNames</prop>
+				<prop key="/PredInfoes">PredInfoes</prop>
+				<prop key="/getXML">getXML</prop>
+				<prop key="/getDocument">getDocument</prop>
+				<prop key="/getDocumentRTK">getDocumentRTK</prop>
+				<prop key="/count">getCount</prop>
+				<prop key="/unlock">unlock</prop>
+				<prop key="/signpack">SignPack</prop>
+				<prop key="/signPackRTK">SignPackRTK</prop>
+				<prop key="/signPackCSS">SignPackCSS</prop>
+				<prop key="/droppack">DropPack</prop>
+				<prop key="/firstpack">FirstPack</prop>
+				<prop key="/fpuacc">FpuAcc</prop>
+				<prop key="/vagnum">Vagnum</prop>
+				<prop key="/sfpack">SFPack</prop>
+				<prop key="/mainpack">MainPack</prop>
+				<prop key="/updt">updt</prop>
+				<prop key="/accdoc">acc</prop>
+				<prop key="/num">num</prop>
+				<prop key="/resend">resend</prop>
+				<prop key="/pps">ppsstore</prop>
+				<prop key="/getEtdidbyId">getEtdidbyId</prop>
+				<prop key="/getFileNameRTK">getFileNameRTK</prop>
+				<prop key="/drop.form">dropController</prop>
+				<prop key="/torg12drop.interface">torg12dropinterfaceController</prop>
+				<prop key="/torg12drop.form">torg12dropController</prop>
+				<prop key="/fpu26ppsdrop.form">fpu26ppsdropController</prop>
+				<prop key="/fpu26ppsdrop.interface">fpu26ppsdropinterfaceController</prop>
+				<prop key="/previewreseipts">PreviewReceipts</prop> 
+				<prop key="/acc.form">accController</prop>
+				<prop key="/save.form">saveController2</prop>
+				<prop key="/cancel.form">cancelController</prop>
+				<prop key="/import.jcp">importController</prop>
+				<prop key="/attach.form">addAttachmentController</prop>
+				<prop key="/attach.remove">removeAttachmentController</prop>
+				<prop key="/attach.get">getAttachmentController</prop>
+				<prop key="/attach.save">saveAttachmentController</prop>
+				<prop key="/previewreseipts">PreviewReceipts</prop> 
+				<prop key="/docreason">docreason</prop>
+ 				<prop key="/doctypeform">doctypeform</prop>
+				<prop key="/getdatetime">getServDateTime</prop>	
+				<prop key="/testrest">testrest</prop>
+				<prop key="/aploadedtoexcel">aploadedtoexcel</prop>
+				<prop key="/sfspsexcel">sfspsexcel</prop>
+				<prop key="/report_tor">torreport</prop>
+				<prop key="/print_package">getDocumentsForPrint</prop>
+				<prop key="/gen_html">generateHTML</prop>
+				<prop key="/accept_docs">acceptDocs</prop>
+				<prop key="/testgen">testgenHTML</prop>
+				<prop key="/enabledropcontroller">enabledropcontroller</prop>
+				<prop key="/listchanges">listchanges</prop>
+				<prop key="/checksign">checksign</prop>
+				<prop key="/insertDfKorr">insertDfKorrcontroller</prop>
+				<prop key="/report_rtk">rtkreport</prop>
+			    <prop key="/getcountvrk">getcountvrk</prop>
+				<prop key="/uploadClaim">uploadClaim</prop>
+				<prop key="/reportPPS">reportPPS</prop>
+				<prop key="/checkDeclVRK">checkDeclVRK</prop>
+				<prop key="/checkPretension">createPretension</prop>
+				<prop key="/checkActTMC">checkActTMC</prop>
+				<prop key="/exportTOR_Archive">exportTOR_Archive</prop>
+				<prop key="/exportXMLArchive">exportXMLArchive</prop>
+				<prop key="/exportPDF">exportPDF</prop>
+				
+				<!-- prop key="/vu41akt">VU41akt</prop -->
+			</props>
+		</property>
+	</bean>
+
+
+
+	<bean id="marshaller" class="org.springframework.oxm.xmlbeans.XmlBeansMarshaller" />
+
+	<bean id="messageFactory"
+		class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory">
+		<property name="payloadCaching" value="true" />
+	</bean>
+	<bean id="messageFactorysaaj" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory">
+
+	</bean>
+	<bean id="wst" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<property name="marshaller" ref="marshaller" />
+		<property name="unmarshaller" ref="marshaller" />
+		<property name="messageFactory" ref="messageFactorysaaj" />
+	</bean>
+	<bean id="saveController2" class="sheff.rjd.controllers.ShepSaveController2">
+	</bean>
+
+	<bean id="dropController" class="sheff.rjd.controllers.DropController">
+	</bean>
+	<bean id ="insertDfKorrcontroller" class=" sheff.rjd.controllers.InsertDfKorrController" > 
+		<property name="integrationDao" ref="integrationDao" />
+	</bean>
+	
+	<bean id="torg12dropController" class="sheff.rjd.controllers.Torg12DropController">
+	</bean>
+	
+	<bean id="fpu26ppsdropController" class="sheff.rjd.controllers.FPU26PPSDropController">
+	</bean>
+	
+	<bean id="accController" class="sheff.rjd.controllers.SoglasController">
+	</bean>
+	
+	<bean id="importController" class="sheff.rjd.controllers.ShepImportController">
+	</bean>
+
+	<bean id="cancelController" class="sheff.rjd.controllers.ShepCancelController">
+		<property name="URL" value="http://localhost:9080/IIT/portal/ws/services" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="wst" ref="wst" />
+	</bean>
+
+
+	<bean id="addAttachmentController" class="sheff.rjd.controllers.AddAttachmentController">
+	</bean>
+
+	<bean id="removeAttachmentController" class="sheff.rjd.controllers.RemoveAttachmentController">
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+
+	<bean id="getAttachmentController" class="sheff.rjd.controllers.GetAttachmentController">
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+
+	<bean id="saveAttachmentController" class="sheff.rjd.controllers.SaveAttachmentController">
+	</bean>
+
+	<bean id="PredRelatesNames" class="ru.aisa.etdportal.controllers.PredRelatesNames">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+
+	<bean id="PredInfoes" class="ru.aisa.etdportal.controllers.PredInfoes">
+		<property name="ds" ref="DSrjd" />
+		<property name="npjt" ref="PrepTemplate" />
+	</bean>
+
+	<bean id="getXML" class="ru.aisa.etdportal.controllers.getXML">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+
+	<bean id="getDocument" class="ru.aisa.etdportal.controllers.getDocument">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	
+	<bean id="getDocumentRTK" class="ru.aisa.etdportal.controllers.getDocumentRTK">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	
+	<bean id="getCount" class="ru.aisa.etdportal.controllers.CountPackDocks">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+
+	<bean id="unlock" class="ru.aisa.etdportal.controllers.UnlockDoc">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="proc" ref="Proc" />
+	</bean>
+
+	<bean id="SignPack" class="ru.aisa.etdportal.controllers.SignPack">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	
+	<bean id="SignPackRTK" class="ru.aisa.etdportal.controllers.SignPackRTK">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	
+	<bean id="SignPackCSS" class="ru.aisa.etdportal.controllers.SignPackCSS">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	
+	<bean id="DropPack" class="ru.aisa.etdportal.controllers.DropPack">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+
+	<bean id="FirstPack" class="ru.aisa.etdportal.controllers.FirstPack">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean>
+
+ <bean id="PreviewReceipts" class="ru.aisa.etdportal.controllers.PreviewReceipts">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean>
+
+
+	<bean id="FpuAcc" class="ru.aisa.etdportal.controllers.FpuAcc">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+
+	<bean id="Vagnum" class="ru.aisa.etdportal.controllers.Vagnum">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	<bean id="ppsstore" class="ru.aisa.etdportal.controllers.PPSStore">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	
+	<bean id="SFPack" class="ru.aisa.etdportal.controllers.SFPack">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+<bean id="MainPack" class="ru.aisa.etdportal.controllers.MainPack">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	<bean id="getEtdidbyId" class="ru.aisa.etdportal.controllers.GetEtdidbyId">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	<bean id="getFileNameRTK" class="ru.aisa.etdportal.controllers.GetFileNameRTK">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	<bean id="updt" class="ru.aisa.etdportal.controllers.updtpack">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="sjt" ref="SimpleTemplate" />
+	</bean>
+	
+	<bean id="acc" class="ru.aisa.etdportal.controllers.SoglDoc">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="oper" ref="OperatorObj" />
+	
+	</bean>
+	
+	<bean id="num" class="ru.aisa.etdportal.controllers.Num">
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	<bean id="resend" class="ru.aisa.etdportal.controllers.ResendToTransoil">
+		<property name = "sendtotrans" ref="sendobject"></property>
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	
+	<bean id="torg12dropinterfaceController" class="ru.aisa.etdportal.controllers.DropTORG12">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		</bean>
+	
+	<bean id="fpu26ppsdropinterfaceController" class="ru.aisa.etdportal.controllers.DropFPU26PPS">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		</bean>
+	
+	<bean id="Proc" class="ru.aisa.etdportal.controllers.Unlockdoc">
+		<constructor-arg ref="DSrjd" />
+		</bean>
+	
+	<bean id="testrest" class="ru.aisa.etdportal.controllers.RestTest">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="httpsender" ref="NewHttpSender"/>
+	</bean>
+	<bean id="docreason" class="sheff.rjd.controllers.DocReason">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	<bean id="doctypeform" class="sheff.rjd.controllers.DocTypeForm">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="sjt" ref="SimpleTemplate" />
+	</bean>
+	
+	<bean id="getServDateTime" class="ru.aisa.etdportal.controllers.getServDateTime">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	<bean id="aploadedtoexcel" class="sheff.rjd.controllers.AploadedToExcel">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="documentDao" ref="etdDocumentDao" />
+	</bean>
+		
+	<bean id="sfspsexcel" class="ru.aisa.etdportal.controllers.SfSpsExcel">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	
+	<bean id="torreport" class="ru.aisa.etdportal.controllers.TorReportController">
+	    <property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	
+	<bean id="getDocumentsForPrint" class="ru.aisa.etdportal.controllers.GetDocumentsForPrintController">
+	    <property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	
+	<bean id="generateHTML" class="ru.aisa.etdportal.controllers.GenerateHTMLController">
+	    <property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	
+	<bean id="acceptDocs" class="ru.aisa.etdportal.controllers.AcceptDocsController">
+	    <property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	
+	<bean id="testgenHTML" class="ru.aisa.etdportal.controllers.TestHTMLGeneratorController">
+	    <property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	<bean id="enabledropcontroller" class="sheff.rjd.controllers.EnableDropController">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="documentDao" ref="etdDocumentDao" />
+	</bean>
+	 <bean id="listchanges" class="ru.aisa.etdportal.controllers.GetListChangesController">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="sendtoetd" ref="sendtoetd" />
+	</bean>
+	<bean id="checksign" class="ru.aisa.etdportal.controllers.CheckSign">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	<bean id="getcountvrk" class="ru.aisa.etdportal.controllers.GetCountForVRKPack">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	<bean id = "NewHttpSender" class = "pfr.NewHttpSender"/>
+	
+	<bean id="rtkreport" class="ru.aisa.etdportal.controllers.RtkReportController">
+	    <property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	
+	<bean id="exportTOR_Archive" class="ru.aisa.etdportal.controllers.ExportTORArchiveController">
+		<property name="npjt" ref="PrepTemplate"></property>
+	</bean>
+	
+	<bean id="exportXMLArchive" class="ru.aisa.etdportal.controllers.ExportXMLArchive">
+		<property name="npjt" ref="PrepTemplate"></property>
+	</bean>
+	
+	<bean id="exportPDF" class="ru.aisa.etdportal.controllers.ExportPDF">
+		<property name="npjt" ref="PrepTemplate"></property>
+		</bean>
+	
+	<bean id="uploadClaim" class="ru.aisa.etdportal.controllers.UploadClaimController">
+	    <property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="transT" ref="TransTemplate" />
+		<property name="facade" ref="_Facade" />
+	</bean>	
+	<bean id = "reportPPS" class = "sheff.rgd.ws.Controllers.PPS.ReportPPSController">
+	    <property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="sjt" ref="SimpleTemplate" />
+		<property name="vugenerator" ref="VUGen" />
+		<property name="transT" ref="TransTemplate" />
+		<property name="facade" ref="_Facade" />
+	</bean>
+
+	<bean id="checkDeclVRK" class="ru.aisa.etdportal.controllers.CheckDeclineForVRK">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+	
+	<bean id="createPretension" class="ru.aisa.etdportal.controllers.CreatePretensionController">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="transT" ref="TransTemplate" />
+		<property name="facade" ref="_Facade" />
+		<property name="formname" value="Претензия"/>
+		<property name="sjt" ref="SimpleTemplate" />
+	</bean>
+	
+	<bean id="checkActTMC" class="ru.aisa.etdportal.controllers.CheckActTmcController">
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+	</bean>
+</beans>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema 
+	targetNamespace="http://iit.ru/ACT/RTK" 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:tns="http://iit.ru/ACT/RTK" 
+	xmlns:ext="http://iit.ru/xsd/utilTypes/import/extBaseTypes_v1_0" 
+	xmlns:dt="http://iit.ru/xsd/utilTypes/import/dateTime_v1_0"
+	>
+	
+	<import
+		namespace="http://iit.ru/xsd/utilTypes/import/extBaseTypes_v1_0"
+		schemaLocation="../utilTypes/import/extBaseTypes_v1_0.xsd" />
+	<import
+		namespace="http://iit.ru/xsd/utilTypes/import/dateTime_v1_0"
+		schemaLocation="../utilTypes/import/dateTime_v1_0.xsd" />
+		
+	<element name="formCreateRequest" type="tns:FormCreateRequest"></element>
+	<element name="formCreateResponse" type="tns:FormCreateResponse"></element>
+	
+	<complexType name="FormCreateRequest">
+		<sequence>
+		    <element name="P_1" minOccurs="1" maxOccurs="1" type="tns:intL1"></element> 
+			<element name="P_2" minOccurs="1" maxOccurs="1" type="ext:string1to30"></element>
+			<element name="P_3" minOccurs="1" maxOccurs="1" type="tns:month"></element>
+			<element name="P_4" minOccurs="1" maxOccurs="1" type="tns:string1to15"></element>
+			<element name="P_5" minOccurs="1" maxOccurs="1" type="tns:year"></element>
+			<element name="P_6" minOccurs="1" maxOccurs="1" type="ext:string1to300"></element>
+			<element name="P_7" minOccurs="1" maxOccurs="1" type="ext:string1to200"></element>
+			<element name="P_8" minOccurs="1" maxOccurs="1" type="ext:string1to200"></element>
+			<element name="P_9" minOccurs="1" maxOccurs="1" type="ext:string1to300"></element>
+			<element name="table1">
+				<complexType>
+					<sequence>
+						<element name="row" minOccurs="1" maxOccurs="50">
+							<complexType>
+								<sequence>
+									<element name="P_10" minOccurs="1" maxOccurs="1" type="ext:string1to3"></element>
+									<element name="P_11" minOccurs="1" maxOccurs="1" type="ext:string1to300"></element>
+									<element name="P_12" minOccurs="1" maxOccurs="1" type="ext:string1to3"></element>
+									<element name="P_13" minOccurs="1" maxOccurs="1" type="ext:string1to10"></element>
+									<element name="P_14" minOccurs="1" maxOccurs="1" type="tns:decimal"></element>
+									<element name="P_15" minOccurs="1" maxOccurs="1" type="ext:string1to14"></element>
+									<element name="P_16" minOccurs="1" maxOccurs="1" type="tns:nalsumm"></element>
+									<element name="P_17" minOccurs="1" maxOccurs="1" type="tns:decimal"></element>
+									<element name="P_37" minOccurs="1" maxOccurs="1" type="tns:int0or1"></element>
+									<element name="P_38" minOccurs="1" maxOccurs="1" type="ext:string1to15"></element>
+									<element name="P_39" minOccurs="0" maxOccurs="1" type="ext:string1to10"></element>
+									<element name="P_41" minOccurs="1" maxOccurs="1" type="tns:decimal0"></element>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="P_18" minOccurs="1" maxOccurs="1" type="tns:decimal"></element>
+			<element name="P_19" minOccurs="1" maxOccurs="1" type="tns:decimal"></element>
+			<element name="P_20" minOccurs="1" maxOccurs="1" type="tns:decimal00"></element>
+			<element name="P_21" minOccurs="1" maxOccurs="1" type="ext:string1to3"></element>
+			<element name="P_22" minOccurs="1" maxOccurs="1" type="tns:decimal"></element>
+			<element name="P_23" minOccurs="1" maxOccurs="1" type="ext:string1to300"></element>
+			<element name="P_28" minOccurs="1" maxOccurs="1" type="ext:stringL4"></element>
+			<element name="P_31" minOccurs="1" maxOccurs="1" type="ext:string1to15"></element>
+			<element name="P_32" minOccurs="1" maxOccurs="1" type="ext:string1to15"></element>
+			<element name="P_33" minOccurs="1" maxOccurs="1" type="ext:string1to15"></element>
+			<element name="P_34" minOccurs="1" maxOccurs="1" type="ext:string1to15"></element>
+			<element name="P_35" minOccurs="1" maxOccurs="1" type="ext:string1to15"></element>
+			<element name="P_36" minOccurs="1" maxOccurs="1" type="ext:string1to15"></element>
+			<element name="P_40" minOccurs="0" maxOccurs="1" type="ext:string1to50"></element>
+			<element name="P_42" minOccurs="0" maxOccurs="1" type="ext:string1to30"></element>
+			<element name="P_43" minOccurs="0" maxOccurs="1" type="tns:month"></element>
+			<element name="P_44" minOccurs="0" maxOccurs="1" type="ext:string1to15"></element>
+			<element name="P_45" minOccurs="0" maxOccurs="1" type="tns:year"></element>
+			<element name="P_47" minOccurs="0" maxOccurs="1" type="ext:string1to50"></element>
+			<element name="P_46" minOccurs="1" maxOccurs="1" type="ext:string1to50"></element>
+			<element name="P_48" minOccurs="1" maxOccurs="1" type="ext:string1to300"></element>
+			<element name="P_49" minOccurs="1" maxOccurs="1" type="dt:UDate"></element>
+			<element name="P_50" minOccurs="1" maxOccurs="1" type="ext:string1to10"></element>
+			</sequence>
+	</complexType>
+	
+	<complexType name="FormCreateResponse">
+		<sequence>
+			<element name="code" type="int" maxOccurs="1" minOccurs="1" />
+			<element name="description" type="string" maxOccurs="1" minOccurs="1" />
+			<element name="docid" type="long" maxOccurs="1" minOccurs="1" />
+			<element name="packageid" type="ext:string1to20" maxOccurs="1" minOccurs="1" />
+		</sequence>
+	</complexType>
+	<simpleType name="int0or1">
+		<restriction base="int">
+			<pattern value="[0-1]{1}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="intL1">
+		<restriction base="int">
+			<pattern value="[1-2]{1}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="month">
+		<restriction base="int">
+			<pattern value="([0][1-9])|([1-2][0-9])|([3][0-1])"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="year">
+		<restriction base="int">
+			<pattern value="[0-9]{4}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="string1to15">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="15"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string1to30">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="30"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="decimal">
+		<restriction base="string">
+			<pattern value="[1-9][0-9]{0,9}\.[0-9]{2}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="decimal00">
+		<restriction base="string">
+			<pattern value="[0-9][0-9]{0,9}\.[0-9]{2}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="decimal0">
+		<restriction base="string">
+			<pattern value="[0-9]{0,10}\.[0-9]{2}"></pattern>
+		</restriction>
+	</simpleType>
+	<simpleType name="nalsumm">
+		<restriction base="string">
+			<pattern value="[0-9]{0,10}\.[0-9]{2}"></pattern>
+			<pattern value="без НДС" />
+			<pattern value="-" />
+		</restriction>
+	</simpleType>
+</schema>

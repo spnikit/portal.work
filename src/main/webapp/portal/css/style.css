@@ -1,0 +1,48 @@
+body {
+	margin: 0px;
+	font-size: 12px;
+	font-family: Tahoma;
+	color: #383838;
+}
+
+* {
+	font-size: 12px;
+	font-family: Tahoma;
+	color: #383838;
+}
+
+.main {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	z-index: 0;
+	float: left;
+}
+
+.white-text {
+	font-family: Verdana;
+	font-size: 20px;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.txt_white {
+	font-family: Verdana;
+	font-size: 20px;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+a.black {
+	font-size: 12px;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none;
+}
+
+a.black:hover {
+	font-size: 12px;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none;
+}

@@ -1,0 +1,262 @@
+<!-- DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-Strict.dtd"-->
+<html>
+<head>
+<title>Портал электронного документооборота</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8"/> 
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<link rel="stylesheet" type="text/css" href="resources/css/ext-all.css"></link>
+<link rel="stylesheet" type="text/css" href="resources/css/xtheme-gray.css"></link>
+<link rel="stylesheet" type="text/css" href="resources/css/datepickerplus.css" />
+<script type="text/javascript" src="js/jquery-1.5.1.js"></script>
+<script type="text/javascript" src="js/startInit.js"></script>
+<script type="text/javascript" src="adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="ext-all-debug.js"></script>
+<script type="text/javascript" src="js/globalVar.js"></script>
+<script type="text/javascript" src="js/globalInit.js"></script>
+<script type="text/javascript" src="gridfilter.js"></script>
+<script type="text/javascript" src="js/multiselect.js?v=2"></script>
+<script type="text/javascript" src="resources/ext-lang-ru.js"></script>
+<script type="text/javascript">
+		<!--
+		Ext.BLANK_IMAGE_URL='resources/images/default/s.gif';
+		tph=70;
+		-->		
+	</script>
+
+<script type="text/javascript" src="js/NPAPI/BrowserDetect.js"></script>
+<script type="text/javascript" src="js/NPAPI/NPAPIplugin.js?v=2"></script>
+
+
+<script type="text/javascript" src="js/ext.ux.datepickerplus.js"></script>
+<script type="text/javascript" src="js/ext.ux.prompt.js"></script>
+<script type="text/javascript" src="webtoolkit.utf8.js"></script>
+<script type="text/javascript" src="js/Functions.js?v=47"></script>
+<script type="text/javascript" src="js/DeviationDoc.js?v=5"></script>
+<script type="text/javascript" src="js/Grids/Role1/DocumentGrid.js?v=18"></script>
+<script type="text/javascript" src="js/Grids/Role1/ArchiveGrid.js?v=18"></script>
+<script type="text/javascript" src="js/Grids/Role1/DeclinedGrid.js?v=18"></script>
+<script type="text/javascript" src="js/Grids/Role1/SendGrid.js?v=18"></script>
+<!-- <script type="text/javascript" src="js/Grids/RoughGrid.js"></script>
+<script type="text/javascript" src="js/Grids/InworkGrid.js"></script> -->
+
+<script type="text/javascript" src="js/Grids/Role23/DocumentGridRole2.js?v=19"></script>
+
+<script type="text/javascript" src="js/Grids/MRM/DocumentGridMRM.js?v=3"></script>
+<script type="text/javascript" src="js/Grids/MRM/ArchiveGridMRM.js?v=2"></script>
+<script type="text/javascript" src="js/Grids/MRM/DeclinedGridMRM.js?v=2"></script>
+<script type="text/javascript" src="js/Grids/MRM/SendGridMRM.js?v=2"></script>
+
+<script type="text/javascript" src="js/Grids/PPS/DocumentGridPPS.js?v=2"></script>
+<script type="text/javascript" src="js/Grids/PPS/DocumentGridPPS2.js?v=2"></script>
+<script type="text/javascript" src="js/Grids/PPS/ArchiveGridPPS.js?v=2"></script>
+<script type="text/javascript" src="js/Grids/PPS/DeclinedGridPPS.js?v=2"></script>
+<script type="text/javascript" src="js/Grids/PPS/SendGridPPS.js?v=2"></script>
+<script type="text/javascript" src="js/Grids/PPS/SendGridPPS2.js?v=2"></script>
+<script type="text/javascript" src="js/Grids/PPS/ArchiveGridPPS2.js?v=2"></script>
+
+<script type="text/javascript" src="js/Grids/RTK/DocumentGridRTK.js?v=2"></script>
+<script type="text/javascript" src="js/Grids/RTK/ArchiveGridRTK.js?v=3"></script>
+<script type="text/javascript" src="js/Grids/RTK/DeclinedGridRTK.js?v=2"></script>
+<script type="text/javascript" src="js/Grids/RTK/SendGridRTK.js?v=2"></script>
+
+<script type="text/javascript" src="js/Grids/RZDS/DocumentGridRZDS.js"></script>
+<script type="text/javascript" src="js/Grids/RZDS/ArchiveGridRZDS.js"></script>
+<script type="text/javascript" src="js/Grids/RZDS/DeclinedGridRZDS.js"></script>
+<script type="text/javascript" src="js/Grids/RZDS/SendGridRZDS.js"></script>
+
+<script type="text/javascript" src="js/Grids/VRK/DocumentGridVRK.js"></script>
+<script type="text/javascript" src="js/Grids/VRK/ArchiveGridVRK.js"></script>
+<script type="text/javascript" src="js/Grids/VRK/DeclinedGridVRK.js"></script>
+<script type="text/javascript" src="js/Grids/VRK/SendGridVRK.js"></script>
+<script type="text/javascript" src="js/Grids/VRK/DocumentGridSignVRK.js"></script>
+<script type="text/javascript" src="js/Grids/VRK/DeclinedGridSignVRK.js"></script>
+<script type="text/javascript" src="js/Grids/VRK/ArchiveGridSignVRK.js"></script>
+
+<script type="text/javascript" src="js/Grids/CSS/DocumentGridCSS.js?v=5"></script>
+<script type="text/javascript" src="js/Grids/CSS/ArchiveGridCSS.js?v=4"></script>
+<script type="text/javascript" src="js/Grids/CSS/DeclinedGridCSS.js?v=4"></script>
+<script type="text/javascript" src="js/Grids/CSS/SendGridCSS.js?v=4"></script>
+<script type="text/javascript" src="js/Grids/CSS/DocumentGridRole2CSS.js?v=4"></script>
+
+<script type="text/javascript" src="js/Grids/SFgrid.js"></script>
+<script type="text/javascript" src="js/Grids/Packgrid.js"></script>
+<script type="text/javascript" src="js/Grids/PackCSSgrid.js?v=2"></script>
+<script type="text/javascript" src="js/Grids/PackRTKgrid.js"></script>
+<script type="text/javascript" src="js/Grids/Historygrid.js"></script>
+<script type="text/javascript" src="utils.js?v=9"></script>
+<script type="text/javascript" src="etd.js?v=16"></script>
+<script type="text/javascript" src="etd-extjs-utils.js?v=39"></script>
+<script type="text/javascript" src="windows.js?v=3"></script>
+<script type="text/javascript" src="js/SelectForPrintGrid.js"></script>
+
+
+
+
+<!-- <script type="text/javascript">
+
+document.onkeydown = function () { 
+	 var ev = e||window.event; 
+
+    if(ev.preventDefault)
+        ev.preventDefault();
+    else  {
+    	alert('else');
+    	ev.returnValue = false;
+    }
+        
+};
+</script> -->
+
+
+<!--[if IE]>
+<OBJECT ID="aisa.aisaplugin.1" CLASSID="clsid:5E8C4033-CF35-5085-B393-97BB896D5238" > 
+			<param name="jvmPath" value="C:\\aisa\\jre\\bin\\client">
+			<param name="classPath" value="C:\\aisa\\applet.jar">
+			<param name="className" value="mypack/zzz">
+			<param name="jarsPath" value="C:\\aisa\\dependency">
+			<param name="typeApplet" value="applet">
+			</object>
+<![endif]-->
+
+
+<style type="text/css">
+.my-label {
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 10px;
+	font-size-adjust: none;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: normal;
+	margin-top: 10px !important;
+}
+	.x-selectable, .x-selectable * {
+		-moz-user-select: text!important;
+		-khtml-user-select: text!important;
+	}
+
+.somebutton {
+	position: relative;
+	top: -20px;
+}
+//	Ext.Msg.wait("Пожалуйста, подождите...", 'Загрузка');
+
+.somebutton-moz {
+	position: relative;
+	top: -22px;
+}
+
+.white-body {
+	background-color: #FFFFFF !important;
+	/*	background: url('logo.jpg') no-repeat;*/
+}
+
+.but-flt .x-btn-left {
+	background-position: 0 -63px;
+}
+
+.but-flt .x-btn-right {
+	background-position: 0 -84px;
+}
+
+.but-flt .x-btn-center {
+	background-position: 0 -105px;
+}
+
+.frame {
+	height: 0px;
+}
+
+.filtered {
+	background: #ebf3fd
+		url(resources/images/default/grid/grid3-hrow-over.gif) repeat-x left
+		bottom; //
+	background-color: #CED9C4;
+}
+
+#Logout {
+	margin-left: 200px !important;
+}
+
+.pbfog {
+	background-color: #ffffff;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	left: 0px;
+	top: 0px;
+	display: none;
+	z-index: 8;
+}
+
+.progress_bar_item {
+	position: absolute;
+	width: 375px;
+	height: 79px;
+	display: none;
+	z-index: 9;
+}
+
+.progress_bar_pane {
+	position: absolute;
+	width: 375px;
+	height: 79px;
+	display: none;
+	z-index: 9;
+}
+
+.progress_bar_item .pbpath {
+	position: relative;
+	width: 310px;
+	height: 22px;
+	left: 32;
+	top: 34;
+}
+
+.progress_bar_item .pbline {
+	position: relative;
+	width: 200px;
+	height: 22px;
+	left: 32;
+	top: 34;
+}
+</style>
+
+
+
+
+<body
+	style="background: url('pics/2.jpg') no-repeat bottom center fixed; background-size: 100%;">
+
+	<!--  <img id="back" alt="" src=""
+		style="position: absolute; width: 0; height: 0; z-index: -100; visibility: visible;">-->
+
+	<table id="tableForViewer" width="100%" border="0" height="100%"
+		style="position: fixed; top: 0px; left: 0px; z-index: -1;">
+		<tr id="trbottom">
+			<td id="bottompanel" align="right" valign="bottom" width="100%"
+				height="100%">
+				<table cellspacing="0" cellpadding="0" border="0">
+					<tr>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	<tr id="tr2" border="0">
+			<td id="GridTD" width="100%"><iframe id="viewerid"
+					name="viewername" width="100%" src="viewer.html" frameborder="0" class="frame">
+					<h1>IFRAME NOT SUPPORTED</h1>
+				</iframe></td>
+		</tr>
+	</table>
+
+	<img id="loading" src="pics/misc/loading_panel_filled.png" 
+		alt=""
+		style="z-index: 100000; visibility: hidden; position: absolute;" />
+	
+
+
+</body>
+</html>

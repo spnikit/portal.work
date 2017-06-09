@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema 
+	targetNamespace="http://iit.ru/RTK/DelCardDocRTK" 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:tns="http://iit.ru/RTK/DelCardDocRTK" 
+	>
+	<element name="formCreateRequest" type="tns:FormCreateRequest"></element>
+	<element name="formCreateResponse" type="tns:FormCreateResponse"></element>
+	
+	<complexType name="FormCreateRequest">
+		<sequence>
+			<element name="docid" type="long" maxOccurs="1" minOccurs="1" />
+	   </sequence>
+	</complexType>
+	
+	<complexType name="FormCreateResponse">
+		<sequence>
+			<element name="code" type="int" maxOccurs="1" minOccurs="1" />
+			<element name="description" type="string" maxOccurs="1" minOccurs="1" />
+		</sequence>
+	</complexType>
+
+</schema>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://iit.ru/portal/Contraginvoice"
+	xmlns:tns="http://iit.ru/portal/Contraginvoice">
+
+
+	<element name="DocListRequest">
+		<complexType>
+			<sequence>
+				<element name="cert_sn" type="string" minOccurs="1"
+					maxOccurs="1" />
+				<element maxOccurs="1" minOccurs="1" name="inn" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="kpp" type="string" />
+				<element name="dateafter" type="tns:date" minOccurs="0"
+					maxOccurs="1" />
+				<element name="datebefore" type="tns:date" minOccurs="0"
+					maxOccurs="1" />
+					<element name="dateizmafter" type="tns:date" minOccurs="0" maxOccurs="1" />
+<element name="dateizmbefore" type="tns:date" minOccurs="0" maxOccurs="1" />
+<element maxOccurs="1" minOccurs="0" name="formaname" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="DocListResponse">
+		<complexType>
+			<sequence>
+				<element maxOccurs="unbounded" minOccurs="0" name="tabledocs">
+					<complexType>
+						<sequence>
+
+							<element maxOccurs="1" minOccurs="1" name="docid" type="long" />
+							<element maxOccurs="1" minOccurs="1" name="type" type="string" />
+							<element maxOccurs="1" minOccurs="0" name="id_pak" type="string" />
+							<element maxOccurs="1" minOccurs="0" name="vagnum" type="string" />
+							<element maxOccurs="1" minOccurs="1" name="status" type="int" />
+
+						</sequence>
+					</complexType>
+				</element>
+				<element maxOccurs="1" minOccurs="1" name="code" type="int" />
+				<element maxOccurs="1" minOccurs="1" name="description"
+					type="string" />
+			</sequence>
+		</complexType>
+	</element>
+<!-- DocAccepLinkReq-->
+<element name="DockAcceptLinkRequest">
+		<complexType>
+			<sequence>
+				<element name="cert_sn" type="string" minOccurs="1" maxOccurs="1" />
+				<element maxOccurs="1" minOccurs="1" name="inn" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="kpp" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="id_pak" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+ <!-- -->
+<!-- DocAccepLinkResp begin -->
+<!--  <element name="DockAcceptLinkResponse">
+     <complexType>
+			<sequence>
+				<element maxOccurs="1" minOccurs="1" name="docid" type="long"/>
+    			<element maxOccurs="1" minOccurs="1" name="code" type="int"/>
+    			<element maxOccurs="1" minOccurs="1" name="formtype" type="string"/>
+    			<element maxOccurs="1" minOccurs="0" name="link" type="string"/>
+    		</sequence>
+    	</complexType>
+    </element> -->
+    <element name="DockAcceptLinkResponse">
+   <complexType>
+    		<sequence>
+    			<element maxOccurs="unbounded" minOccurs="0" name="AcceptedDocs">
+    			<complexType>
+    			<sequence>
+    			<element maxOccurs="1" minOccurs="1" name="docid" type="long"/>
+    			<element maxOccurs="1" minOccurs="1" name="stat" type="string"/>
+    			<element maxOccurs="1" minOccurs="1" name="formtype" type="string"/>
+    			<element maxOccurs="1" minOccurs="0" name="link" type="string"/>
+    			<element maxOccurs="1" minOccurs="1" name="code" type="int" />
+    			<element maxOccurs="1" minOccurs= "1" name="description" type= "string" />
+    			
+    			</sequence>
+    			</complexType>
+    			</element>
+ 			</sequence>
+ </complexType>
+ </element>
+ <!--End -->
+ 
+	<element name="DocDataRequest">
+		<complexType>
+			<sequence>
+				<element name="cert_sn" type="string" minOccurs="1"
+					maxOccurs="1" />
+				<element maxOccurs="1" minOccurs="1" name="docid" type="long" />
+				<element maxOccurs="1" minOccurs="1" name="inn" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="kpp" type="string" />
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="DocDataResponse">
+		<complexType>
+			<sequence>
+				<element maxOccurs="1" minOccurs="1" name="docid" type="long" />
+				<element maxOccurs="1" minOccurs="0" name="docdata" type="string" />
+				<element maxOccurs="1" minOccurs="0" name="bldoc" type="string"/>
+				<element maxOccurs="1" minOccurs="1" name="status" type="int"/>
+				<element maxOccurs="1" minOccurs="1" name="code" type="int" />
+				<element maxOccurs="1" minOccurs="1" name="description" type="string" />
+			</sequence>
+		</complexType>
+	</element>
+  <!--start PackAccept -->
+    <element name="PackAcceptRequest">
+        <complexType>
+    		<sequence>
+<element name="cert_sn" type="string" minOccurs="1" maxOccurs="1"/>
+<element maxOccurs="1" minOccurs="1" name="docid" type="long"/>
+<element maxOccurs="1" minOccurs="1" name="inn" type="string"/>
+<element maxOccurs="1" minOccurs="1" name="kpp" type="string"/>
+</sequence>
+  </complexType>
+    </element>	
+    
+	 <element name="PackAcceptResponse">
+    	<complexType>
+    		<sequence>
+    			<element maxOccurs="1" minOccurs="1" name="docid" type="long"/>
+    			<element maxOccurs="1" minOccurs="1" name="code" type="int"/>
+    			<element maxOccurs="1" minOccurs="1" name="formtype" type="string"/>
+    			
+    			 	</sequence>
+    	</complexType>
+    </element>
+    <!-- end PackAccept -->
+	<element name="ArchDocRequest">
+		<complexType>
+			<sequence>
+				<element name="cert_sn" type="string" minOccurs="1"
+					maxOccurs="1" />
+				<element maxOccurs="1" minOccurs="1" name="docid" type="long" />
+				<element maxOccurs="1" minOccurs="1" name="inn" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="kpp" type="string" />
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="ArchDocResponse">
+		<complexType>
+			<sequence>
+				<element maxOccurs="1" minOccurs="1" name="docid" type="long" />
+				<element maxOccurs="1" minOccurs="0" name="bldoc" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="status" type="int"/>
+				<element maxOccurs="1" minOccurs="1" name="code" type="int" />
+				<element maxOccurs="1" minOccurs="1" name="description"
+					type="string" />
+			</sequence>
+		</complexType>
+	</element>
+<!-- For Portal-1007 -->
+ 	<element name="PackOpenDateRequest">
+		<complexType>
+			<sequence>
+				<element maxOccurs="1" minOccurs="1" name="cert_sn" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="id_pak" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="inn" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="kpp" type="string" />
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="PackOpenDateResponse">
+		<complexType>
+			<sequence>
+				<element maxOccurs="1" minOccurs="1" name="openpack" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="code" type="int"/>
+    			<element maxOccurs="1" minOccurs="1" name="description" type="string"/>
+			</sequence>
+		</complexType>
+	</element> 
+<!-- End Portal-1007 -->
+	<element name="DocDeclineRequest">
+		<complexType>
+			<sequence>
+				<element name="cert_sn" type="string" minOccurs="1"
+					maxOccurs="1" />
+				<element maxOccurs="1" minOccurs="1" name="docid" type="long" />
+				<element maxOccurs="1" minOccurs="1" name="inn" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="kpp" type="string" />
+				<element maxOccurs="1" minOccurs="1" name="reason" type="tns:String500" />
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="DocDeclineResponse">
+		<complexType>
+			<sequence>
+				<element maxOccurs="1" minOccurs="1" name="docid" type="long" />
+				<element maxOccurs="1" minOccurs="1" name="code" type="int" />
+				<element maxOccurs="1" minOccurs="1" name="description"
+					type="string" />
+				<element maxOccurs="1" minOccurs="0" name="fio" type="string" />
+				<element maxOccurs="1" minOccurs="0" name="droptime" type="tns:datetime" />
+			</sequence>
+		</complexType>
+	</element>
+<element name="PackdocRequest">
+        <complexType>
+    		<sequence>
+<element name="cert_sn" type="string" minOccurs="1" maxOccurs="1"/>    		
+<element maxOccurs="1" minOccurs="1" name="id_pak" type="string"/>
+<element maxOccurs="1" minOccurs="1" name="inn" type="string"/>
+<element maxOccurs="1" minOccurs="1" name="kpp" type="string"/>
+</sequence>
+  </complexType>
+    </element>	
+    
+	 <element name="PackdocResponse">
+    	<complexType>
+    		<sequence>
+    			<element maxOccurs="unbounded" minOccurs="0" name="document" type="tns:DocData"/>
+    			<element maxOccurs="1" minOccurs="0" name="packstatus" type="int"/>
+    			<element maxOccurs="1" minOccurs="1" name="code" type="int"/>
+    			<element maxOccurs="1" minOccurs="1" name="description" type="string"/>
+    	</sequence>
+    	</complexType>
+    </element>
+	<simpleType name="datetime">
+		<restriction base="string">
+			<pattern
+				value="(([0][1-9])|([1-2][0-9])|([3][0-1]))[.](([0][1-9])|([1][0-2]))[.]\d{4} (([0-1][0-9])|([2][0-3]))[:]([0-5][0-9])[:]([0-5][0-9])" />
+		</restriction>
+	</simpleType>
+	<simpleType name="date">
+		<restriction base="string">
+			<pattern
+				value="(([0][1-9])|([1-2][0-9])|([3][0-1]))[.](([0][1-9])|([1][0-2]))[.]\d{4}" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="String500">
+		<restriction base="string">
+			<maxLength value="500"></maxLength>
+		</restriction>
+	</simpleType>
+<complexType name="DocData">
+    		<sequence>
+    			<element maxOccurs="1" minOccurs="1" name="docid" type="long"/>
+    			<element maxOccurs="1" minOccurs="1" name="formtype" type="string"/>
+    			<element maxOccurs="1" minOccurs="1" name="docdata" type="string"/>
+    			<element maxOccurs="1" minOccurs="1" name="bldoc" type="string"/>
+    			<element maxOccurs="1" minOccurs="1" name="status" type="int"/>
+    			
+    	</sequence>
+    	</complexType>
+</schema>
+
+

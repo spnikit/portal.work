@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.aisa.ru/ETDSignature"
+	xmlns:tns="http://www.aisa.ru/ETDSignature" elementFormDefault="qualified">
+
+	<element name="ETDSignatureCreateRequest" type="tns:ETDSignatureCreate"></element>
+
+	<element name="ETDSignatureCreateResponse" type="tns:ETDSignatureCreateRespType"></element>
+
+	<complexType name="ETDSignatureCreateRespType">
+		<sequence>
+			<element name="sgn" type="base64Binary" maxOccurs="1"
+				minOccurs="0" nillable="true">
+			</element>
+			<element name="code" type="int" maxOccurs="1" minOccurs="1"
+				nillable="true">
+			</element>
+			<element name="description" type="string" maxOccurs="1"
+				minOccurs="0" nillable="true">
+			</element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="ETDSignatureCreate">
+		<sequence>
+			<element name="data" type="base64Binary" maxOccurs="1"
+				minOccurs="1" nillable="false">
+			</element>
+		</sequence>
+	</complexType>
+
+
+</schema>

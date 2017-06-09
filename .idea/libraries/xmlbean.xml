@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="xmlbean">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/xmlbean/stax-api-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/portal/xmlbean/xbean.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

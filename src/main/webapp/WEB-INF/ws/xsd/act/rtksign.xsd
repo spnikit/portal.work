@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://iit.ru/rtksign"
+	xmlns:tns="http://iit.ru/rtksign">
+
+	<element name="SignRequest">
+		<complexType>
+			<sequence>
+<element name="DOCID" minOccurs="1" type="string"/>
+<element name="FINISHED" minOccurs="0" type="int"/>
+<element name="FIO" minOccurs="0" type="string"/>
+<element name="FORMNAME" minOccurs="1" type="string"/>
+<element name="PACKAGEID" minOccurs="0" type="string"/>
+<element name="POST" minOccurs="0" type="string"/>
+<element name="POSTANDNAME" minOccurs="0" type="string"/>
+<element name="POSTREJECT" minOccurs="0" type="string"/>
+<element name="REASON" minOccurs="0" type="string"/>
+<element name="SIGNDATE" minOccurs="1" type="string"/>
+<element name="SIGNNUM" minOccurs="0" type="int"/>
+<element name="SIGNTIME" minOccurs="1" type="string"/>
+<element name="EXTTEXT" minOccurs="0" maxOccurs="1" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="SignResponse">
+		<complexType>
+			<sequence>
+				<element name="code" type="int" minOccurs="1" maxOccurs="1" />
+				<element name="description" type="string" minOccurs="1"	maxOccurs="1" />
+			</sequence>
+		</complexType>
+	</element>
+
+<element name="DocdataRequest">
+		<complexType>
+			<sequence>
+<element name="DOCID" minOccurs="1" type="long"/>
+<element name="FORMNAME" minOccurs="1" type="string"/>
+<element name="XML" minOccurs="1" type="string"/>
+<element name="BIN" minOccurs="1" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="DocdataResponse">
+		<complexType>
+			<sequence>
+				<element name="code" type="int" minOccurs="1" maxOccurs="1" />
+				<element name="description" type="string" minOccurs="1"	maxOccurs="1" />
+				<element name="docid" type="long" minOccurs="1"	maxOccurs="1" />
+			</sequence>
+		</complexType>
+	</element>
+
+</schema>
+
+

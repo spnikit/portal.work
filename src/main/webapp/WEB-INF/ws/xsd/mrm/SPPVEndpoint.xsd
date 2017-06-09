@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://iit.ru/SPPVEndpoint" 
+    xmlns:tns="http://iit.ru/SPPVEndpoint"
+    xmlns:ext="http://iit.ru/xsd/utilTypes/import/extBaseTypes_v1_0" 
+	xmlns:dt="http://iit.ru/xsd/utilTypes/import/dateTime_v1_0">
+	
+	<import namespace="http://iit.ru/xsd/utilTypes/import/extBaseTypes_v1_0"
+		schemaLocation="../utilTypes/import/extBaseTypes_v1_0.xsd" />
+    <import namespace="http://iit.ru/xsd/utilTypes/import/dateTime_v1_0"
+		schemaLocation="../utilTypes/import/dateTime_v1_0.xsd" />
+	
+	
+	
+    <element name="formCreateRequest" type="tns:FormCreateRequest"></element>
+    <element name="formCreateResponse" type="tns:FormCreateResponse"></element> 
+
+
+
+	<complexType name="FormCreateRequest">
+		<sequence>
+		    <element name="DocId" minOccurs="0" maxOccurs="1" type="long"></element>
+			<element name="OKPO" type="ext:string1to11" minOccurs="1" maxOccurs="1" />
+			<element name="INN" type="ext:string1to16" minOccurs="0" maxOccurs="1"/>
+			<element name="KPP" type="ext:string1to15" minOccurs="0" maxOccurs="1"/>
+			<element name="CodeECPstation" type="ext:string1to6" minOccurs="1" maxOccurs="1" />
+			<element name="table1" minOccurs="1" maxOccurs="1">
+				<complexType>
+					<sequence>
+						<element name="row" minOccurs="1" maxOccurs="100">
+							<complexType>
+								<sequence>
+									<element name="DateWork" type="dt:UDate" minOccurs="0" maxOccurs="1"/>
+			                        <element name="TimeWork" type="dt:UTime" minOccurs="0" maxOccurs="1"/>
+			                        <element name="DateEnd" type="dt:UDate" minOccurs="0" maxOccurs="1"/>
+			                        <element name="TimeEnd" type="dt:UTime" minOccurs="0" maxOccurs="1"/>
+			                         <element name="ColVagPodach" minOccurs="1" maxOccurs="1" type="ext:int3"></element>
+								     <element name="table2" minOccurs="1" maxOccurs="1">
+				                            <complexType>
+			                            		<sequence>	
+			                            	     	<element name="row2" minOccurs="1" maxOccurs="100">
+						                            	<complexType>
+							                              	<sequence>			                             		
+					                            	
+					                            	 <element name="NumVag" minOccurs="1" maxOccurs="1" type="ext:string1to8"></element>
+					                            	 <element name="GruzName" minOccurs="0" maxOccurs="1" type="ext:string1to150"></element>
+					                            	 <element name="NumTrain" minOccurs="0" maxOccurs="1" type="ext:string1to10"></element>
+					                            	 <element name="CodeECPstationFormTrain" minOccurs="0" maxOccurs="1" type="ext:string1to6"></element>
+					                            	 <element name="NumSostava" minOccurs="0" maxOccurs="1" type="ext:string1to3"></element>
+					                            	 <element name="CodeECPstationDestTrain" minOccurs="0" maxOccurs="1" type="ext:string1to6"></element>
+					                            	 <element name="CodeECPstationStartTrain" minOccurs="0" maxOccurs="1" type="ext:string1to6"></element>		
+					                            	       </sequence>
+										                </complexType>
+									                </element> 						                   
+									           </sequence>
+										  </complexType>
+									   </element> 
+									<element name="Park" minOccurs="0" maxOccurs="1" type="ext:string1to15"></element>       
+									<element name="Road" minOccurs="0" maxOccurs="1" type="ext:string1to10"></element>
+									<element name="GrFront" minOccurs="0" maxOccurs="1" type="ext:string1to15"></element>   
+									<element name="RoadPod" minOccurs="0" maxOccurs="1" type="ext:string1to10"></element>           
+									<element name="Primech" minOccurs="0" maxOccurs="1" type="ext:string0to260"></element>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="OKPOop" type="ext:string1to11" minOccurs="0" maxOccurs="1"/>
+			<element name="INNop"  type="ext:string1to16" minOccurs="0" maxOccurs="1"/>
+			<element name="KPPop"  type="ext:string1to15" minOccurs="0" maxOccurs="1"/>
+		</sequence>	
+	</complexType>
+   
+   <complexType name="FormCreateResponse">
+		<sequence>
+			<element name="code" type="int" maxOccurs="1" minOccurs="1" />
+			<element name="description" type="string" maxOccurs="1" minOccurs="1" />
+			<element name="docid" type="long" maxOccurs="1" minOccurs="1" />
+		</sequence>
+	</complexType>  
+  
+
+</schema>

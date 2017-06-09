@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>TestViewer</title>
+<script type="text/javascript">
+			function addViewer(containerDiv, tagID, _width, _height)
+			{
+				var _app = navigator.appName;
+				var parentDiv = document.getElementById(containerDiv);
+				var element = document.createElement('object');
+
+				for (var i = 4; i < arguments.length; i += 2)
+				{
+					var param = document.createElement('param');
+					param.setAttribute('name', arguments[i]);
+					param.setAttribute('value', arguments[i + 1]);
+					element.appendChild(param);
+				}
+
+				element.setAttribute('height', _height);
+				element.setAttribute('width', _width);
+				element.setAttribute('id', tagID);
+
+				if (_app == 'Microsoft Internet Explorer')
+					element.setAttribute('classid', 'clsid:354913B2-7190-49C0-944B-1507C9125367');
+				else
+					element.setAttribute('type', 'application/vnd.xfdl');
+				parentDiv.appendChild(element);
+
+			}
+
+    </script>
+
+<script language="XFDL" id="XFDLData" type="application/vnd.xfdl">
+      	
+      <?xml version="1.0" encoding="UTF-8"?>
+      <XFDL xmlns="http://www.ibm.com/xmlns/prod/XFDL/7.1"
+      xmlns:custom="http://www.ibm.com/xmlns/prod/XFDL/Custom"
+      xmlns:ev="http://www.w3.org/2001/xml-events"
+      xmlns:xforms="http://www.w3.org/2002/xforms">
+      <globalpage sid="global">
+      <global sid="global">
+      <xformsmodels>
+      <xforms:model>
+      <xforms:instance id="instance1" xmlns="">
+      <root>
+      <field_1></field_1>
+      <field_2></field_2>
+      <field_3></field_3>
+      </root>
+      </xforms:instance>
+      </xforms:model>
+      </xformsmodels>
+      </global>
+      </globalpage>
+
+  		
+      <page sid="PAGE1">
+      <global sid="global">
+      <label>PAGE1</label>
+      </global>
+      <field sid="field1">
+      <xforms:input ref="field_1">
+      <xforms:label>Field with xforms:input</xforms:label>
+      </xforms:input>
+      </field>
+      <field sid="field2">
+      <xforms:textarea ref="field_2">
+      <xforms:label>Field with xforms:textarea</xforms:label>
+      </xforms:textarea>
+      <size>
+      <width>30</width>
+      <height>2</height>
+      </size>
+      </field>
+    			
+      <!--<field sid="field3">
+        <xforms:secret ref="field_3">
+          <xforms:label>Field with xforms:secret</xforms:label>
+         </xforms:secret>
+      </field>-->
+      
+      <spacer sid="vfd_spacer">
+      <itemlocation>
+      <x>250</x>
+      <y>250</y>
+      <width>1</width>
+      <height>1</height>
+      </itemlocation>
+      </spacer>
+      </page>
+      </XFDL>
+      
+    </script>
+
+</head>
+<body>
+	<div id="viewer">
+		<script type="text/javascript">
+				addViewer("viewer", // id of the HTML div element
+				"CPClient", // id to assign to the object element
+				800, 400, // width and height of the Viewer
+				"XFDLID", "XFDLData", // name/value pair for XFDL param
+				"detach_id", value = "2507088000" // name/value pair for detach_id param
+				/* other params as required. */
+				);
+      </script>
+	</div>
+
+</body>
+</html>

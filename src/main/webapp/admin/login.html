@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>Портал Административная консоль</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+</head>
+<body onload='document.f.j_username.focus();'>
+	<!--h3>Login with Username and Password</h3-->
+
+	<form name='f' action='j_spring_security_check' method='POST'>
+		<table border='0' cellpadding="0" cellspacing="0" width='100%'
+			height='90%'>
+			<tr>
+				<td align='center' valign='middle'>
+					<table border='0' cellpadding="1" cellspacing="0" width='400'>
+						<tr>
+							<td colspan='100%' align='center' height='66' valign='top'><img
+								src="logo.png" alt="logo" height='55' width='155' id='logo' /></td>
+						</tr>
+						<tr>
+							<td colspan='100%' align='center' valign='top' height='66'>
+								<div
+									style='font-size: 16px; font-family: arial; font-weight: bold;'
+									id="message">&nbsp;</div>
+							</td>
+						</tr>
+					</table>
+					<table>
+
+						<tr>
+							<td align='right' width='31%'
+								style='font-size: 14px; font-family: arial; font-weight: bold'>Пользователь</td>
+							<td><INPUT
+								style='height: 19px; font-size: 14px; font-family: arial; background-color: #D6E0EB; border: none'
+								name='j_username' type='text' value=''></td>
+						</tr>
+						<tr>
+							<td align='right' width='31%'
+								style='font-size: 14px; font-family: arial; font-weight: bold'>Пароль</td>
+							<td><INPUT
+								style='height: 19px; font-size: 14px; font-family: arial; background-color: #D6E0EB; border: none'
+								name='j_password' type='password' value=''></td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td align='left' valign='bottom' height='30'><INPUT
+								style='width: 49px; height: 19px; font-weight: bold; font-size: 14px; font-family: arial; background-color: #D6E0EB; border: none'
+								align='center' type='submit' value='OK'></td>
+						</tr>
+
+					</table>
+				</td>
+			</tr>
+		</table>
+
+
+	</FORM>
+	<script type="text/javascript">
+if(window.location.search.search(/logout=true$/i)!=-1)
+document.getElementById('message').innerHTML='Вы успешно вышли из Консоли Портала';
+else if(window.location.search.search(/failed=true$/i)!=-1)
+document.getElementById('message').innerHTML='Неверные логин и пароль';
+else document.getElementById('message').innerHTML='Консоль Портала';
+if(navigator.userAgent.toLowerCase().indexOf('msie 6.0')>-1){
+document.getElementById('logo').style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='logo.png', sizingMethod='scale')";
+			document.getElementById('logo').src='s.gif';
+};
+</script>
+
+</body>
+</html>

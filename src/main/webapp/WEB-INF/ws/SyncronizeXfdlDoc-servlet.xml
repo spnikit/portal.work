@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- DATA LAYER -->
+
+
+
+	<!-- MAPPING -->
+	<bean id="payloadMapping"
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="mappings">
+			<props>
+				<prop
+					key="{http://etd.gvc.rzd:8888/WAS/ETD/synchronizeXfdlDoc}synchronizeXfdlDocRequest">putdocEndpoint2</prop>
+				<prop
+					key="{http://etd.gvc.rzd:8888/WAS/ETD/synchronizeXfdlDoc}synchronizeXfdlDocResponse">getrespEndpoint</prop>
+
+			</props>
+		</property>
+		<property name="interceptors">
+			<list>
+				<ref local="validatingInterceptor" />
+
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- XML VALIDATION -->
+
+	<bean id="validatingInterceptor"
+		class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+		<property name="schema" value="/WEB-INF/ws/xsd/SynchronizeXfdlDoc.xsd" />
+		<property name="validateRequest" value="true" />
+		<property name="validateResponse" value="true" />
+	</bean>
+
+	<!-- ENDPOINTS -->
+
+	
+<bean id="putdocEndpoint2" class="sheff.rjd.services.SynchronizeDocNewEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="signdealer" ref="SignatureDealer" />
+		<property name="signservice" ref="signservice"/>
+	</bean>
+
+	<bean id="getrespEndpoint" class="sheff.rjd.services.SynchronizeXfdlDocResponseEndpoint">
+		<constructor-arg ref="marshaller" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ssiobj" ref="SSIObj" />
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+	</bean>
+
+
+	<!-- WSDL PUBLISHING -->
+
+	<bean id="SyncronizeXfdlDoc"
+		class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+		<property name="schema">
+			<bean class="org.springframework.xml.xsd.SimpleXsdSchema">
+				<property name="xsd" value="/WEB-INF/ws/xsd/SynchronizeXfdlDoc.xsd" />
+			</bean>
+		</property>
+		<property name="portTypeName" value="SyncronizeXfdlDoc" />
+		<property name="locationUri"
+			value="http://localhost:38080/IIT/SyncronizeXfdlDoc/services" />
+	</bean>
+
+<bean id="SignatureDealer" class="sheff.rjd.services.syncutils.SignatureProcessor">
+		<property name="etdsyncfacade" ref="EtdSyncFacade" />
+		<property name="wrkmap" ref="WrkMap" />
+		<property name="npjt" ref="PrepTemplate" />
+		<property name="ds" ref="DSrjd" />
+		<property name="formControllers" ref="formControllers"/>
+	</bean>
+	<import resource="../formControllers.xml"/>
+</beans>
